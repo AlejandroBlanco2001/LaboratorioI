@@ -9,12 +9,12 @@ package lab;
  *
  * @author alexz
  */
-public class Coordenadas {
+public class Coordenada {
     
     private float latitude;
     private float longitude;
 
-    public Coordenadas(float latitude, float longitude) {
+    public Coordenada(float latitude, float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }

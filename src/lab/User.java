@@ -5,6 +5,8 @@
  */
 package lab;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author alexz
@@ -15,10 +17,42 @@ public class User {
     private String email;
     private Persona persona;
 
-    public User(int ID, String username, String email, Persona persona) {
+    private User(int ID, String username, String email) {
         this.ID = ID;
         this.username = username;
         this.email = email;
-        this.persona = persona;
     }   
+    
+    
+    public static User createUser(int id, String username, String email){
+        return new User(id,username,email);
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public void addPersona(LinkedList<String> info) {
+        this.persona = new Persona(info.get(1),info.get(10),info.get(11));
+        this.persona.setAdress(info.get(4),info.get(5),info.get(6),info.get(7),info);
+    }
+
+    
+    
 }

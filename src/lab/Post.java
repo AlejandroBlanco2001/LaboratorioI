@@ -1,0 +1,70 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package lab;
+
+import java.util.LinkedList;
+
+/**
+ *
+ * @author alexz
+ */
+public class Post {
+    private final int postId;
+    private final int id;
+    private String name;
+    private String body;
+    private String email;
+    
+    private static String temporaryData[] = new String[5];
+
+    private Post(int postId, int id, String name, String body, String email) {
+        this.postId = postId;
+        this.id = id;
+        this.name = name;
+        this.body = body;
+        this.email = email;
+    }
+   
+    public static Post cleanInfo(LinkedList<String> separatedData) {
+        int a = 0;
+        for (String i : separatedData) {
+            temporaryData[a] = i;
+            a++;
+        }
+        int postIdTemp = Integer.parseInt(temporaryData[0]);
+        int idTemp = Integer.parseInt(temporaryData[1]);
+        String tittleT = temporaryData[2];
+        String bodyT = temporaryData[3];
+        String emailT = temporaryData[4];
+        return new Post(postIdTemp,idTemp,tittleT,bodyT,emailT);
+    }    
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public static String[] getTemporaryData() {
+        return temporaryData;
+    }
+    
+    
+}

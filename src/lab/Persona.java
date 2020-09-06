@@ -5,6 +5,8 @@
  */
 package lab;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author alexz
@@ -17,11 +19,17 @@ public class Persona {
     private Direccion adress;
     private Compañia company;
 
-    public Persona(String name, String phone, String website, Direccion adress, Compañia company) {
+    public Persona(String name, String phone, String website) {
         this.name = name;
         this.phone = phone;
         this.website = website;
         this.adress = adress;
         this.company = company;
+    }
+
+    void setAdress(String street, String suite, String city, String zipcode,LinkedList<String> info) {
+        this.adress = new Direccion(street,suite,city,zipcode);
+        this.adress.setGeo(Float.parseFloat(info.get(8)),Float.parseFloat(info.get(9)));
+        this.company = new Compañia(info.get(12),info.get(13),info.get(14));
     }
 }
