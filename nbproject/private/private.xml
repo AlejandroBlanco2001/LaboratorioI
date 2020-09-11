@@ -12,12 +12,16 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Universidad/DatosII/Lab/src/lab/RegexPattern.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/lab/User.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/lab/Parser.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/lab/Persona.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/lab/Lab.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/lab/Direccion.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/VisualTemplates/UserProfile.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/Post.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Prinicipal/Lab.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/Comment.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/Operaciones.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/User.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/Arbol.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Parser/Parser.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/Nodo.java</file>
+            <file>file:/D:/Universidad/DatosII/Lab/src/Prinicipal/Ventana.java</file>
         </group>
     </open-files>
 </project-private>

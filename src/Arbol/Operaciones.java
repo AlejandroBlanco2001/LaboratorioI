@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab;
+package Arbol;
+
+import java.util.LinkedList;
 
 /**
  *
@@ -11,7 +13,7 @@ package lab;
  */
 public interface Operaciones {
     
-    public void Agregar();
+    public void Agregar(LinkedList<Nodo> operaciones);
     public void Rotar();
     
 }

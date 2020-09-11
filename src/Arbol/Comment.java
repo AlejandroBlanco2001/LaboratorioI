@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab;
+package Arbol;
 
 import java.util.LinkedList;
 
@@ -11,24 +11,25 @@ import java.util.LinkedList;
  *
  * @author alexz
  */
-public class Post {
+public class Comment extends Nodo {
+
     private final int postId;
     private final int id;
     private String name;
     private String body;
     private String email;
-    
+
     private static String temporaryData[] = new String[5];
 
-    private Post(int postId, int id, String name, String body, String email) {
+    private Comment(int postId, int id, String name, String body, String email) {
         this.postId = postId;
         this.id = id;
         this.name = name;
         this.body = body;
         this.email = email;
     }
-   
-    public static Post cleanInfo(LinkedList<String> separatedData) {
+
+    public static Comment cleanInfo(LinkedList<String> separatedData) {
         int a = 0;
         for (String i : separatedData) {
             temporaryData[a] = i;
@@ -39,8 +40,8 @@ public class Post {
         String tittleT = temporaryData[2];
         String bodyT = temporaryData[3];
         String emailT = temporaryData[4];
-        return new Post(postIdTemp,idTemp,tittleT,bodyT,emailT);
-    }    
+        return new Comment(postIdTemp, idTemp, tittleT, bodyT, emailT);
+    }
 
     public int getPostId() {
         return postId;
@@ -65,6 +66,10 @@ public class Post {
     public static String[] getTemporaryData() {
         return temporaryData;
     }
-    
-    
+
+    public void mostrarComment() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("\t \t \n " + "ID del comment" + this.id).append("\t \t \n" + "post del Comment id: " +this.postId).append("\t \t \n" + "Email del comentarista" + this.email).append("\t \t \n" + "Persona del comment" + this.name).append("\t \t \n" + "Cuerpo del comment:" + this.body);
+        System.out.println(sb.toString());
+    }
 }

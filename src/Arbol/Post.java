@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab;
+package Arbol;
 
 import java.util.LinkedList;
 
@@ -11,23 +11,25 @@ import java.util.LinkedList;
  *
  * @author alexz
  */
-public class Comment {
+public class Post extends Nodo {
 
     private final int userId;
     private final int id;
     private String title;
     private String body;
 
-    private static String temporaryData[] = new String[4];
-
-    private Comment(int userId, int id, String title, String body) {
+    private static String temporaryData[] = new String[4];  
+    private LinkedList<Nodo> comments;
+    
+    private Post(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
         this.title = title;
         this.body = body;
+        comments = new LinkedList();
     }
 
-    public static Comment cleanInfo(LinkedList<String> separatedData) {
+    public static Post cleanInfo(LinkedList<String> separatedData) {
         int a = 0;
         for (String i : separatedData) {
             temporaryData[a] = i;
@@ -37,7 +39,7 @@ public class Comment {
         int idTemp = Integer.parseInt(temporaryData[1]);
         String tittleT = temporaryData[2];
         String bodyT = temporaryData[3];
-        return new Comment(userIdTemp,idTemp,tittleT,bodyT);
+        return new Post(userIdTemp,idTemp,tittleT,bodyT);
     }
 
     public int getUserId() {
@@ -60,6 +62,19 @@ public class Comment {
         return temporaryData;
     }
     
+    public void setComments(Nodo comment){
+        if(comment != null){
+            comments.add(comment);
+        }
+    }
     
-
+    public void mostrarPost(){
+        StringBuffer sb = new StringBuffer();
+        sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " +this.body);
+        System.out.println(sb.toString());
+        for(Nodo nodo: comments){
+            Comment c = (Comment) nodo;
+            c.mostrarComment();
+        }
+    }
 }

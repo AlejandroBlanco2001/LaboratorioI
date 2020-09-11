@@ -1,4 +1,4 @@
-package lab;
+package Parser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import Arbol.Comment;
+import Arbol.Post;
+import Arbol.User;
 
 /**
  *
@@ -41,6 +44,20 @@ public class Parser {
         }
         return objetos;
     }
+    
+    public LinkedList<String> getObjects(String fileName, String fileRoute) {
+        String JSON = getData(fileRoute);
+        if (!fileName.equals("Users.txt")) {
+            Pattern pattern = Pattern.compile(RegexPattern.OBJECT.getPattern());
+            Matcher matcher = pattern.matcher(JSON);
+            objetos = getBegins(matcher, JSON, 0, 0);
+        } else {
+            Pattern pattern = Pattern.compile(RegexPattern.MULTI_OBJECTS.getPattern());
+            Matcher matcher = pattern.matcher(JSON);
+            objetos = getBegins(matcher, JSON);
+        }
+        return objetos;
+    }
 
     public Object cleanData(String dirtyJSON) {
         Pattern pattern = Pattern.compile(RegexPattern.FIRST_PARAMETER.getPattern());
@@ -52,9 +69,9 @@ public class Parser {
         LinkedList info = getKeyInfo(matcher, dirtyJSON);
         if (identifier.equals("userId") || identifier.equals("postId")) {
             if (identifier.equals("userId")) {
-                return Comment.cleanInfo(info);
-            } else {
                 return Post.cleanInfo(info);
+            } else {
+                return Comment.cleanInfo(info);
             }
         } else {
             return cleanDataInsideData(info);

@@ -3,7 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lab;
+package Prinicipal;
+
+import Arbol.Arbol;
+import Arbol.User;
+import VisualTemplates.UserProfile;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.image.Image.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,9 +31,73 @@ public class Ventana extends javax.swing.JFrame {
     /**
      * Creates new form Ventana
      */
-    
+    Arbol arbol;
+
     public Ventana() {
         initComponents();
+        configUI();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    Color menu = new Color(234, 76, 137);
+    Color colorMainPost = new Color(52, 183, 241);
+    Color backgroundGeneral = new Color(205, 238, 252);
+    Color post1 = new Color(74, 21, 75);
+    Color mediumPostColor = new Color(52, 183, 241);
+    Color post2 = new Color(236, 178, 46);
+    Color post3 = new Color(46, 182, 125);
+    Color post4 = new Color(195, 35, 97);
+
+    public void configUI() {
+        importFonts();
+        setImagesSizes();
+        menuPanel.setBackground(menu);
+        mainPost.setBackground(colorMainPost);
+        smallPost1.setBackground(post2);
+        smallPost2.setBackground(post3);
+        smallPost3.setBackground(menu);
+        smallPost4.setBackground(post2);
+        mediumPost.setBackground(colorMainPost);
+        this.setBackground(backgroundGeneral);
+        searchUser.setBorder(null);
+        searchUser.setBackground(menu);
+        searchUser.setFocusable(false);
+        TextPrompt placeholderSearchUser = new TextPrompt("Search Username", BusquedaUser);
+        placeholderSearchUser.changeAlpha(0.75f);
+        placeholderSearchUser.changeStyle(Font.ITALIC);
+        TextPrompt placeholderSearchPost = new TextPrompt("Search Post", BusquedaPost);
+        placeholderSearchPost.changeAlpha(0.75f);
+        placeholderSearchPost.changeStyle(Font.ITALIC);
+    }
+
+    public void setImagesSizes() {
+        ImageIcon icon = new ImageIcon("Resources/icons/search.png");
+        Image img = icon.getImage();
+        Image newimg = img.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
+        searchUser.setIcon(new ImageIcon(newimg));
+    }
+
+    public void importFonts() {
+        // Code extracted from : https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java by Cᴏʀʏ
+        Font f;
+        try {
+            GraphicsEnvironment ge
+                    = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Menu_Font.ttf")));
+        } catch (IOException | FontFormatException e) {
+            //Handle exception
+        }
+        f = new Font("Ford Antenna Regular XCnd", Font.PLAIN, 20);
+        Users.setFont(f);
+        DeveloperSide.setFont(f);
+        Creators.setFont(f);
+        Close.setFont(f);
+        uploadFiles.setFont(f);
+        DeveloperSide.setText("Look Inside...");
+        Creators.setText("Developers");
+        Users.setText("Home");
+        Close.setText("Close");
+        uploadFiles.setText("Upload Files");
     }
 
     /**
@@ -26,26 +107,471 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuPanel = new javax.swing.JPanel();
+        Users = new java.awt.Label();
+        DeveloperSide = new java.awt.Label();
+        Creators = new java.awt.Label();
+        BusquedaUser = new javax.swing.JTextField();
+        BusquedaPost = new javax.swing.JTextField();
+        Close = new java.awt.Label();
+        uploadFiles = new java.awt.Label();
+        searchUser = new javax.swing.JButton();
+        postPanel = new javax.swing.JPanel();
+        mainPost = new javax.swing.JPanel();
+        mainPostTittle = new javax.swing.JLabel();
+        mainPostDescription = new javax.swing.JLabel();
+        mainPostUser = new javax.swing.JLabel();
+        smallPost2 = new javax.swing.JPanel();
+        smallPostDescription2 = new javax.swing.JLabel();
+        smallPostUser2 = new javax.swing.JLabel();
+        smallPostTittle2 = new javax.swing.JLabel();
+        smallPost1 = new javax.swing.JPanel();
+        smallPostTittle1 = new javax.swing.JLabel();
+        smallPostUser1 = new javax.swing.JLabel();
+        smallPostDescription1 = new javax.swing.JLabel();
+        smallPost3 = new javax.swing.JPanel();
+        smallPostDescription3 = new javax.swing.JLabel();
+        smallPostUser3 = new javax.swing.JLabel();
+        smallPostTittle3 = new javax.swing.JLabel();
+        mediumPost = new javax.swing.JPanel();
+        mediumPostDescription = new javax.swing.JLabel();
+        mediumPostUser = new javax.swing.JLabel();
+        mediumlPostTittle = new javax.swing.JLabel();
+        smallPost4 = new javax.swing.JPanel();
+        smallPostDescription4 = new javax.swing.JLabel();
+        smallPostUser4 = new javax.swing.JLabel();
+        smallPostTittle4 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(205, 238, 252));
+
+        Users.setAlignment(java.awt.Label.CENTER);
+        Users.setText("label1");
+        Users.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UsersMouseClicked(evt);
+            }
+        });
+
+        DeveloperSide.setAlignment(java.awt.Label.CENTER);
+        DeveloperSide.setText("label1");
+        DeveloperSide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeveloperSideMouseClicked(evt);
+            }
+        });
+
+        Creators.setAlignment(java.awt.Label.CENTER);
+        Creators.setText("label1");
+        Creators.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CreatorsMouseClicked(evt);
+            }
+        });
+
+        BusquedaUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BusquedaUserActionPerformed(evt);
+            }
+        });
+
+        BusquedaPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BusquedaPostActionPerformed(evt);
+            }
+        });
+
+        Close.setAlignment(java.awt.Label.CENTER);
+        Close.setText("label1");
+        Close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CloseMouseClicked(evt);
+            }
+        });
+
+        uploadFiles.setAlignment(java.awt.Label.CENTER);
+        uploadFiles.setText("label1");
+        uploadFiles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                uploadFilesMouseClicked(evt);
+            }
+        });
+
+        searchUser.setBorder(null);
+        searchUser.setBorderPainted(false);
+        searchUser.setDoubleBuffered(true);
+        searchUser.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        searchUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUserActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DeveloperSide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Creators, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(Close, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(8, 8, 8))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 17, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(123, 123, 123)
+                .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(DeveloperSide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(Creators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Close, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uploadFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        mainPostTittle.setText("jLabel1");
+
+        mainPostDescription.setText("jLabel1");
+
+        mainPostUser.setText("jLabel1");
+
+        javax.swing.GroupLayout mainPostLayout = new javax.swing.GroupLayout(mainPost);
+        mainPost.setLayout(mainPostLayout);
+        mainPostLayout.setHorizontalGroup(
+            mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPostLayout.createSequentialGroup()
+                .addGap(404, 404, 404)
+                .addGroup(mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mainPostUser)
+                    .addComponent(mainPostDescription)
+                    .addComponent(mainPostTittle))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        mainPostLayout.setVerticalGroup(
+            mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPostLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(mainPostTittle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPostUser)
+                .addGap(51, 51, 51)
+                .addComponent(mainPostDescription)
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        smallPost2.setPreferredSize(new java.awt.Dimension(264, 241));
+
+        smallPostDescription2.setText("jLabel1");
+
+        smallPostUser2.setText("jLabel1");
+
+        smallPostTittle2.setText("jLabel1");
+
+        javax.swing.GroupLayout smallPost2Layout = new javax.swing.GroupLayout(smallPost2);
+        smallPost2.setLayout(smallPost2Layout);
+        smallPost2Layout.setHorizontalGroup(
+            smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost2Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smallPostDescription2)
+                    .addComponent(smallPostUser2)
+                    .addComponent(smallPostTittle2))
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        smallPost2Layout.setVerticalGroup(
+            smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost2Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(smallPostTittle2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(smallPostUser2)
+                .addGap(35, 35, 35)
+                .addComponent(smallPostDescription2)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+
+        smallPostTittle1.setText("jLabel1");
+
+        smallPostUser1.setText("jLabel1");
+
+        smallPostDescription1.setText("jLabel1");
+
+        javax.swing.GroupLayout smallPost1Layout = new javax.swing.GroupLayout(smallPost1);
+        smallPost1.setLayout(smallPost1Layout);
+        smallPost1Layout.setHorizontalGroup(
+            smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost1Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smallPostDescription1)
+                    .addComponent(smallPostUser1)
+                    .addComponent(smallPostTittle1))
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+        smallPost1Layout.setVerticalGroup(
+            smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(smallPostTittle1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(smallPostUser1)
+                .addGap(35, 35, 35)
+                .addComponent(smallPostDescription1)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+
+        smallPostDescription3.setText("jLabel1");
+
+        smallPostUser3.setText("jLabel1");
+
+        smallPostTittle3.setText("jLabel1");
+
+        javax.swing.GroupLayout smallPost3Layout = new javax.swing.GroupLayout(smallPost3);
+        smallPost3.setLayout(smallPost3Layout);
+        smallPost3Layout.setHorizontalGroup(
+            smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost3Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smallPostDescription3)
+                    .addComponent(smallPostUser3)
+                    .addComponent(smallPostTittle3))
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        smallPost3Layout.setVerticalGroup(
+            smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost3Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(smallPostTittle3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(smallPostUser3)
+                .addGap(35, 35, 35)
+                .addComponent(smallPostDescription3)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+
+        mediumPostDescription.setText("jLabel1");
+
+        mediumPostUser.setText("jLabel1");
+
+        mediumlPostTittle.setText("jLabel1");
+
+        javax.swing.GroupLayout mediumPostLayout = new javax.swing.GroupLayout(mediumPost);
+        mediumPost.setLayout(mediumPostLayout);
+        mediumPostLayout.setHorizontalGroup(
+            mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mediumPostDescription)
+                    .addComponent(mediumPostUser)
+                    .addComponent(mediumlPostTittle))
+                .addGap(281, 281, 281))
+        );
+        mediumPostLayout.setVerticalGroup(
+            mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mediumPostLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(mediumlPostTittle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mediumPostUser)
+                .addGap(35, 35, 35)
+                .addComponent(mediumPostDescription)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        smallPostDescription4.setText("jLabel1");
+
+        smallPostUser4.setText("jLabel1");
+
+        smallPostTittle4.setText("jLabel1");
+
+        javax.swing.GroupLayout smallPost4Layout = new javax.swing.GroupLayout(smallPost4);
+        smallPost4.setLayout(smallPost4Layout);
+        smallPost4Layout.setHorizontalGroup(
+            smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost4Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smallPostDescription4)
+                    .addComponent(smallPostUser4)
+                    .addComponent(smallPostTittle4))
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+        smallPost4Layout.setVerticalGroup(
+            smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(smallPost4Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(smallPostTittle4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(smallPostUser4)
+                .addGap(35, 35, 35)
+                .addComponent(smallPostDescription4)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout postPanelLayout = new javax.swing.GroupLayout(postPanel);
+        postPanel.setLayout(postPanelLayout);
+        postPanelLayout.setHorizontalGroup(
+            postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postPanelLayout.createSequentialGroup()
+                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(postPanelLayout.createSequentialGroup()
+                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(postPanelLayout.createSequentialGroup()
+                                .addComponent(smallPost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(smallPost2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(mediumPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(smallPost3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(smallPost4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(mainPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        postPanelLayout.setVerticalGroup(
+            postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(postPanelLayout.createSequentialGroup()
+                .addComponent(mainPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(smallPost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smallPost3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smallPost2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(smallPost4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mediumPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(postPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(postPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersMouseClicked
+        // TODO add your handling code here:
+        System.out.println("ESTAS EN CASA :3");
+    }//GEN-LAST:event_UsersMouseClicked
+
+    private void CreatorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreatorsMouseClicked
+        // TODO add your handling code here:
+        System.out.println("MUESTRA LOS CREADORES");
+    }//GEN-LAST:event_CreatorsMouseClicked
+
+    private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
+        // TODO add your handling code here:
+        System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
+    }//GEN-LAST:event_DeveloperSideMouseClicked
+
+    private void BusquedaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BusquedaUserActionPerformed
+
+    private void BusquedaPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaPostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BusquedaPostActionPerformed
+
+    private void CloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseMouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_CloseMouseClicked
+
+    private void uploadFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadFilesMouseClicked
+        // TODO add your handling code here:
+        File[] files = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "*.txt,*.csv", "txt", "csv");
+        chooser.setFileFilter(filter);
+        int returnValue = chooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            files = chooser.getSelectedFiles();
+        }
+        try {
+            this.arbol = Lab.createTree(files);
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_uploadFilesMouseClicked
+
+    private void searchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserActionPerformed
+        // TODO add your handling code here:
+        String user = BusquedaUser.getText();   
+        if (user.isEmpty()) {
+            return;
+        }
+        int userID = 0;
+        User u;
+        try {
+            userID = Integer.parseInt(user);
+        } catch (Exception e) {
+            userID = -1;
+        }
+        System.out.println(arbol);
+        if (userID == -1) {
+            u = arbol.busquedaUser(user);
+
+        } else {
+            u = arbol.busquedaUser(userID);
+        }
+        UserProfile profile = new UserProfile();
+        profile.setVisible(true);
+        profile.setUsuario(u);
+    }//GEN-LAST:event_searchUserActionPerformed
+
+    public void setArbol(Arbol arbol) {
+        this.arbol = arbol;
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -78,5 +604,39 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BusquedaPost;
+    private javax.swing.JTextField BusquedaUser;
+    private java.awt.Label Close;
+    private java.awt.Label Creators;
+    private java.awt.Label DeveloperSide;
+    private java.awt.Label Users;
+    private javax.swing.JPanel mainPost;
+    private javax.swing.JLabel mainPostDescription;
+    private javax.swing.JLabel mainPostTittle;
+    private javax.swing.JLabel mainPostUser;
+    private javax.swing.JPanel mediumPost;
+    private javax.swing.JLabel mediumPostDescription;
+    private javax.swing.JLabel mediumPostUser;
+    private javax.swing.JLabel mediumlPostTittle;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JPanel postPanel;
+    private javax.swing.JButton searchUser;
+    private javax.swing.JPanel smallPost1;
+    private javax.swing.JPanel smallPost2;
+    private javax.swing.JPanel smallPost3;
+    private javax.swing.JPanel smallPost4;
+    private javax.swing.JLabel smallPostDescription1;
+    private javax.swing.JLabel smallPostDescription2;
+    private javax.swing.JLabel smallPostDescription3;
+    private javax.swing.JLabel smallPostDescription4;
+    private javax.swing.JLabel smallPostTittle1;
+    private javax.swing.JLabel smallPostTittle2;
+    private javax.swing.JLabel smallPostTittle3;
+    private javax.swing.JLabel smallPostTittle4;
+    private javax.swing.JLabel smallPostUser1;
+    private javax.swing.JLabel smallPostUser2;
+    private javax.swing.JLabel smallPostUser3;
+    private javax.swing.JLabel smallPostUser4;
+    private java.awt.Label uploadFiles;
     // End of variables declaration//GEN-END:variables
 }
