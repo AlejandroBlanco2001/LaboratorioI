@@ -7,6 +7,7 @@ package Prinicipal;
 
 import Arbol.Arbol;
 import Arbol.User;
+import VisualTemplates.TreeDisplay;
 import VisualTemplates.UserProfile;
 import java.awt.Color;
 import java.awt.Font;
@@ -505,6 +506,9 @@ public class Ventana extends javax.swing.JFrame {
     private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
         // TODO add your handling code here:
         System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
+        TreeDisplay t = new TreeDisplay(arbol);
+        t.setVisible(true);
+        t.setArbol(arbol);
     }//GEN-LAST:event_DeveloperSideMouseClicked
 
     private void BusquedaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaUserActionPerformed
