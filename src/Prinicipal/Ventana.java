@@ -706,7 +706,7 @@ public class Ventana extends javax.swing.JFrame {
         System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
         TreeDisplay t = new TreeDisplay(arbol);
         t.setVisible(true);
-        t.setArbol(arbol);
+        
     }//GEN-LAST:event_DeveloperSideMouseClicked
 
     private void BusquedaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaUserActionPerformed

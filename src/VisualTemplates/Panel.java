@@ -6,12 +6,15 @@
 package VisualTemplates;
 
 import Arbol.Arbol;
+import Arbol.Comment;
 import Arbol.Nodo;
+import Arbol.Post;
+import Arbol.User;
+import Prinicipal.Ventana;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import javax.swing.JPanel;
 
@@ -21,39 +24,54 @@ import javax.swing.JPanel;
  */
 public class Panel extends JPanel {
 
-    private int radio = 15;
-    private int espacioVertical = 100;
+    private final int radio = 15;
+    private final int espacioVertical = 130;
     private Arbol arbol;
-    private HashMap<Nodo, Point> coordenadas;
     private LinkedList<Nodo> hijos;
 
     public Panel(Arbol arbol) {
         this.arbol = arbol;
-        this.coordenadas = new HashMap<Nodo, Point>();
+
+    }
+    
+    public void setDimension(Dimension d) {
+            setSize(d);
+            setPreferredSize(d);
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         if (arbol != null && arbol.raiz != null) {
-            dibujar(g, arbol.raiz, 3000, 30, 2000);
+            if (getWidth() <900) {
+                dibujar(g, arbol.raiz, 100, 30, getWidth() / 10);
+            } else {
+                dibujar(g, arbol.raiz, 3350, 15, 3000);
+            }
         }
     }
 
     private void dibujar(Graphics g, Nodo Raiz, int x, int y, int espacioH) {
+        if (Raiz == arbol.raiz) {
+            g.setColor(Ventana.menu);
+        } else if (Raiz instanceof User) {
+            g.setColor(Ventana.morado);
+        } else if (Raiz instanceof Post) {
+            g.setColor(Ventana.post3);
+        } else if (Raiz instanceof Comment) {
+            g.setColor(Ventana.colorMainPost);
+        }
+        g.fillOval(x - radio, y - radio, 2 * radio, 2 * radio);
+        g.setColor(Color.BLACK);
         g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
 
         LinkedList<Nodo> hijos = Raiz.getHijos();
         Nodo padre = Raiz;
-        coordenadas.put(Raiz, new Point(x, y));
-
+        Point coordsPadre = new Point(x, y);
         if (hijos != null) {
             for (Nodo hijo : hijos) {
-                Point punto = coordenadas.get(padre);
-                dibujarLinea(g, x - espacioH, y + espacioVertical, punto.x, punto.y);
-
+                dibujarLinea(g, x - espacioH, y + espacioVertical, coordsPadre.x, coordsPadre.y);
                 dibujar(g, hijo, x - espacioH, y + espacioVertical, espacioH / hijos.size());
                 x += espacioH;
-
             }
         }
     }
