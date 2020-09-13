@@ -75,9 +75,11 @@ public class PostProfile extends javax.swing.JFrame {
     
     public void fillModel(){
         StringBuffer sb = new StringBuffer();
+        int cont = 1;
         for(Nodo nodo:post.getComments()){
             Comment c = (Comment) nodo;
-            model.addElement(c.getName() + " : " + c.getBody() + " \n | Contact Adress " + c.getEmail());
+            model.addElement(cont + " - By: " +c.getName() + " : " + c.getBody() + " \n | Contact Adress " + c.getEmail());
+            cont++;
         }
     }
 
@@ -111,6 +113,7 @@ public class PostProfile extends javax.swing.JFrame {
 
         jScrollPane2.setBorder(null);
 
+        CommentsList.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         CommentsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         CommentsList.setToolTipText("");
         jScrollPane2.setViewportView(CommentsList);
@@ -176,6 +179,7 @@ public class PostProfile extends javax.swing.JFrame {
 
         body.setEditable(false);
         body.setColumns(20);
+        body.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         body.setRows(5);
         body.setWrapStyleWord(true);
         jScrollPane3.setViewportView(body);

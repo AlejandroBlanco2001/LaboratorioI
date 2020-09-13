@@ -62,9 +62,11 @@ public final class UserProfile extends javax.swing.JFrame{
 
     public void loadComponents() {
         listPost.setModel(modelList);
+        int cont = 1;
         for (Nodo nodo : username.getPosts()) {
             Post p = (Post) nodo;
-            modelList.addElement(p.getTitle());
+            modelList.addElement(cont + " - " + p.getTitle());
+            cont++;
         }
     }
 
@@ -104,7 +106,7 @@ public final class UserProfile extends javax.swing.JFrame{
         nameCompanyText.setText(user.getPersona().getCompany().getName());
         bsText.setText(user.getPersona().getCompany().getBs());
         sloganText.setText(user.getPersona().getCompany().getCatchPhrase());
-        numberPost.setText(("La cantidad de post del usuario son: " + user.getPosts().size()));
+        numberPost.setText(("Post by " + user.getUsername() + " - " + user.getPosts().size()));
         loadComponents();
     }
 
@@ -294,6 +296,7 @@ public final class UserProfile extends javax.swing.JFrame{
 
         jScrollPane1.setBorder(null);
 
+        listPost.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         listPost.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listPost);
 
@@ -336,20 +339,18 @@ public final class UserProfile extends javax.swing.JFrame{
                 .addGap(19, 19, 19))
         );
 
+        usernamePic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         usernamePic.setText("jLabel1");
 
         javax.swing.GroupLayout profilePanelLayout = new javax.swing.GroupLayout(profilePanel);
         profilePanel.setLayout(profilePanelLayout);
         profilePanelLayout.setHorizontalGroup(
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(usernamePic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profilePanelLayout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
+                .addContainerGap(129, Short.MAX_VALUE)
                 .addComponent(profilePic, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
-            .addGroup(profilePanelLayout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(usernamePic)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(114, 114, 114))
         );
         profilePanelLayout.setVerticalGroup(
             profilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,10 +397,12 @@ public final class UserProfile extends javax.swing.JFrame{
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String tittle = listPost.getSelectedValue();
+        String title = listPost.getSelectedValue();
+        int separation = title.indexOf("-");
+        title = title.substring(separation+2);
         for (Nodo nodo : username.getPosts()) {
             Post p = (Post) nodo;
-            if (p.getTitle().equals(tittle)) {
+            if (p.getTitle().equals(title)) {
                 PostProfile postProfile = new PostProfile();
                 postProfile.setVisible(true);
                 postProfile.setPost(p, username);
