@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Arbol;
 
 import java.io.Serializable;
@@ -14,28 +9,22 @@ import java.util.LinkedList;
  */
 public class User extends Nodo {
     
-      
-    
-    
     private final int ID;
     private String username;
     private String email;
     private Persona persona;
 
-    private LinkedList<Nodo> posts;
-
-    private User (int ID, String username, String email) {
-        
+    private User(int ID, String username, String email) {
         super();
         this.ID = ID;
         this.username = username;
         this.email = email;
-        posts = new LinkedList();
+        hijos = new LinkedList();
     }
 
     public User() {
         this.ID = 0;
-        posts = new LinkedList();
+        hijos = new LinkedList();
     }
 
     public static User createUser(int id, String username, String email) {
@@ -63,7 +52,7 @@ public class User extends Nodo {
     }
 
     public LinkedList<Nodo> getPosts() {
-        return posts;
+        return hijos;
     }
 
     public void addPersona(LinkedList<String> info) {
@@ -73,12 +62,12 @@ public class User extends Nodo {
 
     public void setPost(Nodo post) {
         if (post != null) {
-            posts.add(post);
+            hijos.add(post);
         }
     }
 
     public Post getPost(int id) {
-        for (Nodo post : posts) {
+        for (Nodo post : hijos) {
             Post p = (Post) post;
             if (p.getId() == id) {
                 return p;
@@ -87,8 +76,18 @@ public class User extends Nodo {
         return null;
     }
 
+    public Post getPost(String title) {
+        for (Nodo post : hijos) {
+            Post p = (Post) post;
+            if (p.getTitle().equals(title)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public boolean checkPostId(int postId) {
-        for (Nodo post : posts) {
+        for (Nodo post : hijos) {
             Post p = (Post) post;
             if (p.getId() == postId) {
                 return true;
@@ -96,15 +95,32 @@ public class User extends Nodo {
         }
         return false;
     }
-    
-    public void mostrarUser(){
+
+    public void mostrarUser() {
         StringBuffer sb = new StringBuffer();
         sb.append("ID del user:" + this.ID).append("\n Email del user: " + this.email).append("\n Nombre de usuario:" + this.username);
         System.out.println(sb.toString());
-        for(Nodo nodo: posts){
+        for (Nodo nodo : hijos) {
             Post p = (Post) nodo;
             p.mostrarPost();
         }
     }
-    
+
+    public int getTam() {
+        int cont = this.hijos.size();
+        for (Nodo n : hijos) {
+            Post p = (Post) n;
+            cont += p.getComments().size();
+        }
+        return cont;
+    }
+
+    public int getAllComments() {
+        int cont = 0;
+        for (Nodo n : hijos) {
+            Post p = (Post) n;
+            cont += p.getComments().size();
+        }
+        return cont;
+    }
 }

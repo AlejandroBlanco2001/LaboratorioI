@@ -1,25 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Prinicipal;
 
-import Arbol.Arbol;
-import Arbol.User;
+import Arbol.*;
+import VisualTemplates.Creators;
+import VisualTemplates.PostProfile;
+import VisualTemplates.TreeDisplay;
 import VisualTemplates.UserProfile;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.image.Image.*;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -31,26 +31,52 @@ public class Ventana extends javax.swing.JFrame {
     /**
      * Creates new form Ventana
      */
-    Arbol arbol;
+    private static Arbol arbol;
+    private int posX = 0, posY = 0;
+
+    public synchronized void addMouseListener() {
+        super.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                posY = e.getY();
+            }
+        });
+    }
+
+    public synchronized void addMouseMotionListener() {
+        super.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                //Coloca el frame donde se encuentro el mouse mientras lo arrastras
+                setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
+            }
+        });
+    }
 
     public Ventana() {
         initComponents();
         configUI();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addMouseListener();
+        addMouseMotionListener();
     }
 
-    Color menu = new Color(234, 76, 137);
-    Color colorMainPost = new Color(52, 183, 241);
-    Color backgroundGeneral = new Color(205, 238, 252);
-    Color post1 = new Color(74, 21, 75);
-    Color mediumPostColor = new Color(52, 183, 241);
-    Color post2 = new Color(236, 178, 46);
-    Color post3 = new Color(46, 182, 125);
-    Color post4 = new Color(195, 35, 97);
+    public static Color menu = new Color(234, 76, 137);
+    public static Color colorMainPost = new Color(52, 183, 241);
+    public static Color backgroundGeneral = new Color(205, 238, 252);
+    public static Color post1 = new Color(74, 21, 75);
+    public static Color mediumPostColor = new Color(52, 183, 241);
+    public static Color post2 = new Color(236, 178, 46);
+    public static Color post3 = new Color(46, 182, 125);
+    public static Color post4 = new Color(195, 35, 97);
+    public static Color morado = new Color(231, 123, 255);
+    public static Color amarillo = new Color(255, 123, 147);
+    public static Font principalFont;
 
     public void configUI() {
         importFonts();
         setImagesSizes();
+        setTitle("SMALL Solutions");
         menuPanel.setBackground(menu);
         mainPost.setBackground(colorMainPost);
         smallPost1.setBackground(post2);
@@ -62,6 +88,8 @@ public class Ventana extends javax.swing.JFrame {
         searchUser.setBorder(null);
         searchUser.setBackground(menu);
         searchUser.setFocusable(false);
+        searchPost.setBorder(null);
+        searchPost.setBackground(menu);
         TextPrompt placeholderSearchUser = new TextPrompt("Search Username", BusquedaUser);
         placeholderSearchUser.changeAlpha(0.75f);
         placeholderSearchUser.changeStyle(Font.ITALIC);
@@ -75,11 +103,11 @@ public class Ventana extends javax.swing.JFrame {
         Image img = icon.getImage();
         Image newimg = img.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
         searchUser.setIcon(new ImageIcon(newimg));
+        searchPost.setIcon(new ImageIcon(newimg));
     }
 
     public void importFonts() {
         // Code extracted from : https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java by Cᴏʀʏ
-        Font f;
         try {
             GraphicsEnvironment ge
                     = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -87,12 +115,12 @@ public class Ventana extends javax.swing.JFrame {
         } catch (IOException | FontFormatException e) {
             //Handle exception
         }
-        f = new Font("Ford Antenna Regular XCnd", Font.PLAIN, 20);
-        Users.setFont(f);
-        DeveloperSide.setFont(f);
-        Creators.setFont(f);
-        Close.setFont(f);
-        uploadFiles.setFont(f);
+        principalFont = new Font("Ford Antenna Regular XCnd", Font.PLAIN, 20);
+        Users.setFont(principalFont);
+        DeveloperSide.setFont(principalFont);
+        Creators.setFont(principalFont);
+        Close.setFont(principalFont);
+        uploadFiles.setFont(principalFont);
         DeveloperSide.setText("Look Inside...");
         Creators.setText("Developers");
         Users.setText("Home");
@@ -116,31 +144,40 @@ public class Ventana extends javax.swing.JFrame {
         Close = new java.awt.Label();
         uploadFiles = new java.awt.Label();
         searchUser = new javax.swing.JButton();
+        searchPost = new javax.swing.JButton();
         postPanel = new javax.swing.JPanel();
         mainPost = new javax.swing.JPanel();
-        mainPostTittle = new javax.swing.JLabel();
-        mainPostDescription = new javax.swing.JLabel();
-        mainPostUser = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mainPostTitleArea = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        mainPostBodyArea = new javax.swing.JTextArea();
         smallPost2 = new javax.swing.JPanel();
-        smallPostDescription2 = new javax.swing.JLabel();
-        smallPostUser2 = new javax.swing.JLabel();
-        smallPostTittle2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        smallPostTitleArea2 = new javax.swing.JTextArea();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        smallPostBodyArea2 = new javax.swing.JTextArea();
         smallPost1 = new javax.swing.JPanel();
-        smallPostTittle1 = new javax.swing.JLabel();
-        smallPostUser1 = new javax.swing.JLabel();
-        smallPostDescription1 = new javax.swing.JLabel();
+        smallPostTitleArea = new javax.swing.JScrollPane();
+        smallPostTitleArea1 = new javax.swing.JTextArea();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        smallPostBodyArea1 = new javax.swing.JTextArea();
         smallPost3 = new javax.swing.JPanel();
-        smallPostDescription3 = new javax.swing.JLabel();
-        smallPostUser3 = new javax.swing.JLabel();
-        smallPostTittle3 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        smallPostTitleArea3 = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        smallPostBodyArea3 = new javax.swing.JTextArea();
         mediumPost = new javax.swing.JPanel();
-        mediumPostDescription = new javax.swing.JLabel();
-        mediumPostUser = new javax.swing.JLabel();
-        mediumlPostTittle = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        mediumPostTitleArea = new javax.swing.JTextArea();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        mediumPostBodyArea = new javax.swing.JTextArea();
         smallPost4 = new javax.swing.JPanel();
-        smallPostDescription4 = new javax.swing.JLabel();
-        smallPostUser4 = new javax.swing.JLabel();
-        smallPostTittle4 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        smallPostTitleArea4 = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        smallPostBodyArea4 = new javax.swing.JTextArea();
+        close = new javax.swing.JLabel();
+        minimize = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(205, 238, 252));
@@ -207,6 +244,16 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        searchPost.setBorder(null);
+        searchPost.setBorderPainted(false);
+        searchPost.setDoubleBuffered(true);
+        searchPost.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        searchPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchPostActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -223,7 +270,9 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(8, 8, 8))
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,9 +287,11 @@ public class Ventana extends javax.swing.JFrame {
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123)
+                .addGap(23, 23, 23)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(104, 104, 104)
                 .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(DeveloperSide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,186 +304,307 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        mainPostTittle.setText("jLabel1");
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        mainPostDescription.setText("jLabel1");
+        mainPostTitleArea.setEditable(false);
+        mainPostTitleArea.setBackground(new java.awt.Color(52, 183, 241));
+        mainPostTitleArea.setColumns(20);
+        mainPostTitleArea.setFont(getFont());
+        mainPostTitleArea.setRows(5);
+        mainPostTitleArea.setBorder(null);
+        mainPostTitleArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mainPostTitleArea.setFocusable(false);
+        mainPostTitleArea.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        mainPostTitleArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainPostTitleAreaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(mainPostTitleArea);
 
-        mainPostUser.setText("jLabel1");
+        jScrollPane7.setBorder(null);
+        jScrollPane7.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane7.setToolTipText("");
+        jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        mainPostBodyArea.setEditable(false);
+        mainPostBodyArea.setBackground(new java.awt.Color(52, 183, 241));
+        mainPostBodyArea.setColumns(20);
+        mainPostBodyArea.setRows(5);
+        jScrollPane7.setViewportView(mainPostBodyArea);
 
         javax.swing.GroupLayout mainPostLayout = new javax.swing.GroupLayout(mainPost);
         mainPost.setLayout(mainPostLayout);
         mainPostLayout.setHorizontalGroup(
             mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPostLayout.createSequentialGroup()
-                .addGap(404, 404, 404)
-                .addGroup(mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(mainPostUser)
-                    .addComponent(mainPostDescription)
-                    .addComponent(mainPostTittle))
+                .addGroup(mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPostLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPostLayout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPostLayout.setVerticalGroup(
             mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPostLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(mainPostTittle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPostUser)
-                .addGap(51, 51, 51)
-                .addComponent(mainPostDescription)
-                .addContainerGap(150, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPostLayout.createSequentialGroup()
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         smallPost2.setPreferredSize(new java.awt.Dimension(264, 241));
 
-        smallPostDescription2.setText("jLabel1");
+        jScrollPane3.setBorder(null);
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setToolTipText("");
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        smallPostUser2.setText("jLabel1");
+        smallPostTitleArea2.setEditable(false);
+        smallPostTitleArea2.setBackground(new java.awt.Color(46, 182, 125));
+        smallPostTitleArea2.setColumns(20);
+        smallPostTitleArea2.setRows(5);
+        smallPostTitleArea2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                smallPostTitleArea2MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(smallPostTitleArea2);
 
-        smallPostTittle2.setText("jLabel1");
+        jScrollPane9.setBorder(null);
+        jScrollPane9.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane9.setToolTipText("");
+        jScrollPane9.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        smallPostBodyArea2.setEditable(false);
+        smallPostBodyArea2.setBackground(new java.awt.Color(46, 182, 125));
+        smallPostBodyArea2.setColumns(20);
+        smallPostBodyArea2.setRows(5);
+        jScrollPane9.setViewportView(smallPostBodyArea2);
 
         javax.swing.GroupLayout smallPost2Layout = new javax.swing.GroupLayout(smallPost2);
         smallPost2.setLayout(smallPost2Layout);
         smallPost2Layout.setHorizontalGroup(
             smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost2Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addGroup(smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(smallPostDescription2)
-                    .addComponent(smallPostUser2)
-                    .addComponent(smallPostTittle2))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addGroup(smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
         smallPost2Layout.setVerticalGroup(
             smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(smallPostTittle2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(smallPostUser2)
-                .addGap(35, 35, 35)
-                .addComponent(smallPostDescription2)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        smallPostTittle1.setText("jLabel1");
+        smallPost1.setPreferredSize(new java.awt.Dimension(264, 241));
 
-        smallPostUser1.setText("jLabel1");
+        smallPostTitleArea.setBorder(null);
+        smallPostTitleArea.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        smallPostTitleArea.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        smallPostDescription1.setText("jLabel1");
+        smallPostTitleArea1.setEditable(false);
+        smallPostTitleArea1.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostTitleArea1.setColumns(20);
+        smallPostTitleArea1.setRows(5);
+        smallPostTitleArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                smallPostTitleArea1MouseClicked(evt);
+            }
+        });
+        smallPostTitleArea.setViewportView(smallPostTitleArea1);
+
+        jScrollPane10.setBorder(null);
+        jScrollPane10.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane10.setToolTipText("");
+        jScrollPane10.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        smallPostBodyArea1.setEditable(false);
+        smallPostBodyArea1.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostBodyArea1.setColumns(20);
+        smallPostBodyArea1.setRows(5);
+        jScrollPane10.setViewportView(smallPostBodyArea1);
 
         javax.swing.GroupLayout smallPost1Layout = new javax.swing.GroupLayout(smallPost1);
         smallPost1.setLayout(smallPost1Layout);
         smallPost1Layout.setHorizontalGroup(
             smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(smallPost1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(smallPostDescription1)
-                    .addComponent(smallPostUser1)
-                    .addComponent(smallPostTittle1))
-                .addContainerGap(144, Short.MAX_VALUE))
+                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
         smallPost1Layout.setVerticalGroup(
             smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(smallPostTittle1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(smallPostUser1)
-                .addGap(35, 35, 35)
-                .addComponent(smallPostDescription1)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
-        smallPostDescription3.setText("jLabel1");
+        jScrollPane4.setBorder(null);
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setToolTipText("");
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        smallPostUser3.setText("jLabel1");
+        smallPostTitleArea3.setEditable(false);
+        smallPostTitleArea3.setBackground(new java.awt.Color(234, 76, 137));
+        smallPostTitleArea3.setColumns(20);
+        smallPostTitleArea3.setRows(5);
+        smallPostTitleArea3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                smallPostTitleArea3MouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(smallPostTitleArea3);
 
-        smallPostTittle3.setText("jLabel1");
+        jScrollPane8.setBorder(null);
+        jScrollPane8.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane8.setToolTipText("");
+        jScrollPane8.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        smallPostBodyArea3.setEditable(false);
+        smallPostBodyArea3.setBackground(new java.awt.Color(234, 76, 137));
+        smallPostBodyArea3.setColumns(20);
+        smallPostBodyArea3.setRows(5);
+        jScrollPane8.setViewportView(smallPostBodyArea3);
 
         javax.swing.GroupLayout smallPost3Layout = new javax.swing.GroupLayout(smallPost3);
         smallPost3.setLayout(smallPost3Layout);
         smallPost3Layout.setHorizontalGroup(
             smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost3Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addGroup(smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(smallPostDescription3)
-                    .addComponent(smallPostUser3)
-                    .addComponent(smallPostTittle3))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         smallPost3Layout.setVerticalGroup(
             smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost3Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(smallPostTittle3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(smallPostUser3)
-                .addGap(35, 35, 35)
-                .addComponent(smallPostDescription3)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mediumPostDescription.setText("jLabel1");
+        jScrollPane5.setBorder(null);
+        jScrollPane5.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane5.setToolTipText("");
+        jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        mediumPostUser.setText("jLabel1");
+        mediumPostTitleArea.setEditable(false);
+        mediumPostTitleArea.setBackground(new java.awt.Color(52, 183, 241));
+        mediumPostTitleArea.setColumns(20);
+        mediumPostTitleArea.setRows(5);
+        mediumPostTitleArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mediumPostTitleAreaMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(mediumPostTitleArea);
 
-        mediumlPostTittle.setText("jLabel1");
+        jScrollPane11.setBorder(null);
+        jScrollPane11.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane11.setToolTipText("");
+        jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        mediumPostBodyArea.setEditable(false);
+        mediumPostBodyArea.setBackground(new java.awt.Color(52, 183, 241));
+        mediumPostBodyArea.setColumns(20);
+        mediumPostBodyArea.setRows(5);
+        jScrollPane11.setViewportView(mediumPostBodyArea);
 
         javax.swing.GroupLayout mediumPostLayout = new javax.swing.GroupLayout(mediumPost);
         mediumPost.setLayout(mediumPostLayout);
         mediumPostLayout.setHorizontalGroup(
             mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(109, Short.MAX_VALUE)
                 .addGroup(mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mediumPostDescription)
-                    .addComponent(mediumPostUser)
-                    .addComponent(mediumlPostTittle))
-                .addGap(281, 281, 281))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157))))
         );
         mediumPostLayout.setVerticalGroup(
             mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mediumPostLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(mediumlPostTittle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mediumPostUser)
-                .addGap(35, 35, 35)
-                .addComponent(mediumPostDescription)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        smallPostDescription4.setText("jLabel1");
+        jScrollPane6.setBorder(null);
+        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane6.setToolTipText("");
+        jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        smallPostUser4.setText("jLabel1");
+        smallPostTitleArea4.setEditable(false);
+        smallPostTitleArea4.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostTitleArea4.setColumns(20);
+        smallPostTitleArea4.setRows(5);
+        smallPostTitleArea4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                smallPostTitleArea4MouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(smallPostTitleArea4);
 
-        smallPostTittle4.setText("jLabel1");
+        jScrollPane12.setBorder(null);
+        jScrollPane12.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane12.setToolTipText("");
+        jScrollPane12.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        smallPostBodyArea4.setEditable(false);
+        smallPostBodyArea4.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostBodyArea4.setColumns(20);
+        smallPostBodyArea4.setRows(5);
+        jScrollPane12.setViewportView(smallPostBodyArea4);
 
         javax.swing.GroupLayout smallPost4Layout = new javax.swing.GroupLayout(smallPost4);
         smallPost4.setLayout(smallPost4Layout);
         smallPost4Layout.setHorizontalGroup(
             smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost4Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
+                .addGap(20, 20, 20)
                 .addGroup(smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(smallPostDescription4)
-                    .addComponent(smallPostUser4)
-                    .addComponent(smallPostTittle4))
-                .addContainerGap(104, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         smallPost4Layout.setVerticalGroup(
             smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost4Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(smallPostTittle4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(smallPostUser4)
-                .addGap(35, 35, 35)
-                .addComponent(smallPostDescription4)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout postPanelLayout = new javax.swing.GroupLayout(postPanel);
@@ -442,13 +614,15 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(postPanelLayout.createSequentialGroup()
                 .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(postPanelLayout.createSequentialGroup()
-                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(postPanelLayout.createSequentialGroup()
                                 .addComponent(smallPost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(smallPost2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(mediumPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                .addComponent(smallPost2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
+                            .addGroup(postPanelLayout.createSequentialGroup()
+                                .addComponent(mediumPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(smallPost3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(smallPost4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -458,18 +632,33 @@ public class Ventana extends javax.swing.JFrame {
         postPanelLayout.setVerticalGroup(
             postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addComponent(mainPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(smallPost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(smallPost3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(smallPost2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(smallPost1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(smallPost2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(smallPost3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(smallPost4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mediumPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        close.setText("X");
+        close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeMouseClicked(evt);
+            }
+        });
+
+        minimize.setText("-");
+        minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -478,14 +667,24 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(postPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(postPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(minimize)
+                .addGap(10, 10, 10)
+                .addComponent(close)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(postPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(close)
+                            .addComponent(minimize)))
+                    .addComponent(postPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -499,12 +698,16 @@ public class Ventana extends javax.swing.JFrame {
 
     private void CreatorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreatorsMouseClicked
         // TODO add your handling code here:
-        System.out.println("MUESTRA LOS CREADORES");
+        Creators creators = new Creators();
+        creators.setVisible(true);
     }//GEN-LAST:event_CreatorsMouseClicked
 
     private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
         // TODO add your handling code here:
         System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
+        TreeDisplay t = new TreeDisplay(arbol);
+        t.setVisible(true);
+        t.setArbol(arbol);
     }//GEN-LAST:event_DeveloperSideMouseClicked
 
     private void BusquedaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaUserActionPerformed
@@ -541,7 +744,7 @@ public class Ventana extends javax.swing.JFrame {
 
     private void searchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserActionPerformed
         // TODO add your handling code here:
-        String user = BusquedaUser.getText();   
+        String user = BusquedaUser.getText();
         if (user.isEmpty()) {
             return;
         }
@@ -549,23 +752,150 @@ public class Ventana extends javax.swing.JFrame {
         User u;
         try {
             userID = Integer.parseInt(user);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
+            System.out.println(e);
             userID = -1;
         }
-        System.out.println(arbol);
         if (userID == -1) {
             u = arbol.busquedaUser(user);
-
         } else {
             u = arbol.busquedaUser(userID);
+        }
+        if (u == null) {
+            JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         UserProfile profile = new UserProfile();
         profile.setVisible(true);
         profile.setUsuario(u);
     }//GEN-LAST:event_searchUserActionPerformed
 
+    public void searchPost(String title) {
+        for (Nodo nodo : arbol.raiz.getPosts()) {
+            User user = (User) nodo;
+            if (user.getPost(title) != null) {
+                PostProfile postP = new PostProfile();
+                postP.setPost(user.getPost(title), user);
+                postP.setVisible(true);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void searchPost(int id) {
+        for (Nodo nodo : arbol.raiz.getPosts()) {
+            User user = (User) nodo;
+            if (user.getPost(id) != null) {
+                PostProfile postP = new PostProfile();
+                postP.setPost(user.getPost(id), user);
+                postP.setVisible(true);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void searchPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPostActionPerformed
+        // TODO add your handling code here:
+        String searchTag = BusquedaPost.getText();
+        int id = 0;
+        try {
+            id = Integer.parseInt(searchTag);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            id = -1;
+        }
+        if (id == -1) {
+            searchPost(searchTag);
+        } else {
+            searchPost(id);
+        }
+    }//GEN-LAST:event_searchPostActionPerformed
+
+    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_closeMouseClicked
+
+    private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
+        // TODO add your handling code here:
+        this.setState(Ventana.ICONIFIED);
+    }//GEN-LAST:event_minimizeMouseClicked
+
+    private void mainPostTitleAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPostTitleAreaMouseClicked
+        // TODO add your handling code here:
+        searchPost(mainPostTitleArea.getText());
+    }//GEN-LAST:event_mainPostTitleAreaMouseClicked
+
+    private void smallPostTitleArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_smallPostTitleArea1MouseClicked
+        // TODO add your handling code here:
+        searchPost(smallPostTitleArea1.getText());
+    }//GEN-LAST:event_smallPostTitleArea1MouseClicked
+
+    private void smallPostTitleArea2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_smallPostTitleArea2MouseClicked
+        // TODO add your handling code here:
+        searchPost(smallPostTitleArea2.getText());
+    }//GEN-LAST:event_smallPostTitleArea2MouseClicked
+
+    private void smallPostTitleArea4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_smallPostTitleArea4MouseClicked
+        // TODO add your handling code here:
+        searchPost(smallPostTitleArea4.getText());
+    }//GEN-LAST:event_smallPostTitleArea4MouseClicked
+
+    private void smallPostTitleArea3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_smallPostTitleArea3MouseClicked
+        // TODO add your handling code here:
+        searchPost(smallPostTitleArea3.getText());
+    }//GEN-LAST:event_smallPostTitleArea3MouseClicked
+
+    private void mediumPostTitleAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mediumPostTitleAreaMouseClicked
+        // TODO add your handling code here:
+        searchPost(mediumPostTitleArea.getText());
+    }//GEN-LAST:event_mediumPostTitleAreaMouseClicked
+
     public void setArbol(Arbol arbol) {
-        this.arbol = arbol;
+        Ventana.arbol = arbol;
+        getPostForShowing();
+    }
+
+    public static Arbol getArbol() {
+        return arbol;
+    }
+
+    public void getPostForShowing() {
+        LinkedList<Post> lista = Lab.getRandomPost(arbol);
+        if (lista.size() >= 6) {
+            setAllText(lista);
+        } else {
+            System.out.println("ERROR");
+        }
+    }
+
+    public void setAllText(LinkedList<Post> info) {
+        mainPostTitleArea.append(info.get(0).getTitle());
+        mainPostTitleArea.setLineWrap(true);
+        mainPostBodyArea.append(info.get(0).getBody());
+        mainPostBodyArea.setLineWrap(true);
+        smallPostTitleArea1.append(info.get(1).getTitle());
+        smallPostTitleArea1.setLineWrap(true);
+        smallPostBodyArea1.append(info.get(1).getTitle());
+        smallPostBodyArea1.setLineWrap(true);
+        smallPostTitleArea2.append(info.get(2).getTitle());
+        smallPostTitleArea2.setLineWrap(true);
+        smallPostBodyArea2.append(info.get(2).getBody());
+        smallPostBodyArea2.setLineWrap(true);
+        smallPostTitleArea3.append(info.get(3).getTitle());
+        smallPostTitleArea3.setLineWrap(true);
+        smallPostBodyArea3.append(info.get(3).getBody());
+        smallPostBodyArea3.setLineWrap(true);
+        smallPostTitleArea4.append(info.get(4).getTitle());
+        smallPostTitleArea4.setLineWrap(true);
+        smallPostBodyArea4.append(info.get(4).getBody());
+        smallPostBodyArea4.setLineWrap(true);
+        mediumPostTitleArea.append(info.get(5).getTitle());
+        mediumPostTitleArea.setLineWrap(true);
+        mediumPostBodyArea.append(info.get(5).getBody());
+        mediumPostBodyArea.setLineWrap(true);
     }
 
     /**
@@ -610,33 +940,42 @@ public class Ventana extends javax.swing.JFrame {
     private java.awt.Label Creators;
     private java.awt.Label DeveloperSide;
     private java.awt.Label Users;
+    private javax.swing.JLabel close;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPanel mainPost;
-    private javax.swing.JLabel mainPostDescription;
-    private javax.swing.JLabel mainPostTittle;
-    private javax.swing.JLabel mainPostUser;
+    private javax.swing.JTextArea mainPostBodyArea;
+    private javax.swing.JTextArea mainPostTitleArea;
     private javax.swing.JPanel mediumPost;
-    private javax.swing.JLabel mediumPostDescription;
-    private javax.swing.JLabel mediumPostUser;
-    private javax.swing.JLabel mediumlPostTittle;
+    private javax.swing.JTextArea mediumPostBodyArea;
+    private javax.swing.JTextArea mediumPostTitleArea;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JLabel minimize;
     private javax.swing.JPanel postPanel;
+    private javax.swing.JButton searchPost;
     private javax.swing.JButton searchUser;
     private javax.swing.JPanel smallPost1;
     private javax.swing.JPanel smallPost2;
     private javax.swing.JPanel smallPost3;
     private javax.swing.JPanel smallPost4;
-    private javax.swing.JLabel smallPostDescription1;
-    private javax.swing.JLabel smallPostDescription2;
-    private javax.swing.JLabel smallPostDescription3;
-    private javax.swing.JLabel smallPostDescription4;
-    private javax.swing.JLabel smallPostTittle1;
-    private javax.swing.JLabel smallPostTittle2;
-    private javax.swing.JLabel smallPostTittle3;
-    private javax.swing.JLabel smallPostTittle4;
-    private javax.swing.JLabel smallPostUser1;
-    private javax.swing.JLabel smallPostUser2;
-    private javax.swing.JLabel smallPostUser3;
-    private javax.swing.JLabel smallPostUser4;
+    private javax.swing.JTextArea smallPostBodyArea1;
+    private javax.swing.JTextArea smallPostBodyArea2;
+    private javax.swing.JTextArea smallPostBodyArea3;
+    private javax.swing.JTextArea smallPostBodyArea4;
+    private javax.swing.JScrollPane smallPostTitleArea;
+    private javax.swing.JTextArea smallPostTitleArea1;
+    private javax.swing.JTextArea smallPostTitleArea2;
+    private javax.swing.JTextArea smallPostTitleArea3;
+    private javax.swing.JTextArea smallPostTitleArea4;
     private java.awt.Label uploadFiles;
     // End of variables declaration//GEN-END:variables
 }

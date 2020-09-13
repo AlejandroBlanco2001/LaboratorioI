@@ -33,4 +33,26 @@ public class Persona implements Serializable {
         this.adress.setGeo(Float.parseFloat(info.get(8)),Float.parseFloat(info.get(9)));
         this.company = new Compañia(info.get(12),info.get(13),info.get(14));
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public Direccion getAdress() {
+        return adress;
+    }
+
+    public Compañia getCompany() {
+        return company;
+    }
+
+    
 }
