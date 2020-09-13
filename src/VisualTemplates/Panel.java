@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 public class Panel extends JPanel {
 
     private int radio = 15;
-    private int espacioVertical = 50;
+    private int espacioVertical = 100;
     private Arbol arbol;
     private HashMap<Nodo, Point> coordenadas;
     private LinkedList<Nodo> hijos;
@@ -35,7 +35,7 @@ public class Panel extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         if (arbol != null && arbol.raiz != null) {
-            dibujar(g, arbol.raiz, getWidth() / 2, 30, getWidth() / 5);
+            dibujar(g, arbol.raiz, 3000, 30, 2000);
         }
     }
 
