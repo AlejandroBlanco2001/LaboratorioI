@@ -5,13 +5,14 @@
  */
 package Arbol;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author alexz
  */
-public class Persona {
+public class Persona implements Serializable {
     
     private String name;
     private String phone;

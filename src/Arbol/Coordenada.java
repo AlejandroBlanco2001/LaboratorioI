@@ -5,11 +5,13 @@
  */
 package Arbol;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alexz
  */
-public class Coordenada {
+public class Coordenada implements Serializable {
     
     private float latitude;
     private float longitude;

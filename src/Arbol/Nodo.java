@@ -12,7 +12,7 @@ import java.util.LinkedList;
  *
  * @author alexz
  */
-public abstract class Nodo{
+public abstract class Nodo implements Serializable{
     
     private LinkedList<Nodo> hijos;
      

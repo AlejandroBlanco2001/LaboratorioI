@@ -5,14 +5,15 @@
  */
 package Arbol;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
  *
  * @author alexz
  */
-public class Arbol implements Operaciones {
-
+public class Arbol implements Operaciones, Serializable {
+    
     // Nodo vacio
     public User raiz;
 
@@ -94,7 +95,7 @@ public class Arbol implements Operaciones {
 
     @Override
     public void Rotar() {
-
+      
     }
-
-}
+ 
+    }

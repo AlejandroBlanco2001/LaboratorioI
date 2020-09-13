@@ -5,6 +5,7 @@
  */
 package Arbol;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
@@ -12,7 +13,10 @@ import java.util.LinkedList;
  * @author alexz
  */
 public class User extends Nodo {
-
+    
+      
+    
+    
     private final int ID;
     private String username;
     private String email;
@@ -20,7 +24,8 @@ public class User extends Nodo {
 
     private LinkedList<Nodo> posts;
 
-    private User(int ID, String username, String email) {
+    private User (int ID, String username, String email) {
+        
         super();
         this.ID = ID;
         this.username = username;
@@ -101,4 +106,5 @@ public class User extends Nodo {
             p.mostrarPost();
         }
     }
+    
 }
