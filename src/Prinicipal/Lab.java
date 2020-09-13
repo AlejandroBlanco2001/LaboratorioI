@@ -16,12 +16,9 @@ import java.util.LinkedList;
  */
 public class Lab {
 
-    /**
-     * @param args the command line arguments
-     */
     public static User user;
     private static Arbol arbol;
-
+    
     public static void main(String[] args) {
         // TODO code application logic here
         Ventana ventana = new Ventana();
@@ -95,6 +92,18 @@ public class Lab {
             cont++;
         }
         return files;
+    }
+
+    // TEST ONLY USE
+    public static  LinkedList<Post> getRandomPost(Arbol arbol) {
+        LinkedList<Post> lista = new LinkedList();
+        for(Nodo nodo: arbol.raiz.getPosts()){
+            User user = (User) nodo;
+            if(user.getPosts().get(0) != null){
+                lista.add((Post) user.getPosts().get(0));
+            }
+        }
+        return lista;
     }
 
     public User getUsuario() {

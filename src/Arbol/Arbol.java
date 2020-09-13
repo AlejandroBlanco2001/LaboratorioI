@@ -91,9 +91,46 @@ public class Arbol implements Operaciones {
         }
         return null;
     }
-
+    
     @Override
     public void Rotar() {
+
+    }
+
+    @Override
+    public void Tamaño() {
+        int cont = raiz.getPosts().size();
+        for(Nodo n: raiz.getPosts()){
+            User user = (User) n;
+            cont += user.getTam();
+        }
+        System.out.println(cont);
+    }
+
+    public int cantidadDeUsers(){
+        return raiz.getPosts().size();
+    }
+    
+    public int cantidadPosts(){
+        int cont = 0;
+        for(Nodo n: raiz.getPosts()){
+            User user = (User) n;
+            cont += user.getPosts().size();
+        }
+        return cont;
+    } 
+    
+    public int cantidadDeComments(){
+        int cont = 0;
+        for(Nodo n: raiz.getPosts()){
+            User user = (User) n;
+            cont += user.getAllComments();
+        }
+        return cont;
+    }
+    
+    @Override
+    public void Profundidad() {
 
     }
 

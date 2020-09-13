@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Arbol;
 
 import java.util.LinkedList;
@@ -82,6 +77,16 @@ public class User extends Nodo {
         return null;
     }
 
+    public Post getPost(String title) {
+        for (Nodo post : posts) {
+            Post p = (Post) post;
+            if (p.getTitle().equals(title)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public boolean checkPostId(int postId) {
         for (Nodo post : posts) {
             Post p = (Post) post;
@@ -91,14 +96,32 @@ public class User extends Nodo {
         }
         return false;
     }
-    
-    public void mostrarUser(){
+
+    public void mostrarUser() {
         StringBuffer sb = new StringBuffer();
         sb.append("ID del user:" + this.ID).append("\n Email del user: " + this.email).append("\n Nombre de usuario:" + this.username);
         System.out.println(sb.toString());
-        for(Nodo nodo: posts){
+        for (Nodo nodo : posts) {
             Post p = (Post) nodo;
             p.mostrarPost();
         }
+    }
+
+    public int getTam() {
+        int cont = this.posts.size();
+        for (Nodo n : posts) {
+            Post p = (Post) n;
+            cont += p.getComments().size();
+        }
+        return cont;
+    }
+
+    public int getAllComments() {
+        int cont = 0;
+        for (Nodo n : posts) {
+            Post p = (Post) n;
+            cont += p.getComments().size();
+        }
+        return cont;
     }
 }

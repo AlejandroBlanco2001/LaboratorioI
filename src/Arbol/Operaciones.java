@@ -15,5 +15,6 @@ public interface Operaciones {
     
     public void Agregar(LinkedList<Nodo> operaciones);
     public void Rotar();
-    
+    public void Tamaño();
+    public void Profundidad();
 }

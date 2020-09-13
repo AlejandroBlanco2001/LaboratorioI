@@ -27,6 +27,26 @@ public class Direccion {
     void setGeo(float lat, float lng) {
         this.coordenada = new Coordenada(lat,lng);
     }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getSuite() {
+        return suite;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public Coordenada getCoordenada() {
+        return coordenada;
+    }
     
     
     

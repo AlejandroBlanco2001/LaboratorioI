@@ -38,8 +38,8 @@ public class Comment extends Nodo {
         int postIdTemp = Integer.parseInt(temporaryData[0]);
         int idTemp = Integer.parseInt(temporaryData[1]);
         String tittleT = temporaryData[2];
-        String bodyT = temporaryData[3];
-        String emailT = temporaryData[4];
+        String bodyT = temporaryData[4];
+        String emailT = temporaryData[3];
         return new Comment(postIdTemp, idTemp, tittleT, bodyT, emailT);
     }
 
