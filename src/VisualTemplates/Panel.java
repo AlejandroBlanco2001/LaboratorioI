@@ -41,20 +41,20 @@ public class Panel extends JPanel {
 
     private void dibujar(Graphics g, Nodo Raiz, int x, int y, int espacioH) {
         g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
-        g.drawString(String.valueOf(Raiz), x - 6, y + 4);
 
         LinkedList<Nodo> hijos = Raiz.getHijos();
         Nodo padre = Raiz;
         coordenadas.put(Raiz, new Point(x, y));
 
+        if (hijos != null) {
+            for (Nodo hijo : hijos) {
+                Point punto = coordenadas.get(padre);
+                dibujarLinea(g, x - espacioH, y + espacioVertical, punto.x, punto.y);
 
-        for (Nodo hijo : hijos) {
-            Point punto = coordenadas.get(padre);
-            dibujarLinea(g, x - espacioH, y + espacioVertical, punto.x, punto.y);
+                dibujar(g, hijo, x - espacioH, y + espacioVertical, espacioH / hijos.size());
+                x += espacioH;
 
-            dibujar(g, hijo, x - espacioH, y + espacioVertical, espacioH / hijos.size());
-            x += espacioH;
-
+            }
         }
     }
 

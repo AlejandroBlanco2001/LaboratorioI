@@ -28,8 +28,7 @@ public class TreeDisplay extends javax.swing.JFrame {
         dp.setMinimumSize(d);
         dp.setMaximumSize(d);
         dp.setPreferredSize(d);
-        
-        
+        this.setResizable(false);
         initComponents();
                
     }
