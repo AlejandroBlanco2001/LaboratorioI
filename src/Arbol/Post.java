@@ -14,14 +14,13 @@ public class Post extends Nodo {
     private String body;
 
     private static String temporaryData[] = new String[4];  
-    private LinkedList<Nodo> comments;
     
     private Post(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
         this.title = title;
         this.body = body;
-        comments = new LinkedList();
+        hijos = new LinkedList();
     }
 
     public static Post cleanInfo(LinkedList<String> separatedData) {
@@ -59,7 +58,7 @@ public class Post extends Nodo {
     
     public void setComments(Nodo comment){
         if(comment != null){
-            comments.add(comment);
+            hijos.add(comment);
         }
     }
     
@@ -67,14 +66,14 @@ public class Post extends Nodo {
         StringBuffer sb = new StringBuffer();
         sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " +this.body);
         System.out.println(sb.toString());
-        for(Nodo nodo: comments){
+        for(Nodo nodo: hijos){
             Comment c = (Comment) nodo;
             c.mostrarComment();
         }
     }
 
     public LinkedList<Nodo> getComments() {
-        return comments;
+        return hijos;
     }
     
     
