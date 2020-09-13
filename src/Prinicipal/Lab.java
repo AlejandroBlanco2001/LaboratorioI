@@ -4,17 +4,11 @@ import Arbol.Arbol;
 import Arbol.Post;
 import Arbol.Comment;
 import Arbol.Nodo;
-import Arbol.Serializador;
 import Arbol.User;
 import Parser.Parser;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +18,7 @@ public class Lab {
 
     public static User user;
     private static Arbol arbol;
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // TODO code application logic here   
         Ventana ventana = new Ventana();
@@ -54,26 +49,25 @@ public class Lab {
         ventana.setArbol(arbol);
     }
 
-    
     public static Arbol createTree(File[] files) throws IOException {
         Arbol arbol = new Arbol();
         files = organizeFiles(files);
         Parser p = Parser.getParser();
-        LinkedList<String> tempo = p.getObjects(files[0].getName(),files[0].getCanonicalPath());
+        LinkedList<String> tempo = p.getObjects(files[0].getName(), files[0].getCanonicalPath());
         LinkedList<Nodo> lista = new LinkedList();
         for (String t : tempo) {
             lista.add((User) p.cleanData(t));
         }
         user = (User) lista.get(0);
         arbol.Agregar(lista);
-        tempo = p.getObjects(files[1].getName(),files[1].getCanonicalPath());
+        tempo = p.getObjects(files[1].getName(), files[1].getCanonicalPath());
         lista.clear();
         for (String t : tempo) {
             lista.add((Post) p.cleanData(t));
         }
         arbol.Agregar(lista);
         lista.clear();
-        tempo = p.getObjects(files[2].getName(),files[2].getCanonicalPath());
+        tempo = p.getObjects(files[2].getName(), files[2].getCanonicalPath());
         for (String t : tempo) {
             lista.add((Comment) p.cleanData(t));
         }
@@ -101,11 +95,11 @@ public class Lab {
     }
 
     // TEST ONLY USE
-    public static  LinkedList<Post> getRandomPost(Arbol arbol) {
+    public static LinkedList<Post> getRandomPost(Arbol arbol) {
         LinkedList<Post> lista = new LinkedList();
-        for(Nodo nodo: arbol.raiz.getPosts()){
+        for (Nodo nodo : arbol.raiz.getPosts()) {
             User user = (User) nodo;
-            if(user.getPosts().get(0) != null){
+            if (user.getPosts().get(0) != null) {
                 lista.add((Post) user.getPosts().get(0));
             }
         }
@@ -119,6 +113,5 @@ public class Lab {
     public Arbol getArbol() {
         return arbol;
     }
-    
-    
+
 }

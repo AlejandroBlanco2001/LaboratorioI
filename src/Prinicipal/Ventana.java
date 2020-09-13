@@ -6,6 +6,7 @@ import VisualTemplates.PostProfile;
 import VisualTemplates.TreeDisplay;
 import VisualTemplates.UserProfile;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -135,6 +137,11 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        possibleMatches = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        matchesUsers = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         Users = new java.awt.Label();
         DeveloperSide = new java.awt.Label();
@@ -179,10 +186,59 @@ public class Ventana extends javax.swing.JFrame {
         close = new javax.swing.JLabel();
         minimize = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(46, 182, 125));
+
+        jScrollPane13.setBorder(null);
+        jScrollPane13.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane13.setToolTipText("");
+        jScrollPane13.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        matchesUsers.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        matchesUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane13.setViewportView(matchesUsers);
+
+        jLabel2.setText("Maybe you are looking for");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel2)))
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addGap(45, 45, 45))
+        );
+
+        javax.swing.GroupLayout possibleMatchesLayout = new javax.swing.GroupLayout(possibleMatches.getContentPane());
+        possibleMatches.getContentPane().setLayout(possibleMatchesLayout);
+        possibleMatchesLayout.setHorizontalGroup(
+            possibleMatchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        possibleMatchesLayout.setVerticalGroup(
+            possibleMatchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(205, 238, 252));
 
         Users.setAlignment(java.awt.Label.CENTER);
+        Users.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Users.setText("label1");
         Users.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -191,6 +247,7 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         DeveloperSide.setAlignment(java.awt.Label.CENTER);
+        DeveloperSide.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         DeveloperSide.setText("label1");
         DeveloperSide.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -199,6 +256,7 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         Creators.setAlignment(java.awt.Label.CENTER);
+        Creators.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Creators.setText("label1");
         Creators.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -219,6 +277,7 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         save.setAlignment(java.awt.Label.CENTER);
+        save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         save.setText("label1");
         save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -227,6 +286,7 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         uploadFiles.setAlignment(java.awt.Label.CENTER);
+        uploadFiles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         uploadFiles.setText("label1");
         uploadFiles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -234,8 +294,10 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        searchUser.setToolTipText("Enter the username to search");
         searchUser.setBorder(null);
         searchUser.setBorderPainted(false);
+        searchUser.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchUser.setDoubleBuffered(true);
         searchUser.setMargin(new java.awt.Insets(0, 0, 0, 0));
         searchUser.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +308,7 @@ public class Ventana extends javax.swing.JFrame {
 
         searchPost.setBorder(null);
         searchPost.setBorderPainted(false);
+        searchPost.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchPost.setDoubleBuffered(true);
         searchPost.setMargin(new java.awt.Insets(0, 0, 0, 0));
         searchPost.addActionListener(new java.awt.event.ActionListener() {
@@ -310,10 +373,11 @@ public class Ventana extends javax.swing.JFrame {
         mainPostTitleArea.setEditable(false);
         mainPostTitleArea.setBackground(new java.awt.Color(52, 183, 241));
         mainPostTitleArea.setColumns(20);
-        mainPostTitleArea.setFont(getFont());
+        mainPostTitleArea.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
+        mainPostTitleArea.setForeground(new java.awt.Color(255, 255, 255));
         mainPostTitleArea.setRows(5);
         mainPostTitleArea.setBorder(null);
-        mainPostTitleArea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        mainPostTitleArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mainPostTitleArea.setFocusable(false);
         mainPostTitleArea.setMargin(new java.awt.Insets(0, 0, 0, 0));
         mainPostTitleArea.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -331,6 +395,7 @@ public class Ventana extends javax.swing.JFrame {
         mainPostBodyArea.setEditable(false);
         mainPostBodyArea.setBackground(new java.awt.Color(52, 183, 241));
         mainPostBodyArea.setColumns(20);
+        mainPostBodyArea.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         mainPostBodyArea.setRows(5);
         jScrollPane7.setViewportView(mainPostBodyArea);
 
@@ -341,11 +406,11 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(mainPostLayout.createSequentialGroup()
                 .addGroup(mainPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPostLayout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPostLayout.createSequentialGroup()
                         .addGap(255, 255, 255)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPostLayout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPostLayout.setVerticalGroup(
@@ -368,7 +433,10 @@ public class Ventana extends javax.swing.JFrame {
         smallPostTitleArea2.setEditable(false);
         smallPostTitleArea2.setBackground(new java.awt.Color(46, 182, 125));
         smallPostTitleArea2.setColumns(20);
+        smallPostTitleArea2.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
+        smallPostTitleArea2.setForeground(new java.awt.Color(255, 255, 255));
         smallPostTitleArea2.setRows(5);
+        smallPostTitleArea2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         smallPostTitleArea2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 smallPostTitleArea2MouseClicked(evt);
@@ -384,6 +452,7 @@ public class Ventana extends javax.swing.JFrame {
         smallPostBodyArea2.setEditable(false);
         smallPostBodyArea2.setBackground(new java.awt.Color(46, 182, 125));
         smallPostBodyArea2.setColumns(20);
+        smallPostBodyArea2.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         smallPostBodyArea2.setRows(5);
         jScrollPane9.setViewportView(smallPostBodyArea2);
 
@@ -394,9 +463,9 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(smallPost2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                    .addComponent(jScrollPane9))
-                .addGap(0, 28, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(66, 66, 66))
         );
         smallPost2Layout.setVerticalGroup(
             smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +474,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         smallPost1.setPreferredSize(new java.awt.Dimension(264, 241));
@@ -417,7 +486,10 @@ public class Ventana extends javax.swing.JFrame {
         smallPostTitleArea1.setEditable(false);
         smallPostTitleArea1.setBackground(new java.awt.Color(236, 178, 46));
         smallPostTitleArea1.setColumns(20);
+        smallPostTitleArea1.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
+        smallPostTitleArea1.setForeground(new java.awt.Color(255, 255, 255));
         smallPostTitleArea1.setRows(5);
+        smallPostTitleArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         smallPostTitleArea1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 smallPostTitleArea1MouseClicked(evt);
@@ -433,6 +505,7 @@ public class Ventana extends javax.swing.JFrame {
         smallPostBodyArea1.setEditable(false);
         smallPostBodyArea1.setBackground(new java.awt.Color(236, 178, 46));
         smallPostBodyArea1.setColumns(20);
+        smallPostBodyArea1.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         smallPostBodyArea1.setRows(5);
         jScrollPane10.setViewportView(smallPostBodyArea1);
 
@@ -443,18 +516,18 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
         smallPost1Layout.setVerticalGroup(
             smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost1Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane4.setBorder(null);
@@ -465,7 +538,10 @@ public class Ventana extends javax.swing.JFrame {
         smallPostTitleArea3.setEditable(false);
         smallPostTitleArea3.setBackground(new java.awt.Color(234, 76, 137));
         smallPostTitleArea3.setColumns(20);
+        smallPostTitleArea3.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
+        smallPostTitleArea3.setForeground(new java.awt.Color(255, 255, 255));
         smallPostTitleArea3.setRows(5);
+        smallPostTitleArea3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         smallPostTitleArea3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 smallPostTitleArea3MouseClicked(evt);
@@ -481,6 +557,7 @@ public class Ventana extends javax.swing.JFrame {
         smallPostBodyArea3.setEditable(false);
         smallPostBodyArea3.setBackground(new java.awt.Color(234, 76, 137));
         smallPostBodyArea3.setColumns(20);
+        smallPostBodyArea3.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         smallPostBodyArea3.setRows(5);
         jScrollPane8.setViewportView(smallPostBodyArea3);
 
@@ -515,7 +592,10 @@ public class Ventana extends javax.swing.JFrame {
         mediumPostTitleArea.setEditable(false);
         mediumPostTitleArea.setBackground(new java.awt.Color(52, 183, 241));
         mediumPostTitleArea.setColumns(20);
+        mediumPostTitleArea.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
+        mediumPostTitleArea.setForeground(new java.awt.Color(255, 255, 255));
         mediumPostTitleArea.setRows(5);
+        mediumPostTitleArea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         mediumPostTitleArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mediumPostTitleAreaMouseClicked(evt);
@@ -531,6 +611,7 @@ public class Ventana extends javax.swing.JFrame {
         mediumPostBodyArea.setEditable(false);
         mediumPostBodyArea.setBackground(new java.awt.Color(52, 183, 241));
         mediumPostBodyArea.setColumns(20);
+        mediumPostBodyArea.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         mediumPostBodyArea.setRows(5);
         jScrollPane11.setViewportView(mediumPostBodyArea);
 
@@ -566,7 +647,10 @@ public class Ventana extends javax.swing.JFrame {
         smallPostTitleArea4.setEditable(false);
         smallPostTitleArea4.setBackground(new java.awt.Color(236, 178, 46));
         smallPostTitleArea4.setColumns(20);
+        smallPostTitleArea4.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
+        smallPostTitleArea4.setForeground(new java.awt.Color(255, 255, 255));
         smallPostTitleArea4.setRows(5);
+        smallPostTitleArea4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         smallPostTitleArea4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 smallPostTitleArea4MouseClicked(evt);
@@ -582,6 +666,7 @@ public class Ventana extends javax.swing.JFrame {
         smallPostBodyArea4.setEditable(false);
         smallPostBodyArea4.setBackground(new java.awt.Color(236, 178, 46));
         smallPostBodyArea4.setColumns(20);
+        smallPostBodyArea4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         smallPostBodyArea4.setRows(5);
         jScrollPane12.setViewportView(smallPostBodyArea4);
 
@@ -593,8 +678,8 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         smallPost4Layout.setVerticalGroup(
             smallPost4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -671,7 +756,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(minimize)
                 .addGap(10, 10, 10)
                 .addComponent(close)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,9 +820,9 @@ public class Ventana extends javax.swing.JFrame {
             files = chooser.getSelectedFiles();
         }
         try {
-            if(files.length == 1){
+            if (files.length == 1) {
                 this.arbol = Serializador.recover(files[0].getCanonicalPath());
-            }else{
+            } else {
                 this.arbol = Lab.createTree(files);
             }
         } catch (IOException ex) {
@@ -762,12 +847,17 @@ public class Ventana extends javax.swing.JFrame {
             userID = -1;
         }
         if (userID == -1) {
-            u = arbol.busquedaUser(user);
+            u = arbol.busquedaUser(user.toLowerCase());
         } else {
             u = arbol.busquedaUser(userID);
         }
         if (u == null) {
-            JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+            LinkedList<User> matches = arbol.matchPosibbleUsers(user.toLowerCase());
+            if (matches.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            setPossibleQuery(matches);
             return;
         }
         UserProfile profile = new UserProfile();
@@ -799,6 +889,18 @@ public class Ventana extends javax.swing.JFrame {
             }
         }
         JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void setPossibleQuery(LinkedList<User> matches) {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (User m : matches) {
+            model.addElement(m.getUsername());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
     }
 
     private void searchPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPostActionPerformed
@@ -945,10 +1047,13 @@ public class Ventana extends javax.swing.JFrame {
     private java.awt.Label DeveloperSide;
     private java.awt.Label Users;
     private javax.swing.JLabel close;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -959,11 +1064,13 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel mainPost;
     private javax.swing.JTextArea mainPostBodyArea;
     private javax.swing.JTextArea mainPostTitleArea;
+    private javax.swing.JList<String> matchesUsers;
     private javax.swing.JPanel mediumPost;
     private javax.swing.JTextArea mediumPostBodyArea;
     private javax.swing.JTextArea mediumPostTitleArea;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel minimize;
+    private javax.swing.JDialog possibleMatches;
     private javax.swing.JPanel postPanel;
     private java.awt.Label save;
     private javax.swing.JButton searchPost;

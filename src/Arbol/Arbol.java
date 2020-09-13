@@ -86,11 +86,21 @@ public class Arbol implements Operaciones, Serializable {
     public User busquedaUser(String username) {
         for (Nodo n : raiz.getPosts()) {
             User user = (User) n;
-            if (user.getUsername().equals(username)) {
+            if (user.getUsername().toLowerCase().equals(username)) {
                 return user;
             }
         }
         return null;
+    }
+    
+    public LinkedList<User> matchPosibbleUsers(String username){
+        LinkedList<User> matches = new LinkedList();
+        for(Nodo n : raiz.getPosts()){
+            User user = (User) n;
+            if(user.getUsername().toLowerCase().startsWith(username))
+                matches.add(user);
+        }
+        return matches;
     }
     
     @Override
