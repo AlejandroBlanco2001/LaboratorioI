@@ -5,11 +5,13 @@
  */
 package Arbol;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alexz
  */
-public class Compañia {
+public class Compañia implements Serializable{
     
     private String name;
     private String catchPhrase;

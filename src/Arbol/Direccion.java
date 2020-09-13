@@ -5,11 +5,13 @@
  */
 package Arbol;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alexz
  */
-public class Direccion {
+public class Direccion implements Serializable {
     
     private String street;
     private String suite;

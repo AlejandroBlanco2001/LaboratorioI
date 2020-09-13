@@ -4,11 +4,17 @@ import Arbol.Arbol;
 import Arbol.Post;
 import Arbol.Comment;
 import Arbol.Nodo;
+import Arbol.Serializar;
 import Arbol.User;
 import Parser.Parser;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,9 +24,8 @@ public class Lab {
 
     public static User user;
     private static Arbol arbol;
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        // TODO code application logic here   
         Ventana ventana = new Ventana();
         ventana.dispose();
         ventana.setUndecorated(true);
@@ -46,9 +51,20 @@ public class Lab {
         }
         arbol.Agregar(lista);
         ventana.setVisible(true);
+        
+        
+        
+        Serializar.serializando(arbol);
+        try {
+            ObjectInputStream Datos_Entrada=new ObjectInputStream(new FileInputStream("C:\\Users\\57301\\Desktop\\Arbol.txt"));
+            arbol=(Arbol)Datos_Entrada.readObject();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Lab.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ventana.setArbol(arbol);
     }
 
+    
     public static Arbol createTree(File[] files) throws IOException {
         Arbol arbol = new Arbol();
         files = organizeFiles(files);
@@ -113,4 +129,6 @@ public class Lab {
     public Arbol getArbol() {
         return arbol;
     }
+    
+    
 }
