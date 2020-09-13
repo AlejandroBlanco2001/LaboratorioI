@@ -24,7 +24,7 @@ public class TreeDisplay extends javax.swing.JFrame {
      */
     public TreeDisplay(Arbol ab) {
         dp = new Panel(ab);
-        Dimension d = new Dimension(4000, 1000);
+        Dimension d = new Dimension(50000, 50000);
         dp.setMinimumSize(d);
         dp.setMaximumSize(d);
         dp.setPreferredSize(d);
