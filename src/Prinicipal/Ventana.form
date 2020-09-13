@@ -70,10 +70,9 @@
                       <Component id="DeveloperSide" alignment="0" max="32767" attributes="0"/>
                       <Component id="Creators" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Close" min="-2" pref="94" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="save" min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Component id="uploadFiles" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -113,7 +112,7 @@
                   <Component id="Creators" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="Close" min="-2" max="-2" attributes="0"/>
+                      <Component id="save" min="-2" max="-2" attributes="0"/>
                       <Component id="uploadFiles" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -159,13 +158,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BusquedaPostActionPerformed"/>
           </Events>
         </Component>
-        <Component class="java.awt.Label" name="Close">
+        <Component class="java.awt.Label" name="save">
           <Properties>
             <Property name="alignment" type="int" value="1"/>
             <Property name="text" type="java.lang.String" value="label1"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CloseMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="saveMouseClicked"/>
           </Events>
         </Component>
         <Component class="java.awt.Label" name="uploadFiles">

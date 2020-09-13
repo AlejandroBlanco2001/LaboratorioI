@@ -97,8 +97,6 @@ public class Arbol implements Operaciones, Serializable {
     public void Rotar() {
       
     }
- 
-    }
 
     @Override
     public void Tamaño() {
@@ -136,5 +134,4 @@ public class Arbol implements Operaciones, Serializable {
     public void Profundidad() {
 
     }
-
 }

@@ -1,33 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="4">
-        <file>
-            <url>src/VisualTemplates/PostProfile.java</url>
-            <bookmark id="4">
-                <name/>
-                <line>248</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/lab/Persona.java</url>
-            <bookmark id="3">
-                <name/>
-                <line>31</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Universidad/DatosII/Lab/src/VisualTemplates/UserProfile.java</file>
             <file>file:/D:/Universidad/DatosII/Lab/src/Prinicipal/Lab.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/VisualTemplates/PostProfile.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/User.java</file>
-            <file>file:/D:/Universidad/DatosII/Lab/src/Arbol/Arbol.java</file>
             <file>file:/D:/Universidad/DatosII/Lab/src/Prinicipal/Ventana.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/LaboratorioI/src/Prinicipal/Ventana.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/LaboratorioI/src/VisualTemplates/TreeDisplay.java</file>
         </group>
     </open-files>
 </project-private>

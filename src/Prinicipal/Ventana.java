@@ -119,12 +119,12 @@ public class Ventana extends javax.swing.JFrame {
         Users.setFont(principalFont);
         DeveloperSide.setFont(principalFont);
         Creators.setFont(principalFont);
-        Close.setFont(principalFont);
+        save.setFont(principalFont);
         uploadFiles.setFont(principalFont);
         DeveloperSide.setText("Look Inside...");
         Creators.setText("Developers");
         Users.setText("Home");
-        Close.setText("Close");
+        save.setText("Save Tree");
         uploadFiles.setText("Upload Files");
     }
 
@@ -141,7 +141,7 @@ public class Ventana extends javax.swing.JFrame {
         Creators = new java.awt.Label();
         BusquedaUser = new javax.swing.JTextField();
         BusquedaPost = new javax.swing.JTextField();
-        Close = new java.awt.Label();
+        save = new java.awt.Label();
         uploadFiles = new java.awt.Label();
         searchUser = new javax.swing.JButton();
         searchPost = new javax.swing.JButton();
@@ -218,11 +218,11 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        Close.setAlignment(java.awt.Label.CENTER);
-        Close.setText("label1");
-        Close.addMouseListener(new java.awt.event.MouseAdapter() {
+        save.setAlignment(java.awt.Label.CENTER);
+        save.setText("label1");
+        save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CloseMouseClicked(evt);
+                saveMouseClicked(evt);
             }
         });
 
@@ -265,10 +265,9 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(DeveloperSide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Creators, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(Close, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(8, 8, 8))
+                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,7 +298,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addComponent(Creators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Close, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uploadFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -718,10 +717,10 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BusquedaPostActionPerformed
 
-    private void CloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CloseMouseClicked
+    private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
         // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_CloseMouseClicked
+        Serializador.serialize(arbol);
+    }//GEN-LAST:event_saveMouseClicked
 
     private void uploadFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadFilesMouseClicked
         // TODO add your handling code here:
@@ -736,8 +735,14 @@ public class Ventana extends javax.swing.JFrame {
             files = chooser.getSelectedFiles();
         }
         try {
-            this.arbol = Lab.createTree(files);
+            if(files.length == 1){
+                this.arbol = Serializador.recover(files[0].getCanonicalPath());
+            }else{
+                this.arbol = Lab.createTree(files);
+            }
         } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_uploadFilesMouseClicked
@@ -936,7 +941,6 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BusquedaPost;
     private javax.swing.JTextField BusquedaUser;
-    private java.awt.Label Close;
     private java.awt.Label Creators;
     private java.awt.Label DeveloperSide;
     private java.awt.Label Users;
@@ -961,6 +965,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel minimize;
     private javax.swing.JPanel postPanel;
+    private java.awt.Label save;
     private javax.swing.JButton searchPost;
     private javax.swing.JButton searchUser;
     private javax.swing.JPanel smallPost1;

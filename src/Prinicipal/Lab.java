@@ -4,7 +4,7 @@ import Arbol.Arbol;
 import Arbol.Post;
 import Arbol.Comment;
 import Arbol.Nodo;
-import Arbol.Serializar;
+import Arbol.Serializador;
 import Arbol.User;
 import Parser.Parser;
 import java.io.File;
@@ -51,16 +51,6 @@ public class Lab {
         }
         arbol.Agregar(lista);
         ventana.setVisible(true);
-        
-        
-        
-        Serializar.serializando(arbol);
-        try {
-            ObjectInputStream Datos_Entrada=new ObjectInputStream(new FileInputStream("C:\\Users\\57301\\Desktop\\Arbol.txt"));
-            arbol=(Arbol)Datos_Entrada.readObject();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Lab.class.getName()).log(Level.SEVERE, null, ex);
-        }
         ventana.setArbol(arbol);
     }
 
