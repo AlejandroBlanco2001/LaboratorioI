@@ -102,10 +102,15 @@ public class Ventana extends javax.swing.JFrame {
 
     public void setImagesSizes() {
         ImageIcon icon = new ImageIcon("Resources/icons/search.png");
+        ImageIcon iconEye = new ImageIcon("Resources/icons/ojo.png");
         Image img = icon.getImage();
+        Image imgEye = iconEye.getImage();
         Image newimg = img.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
+        Image newimgEye = imgEye.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
         searchUser.setIcon(new ImageIcon(newimg));
         searchPost.setIcon(new ImageIcon(newimg));
+        watchAllUsers.setIcon(new ImageIcon(newimgEye));
+        watchAllPost.setIcon(new ImageIcon(newimgEye));
     }
 
     public void importFonts() {
@@ -123,8 +128,8 @@ public class Ventana extends javax.swing.JFrame {
         Creators.setFont(principalFont);
         save.setFont(principalFont);
         uploadFiles.setFont(principalFont);
-        DeveloperSide.setText("Look Inside...");
-        Creators.setText("Developers");
+        DeveloperSide.setText("Tree Structure");
+        Creators.setText("Creators");
         Users.setText("Home");
         save.setText("Save Tree");
         uploadFiles.setText("Upload Files");
@@ -141,7 +146,8 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
         matchesUsers = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
+        info = new javax.swing.JLabel();
+        lookUser = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         Users = new java.awt.Label();
         DeveloperSide = new java.awt.Label();
@@ -152,6 +158,8 @@ public class Ventana extends javax.swing.JFrame {
         uploadFiles = new java.awt.Label();
         searchUser = new javax.swing.JButton();
         searchPost = new javax.swing.JButton();
+        watchAllUsers = new javax.swing.JLabel();
+        watchAllPost = new javax.swing.JLabel();
         postPanel = new javax.swing.JPanel();
         mainPost = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -191,36 +199,47 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane13.setBorder(null);
         jScrollPane13.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane13.setToolTipText("");
-        jScrollPane13.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         matchesUsers.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         matchesUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane13.setViewportView(matchesUsers);
 
-        jLabel2.setText("Maybe you are looking for");
+        info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        info.setText("Maybe you are looking for");
+
+        lookUser.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lookUser.setText("Look User");
+        lookUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lookUserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(info, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel2)))
+                        .addGap(157, 157, 157)
+                        .addComponent(lookUser)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jLabel2)
+                .addComponent(info)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lookUser)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout possibleMatchesLayout = new javax.swing.GroupLayout(possibleMatches.getContentPane());
@@ -306,6 +325,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        searchPost.setToolTipText("Search the post title");
         searchPost.setBorder(null);
         searchPost.setBorderPainted(false);
         searchPost.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -317,6 +337,22 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        watchAllUsers.setToolTipText("See all users");
+        watchAllUsers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        watchAllUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                watchAllUsersMouseClicked(evt);
+            }
+        });
+
+        watchAllPost.setToolTipText("See all posts");
+        watchAllPost.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        watchAllPost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                watchAllPostMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -324,42 +360,57 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DeveloperSide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Creators, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(DeveloperSide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 17, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(watchAllUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(watchAllPost, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Creators, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(8, 8, 8)))
+                        .addGap(2, 2, 2))))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(watchAllUsers))
                     .addComponent(searchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
                 .addGap(23, 23, 23)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(watchAllPost)))
                 .addGap(104, 104, 104)
                 .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(37, 37, 37)
                 .addComponent(DeveloperSide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(Creators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 428, Short.MAX_VALUE)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uploadFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -566,12 +617,13 @@ public class Ventana extends javax.swing.JFrame {
         smallPost3Layout.setHorizontalGroup(
             smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(smallPost3Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost3Layout.createSequentialGroup()
+                        .addContainerGap(19, Short.MAX_VALUE)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(smallPost3Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         smallPost3Layout.setVerticalGroup(
@@ -620,14 +672,13 @@ public class Ventana extends javax.swing.JFrame {
         mediumPostLayout.setHorizontalGroup(
             mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
-                .addGroup(mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
-                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mediumPostLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(157, 157, 157))))
+                .addContainerGap(188, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(157, 157, 157))
+            .addGroup(mediumPostLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mediumPostLayout.setVerticalGroup(
             mediumPostLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -749,14 +800,14 @@ public class Ventana extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(minimize)
                 .addGap(10, 10, 10)
                 .addComponent(close)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -775,25 +826,6 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersMouseClicked
-        // TODO add your handling code here:
-        System.out.println("ESTAS EN CASA :3");
-    }//GEN-LAST:event_UsersMouseClicked
-
-    private void CreatorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreatorsMouseClicked
-        // TODO add your handling code here:
-        Creators creators = new Creators();
-        creators.setVisible(true);
-    }//GEN-LAST:event_CreatorsMouseClicked
-
-    private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
-        // TODO add your handling code here:
-        System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
-        TreeDisplay t = new TreeDisplay(arbol);
-        t.setVisible(true);
-        
-    }//GEN-LAST:event_DeveloperSideMouseClicked
-
     private void BusquedaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BusquedaUserActionPerformed
@@ -801,36 +833,6 @@ public class Ventana extends javax.swing.JFrame {
     private void BusquedaPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaPostActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BusquedaPostActionPerformed
-
-    private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        // TODO add your handling code here:
-        Serializador.serialize(arbol);
-    }//GEN-LAST:event_saveMouseClicked
-
-    private void uploadFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadFilesMouseClicked
-        // TODO add your handling code here:
-        File[] files = null;
-        JFileChooser chooser = new JFileChooser();
-        chooser.setMultiSelectionEnabled(true);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "*.txt,*.csv", "txt", "csv");
-        chooser.setFileFilter(filter);
-        int returnValue = chooser.showOpenDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            files = chooser.getSelectedFiles();
-        }
-        try {
-            if (files.length == 1) {
-                this.arbol = Serializador.recover(files[0].getCanonicalPath());
-            } else {
-                this.arbol = Lab.createTree(files);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_uploadFilesMouseClicked
 
     private void searchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserActionPerformed
         // TODO add your handling code here:
@@ -891,14 +893,43 @@ public class Ventana extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
     }
 
+    public void setAllPost(LinkedList<Post> posts) {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        info.setText("All the Post are");
+        lookUser.setText("Look Post");
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (Post p : posts) {
+            model.addElement(p.getTitle());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
+    }
+
     public void setPossibleQuery(LinkedList<User> matches) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
         possibleMatches.setVisible(true);
+        info.setText("Maybe you are looking for");
         DefaultListModel model = new DefaultListModel();
         matchesUsers.setModel(model);
         for (User m : matches) {
             model.addElement(m.getUsername());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
+    }
+
+    public void setAllUsers() {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        info.setText("All the users in the plataform");
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (Nodo n : arbol.raiz.getPosts()) {
+            User user = (User) n;
+            model.addElement(user.getUsername());
         }
         possibleMatches.setSize(new Dimension(400, 500));
     }
@@ -959,6 +990,96 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchPost(mediumPostTitleArea.getText());
     }//GEN-LAST:event_mediumPostTitleAreaMouseClicked
+
+    private void watchAllUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllUsersMouseClicked
+        // TODO add your handling code here:
+        setAllUsers();
+    }//GEN-LAST:event_watchAllUsersMouseClicked
+
+    private void lookUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookUserActionPerformed
+        // TODO add your handling code here:
+        String title = matchesUsers.getSelectedValue();
+        if (lookUser.getText().equals("Look User")) {
+            for (Nodo nodo : arbol.raiz.getPosts()) {
+                User user = (User) nodo;
+                if (user.getUsername().equals(title)) {
+                    UserProfile userProfile = new UserProfile();
+                    userProfile.setVisible(true);
+                    userProfile.setUsuario(user);
+                }
+            }
+        } else {
+            for(Nodo nodo: arbol.raiz.getPosts()){
+                User user = (User) nodo;
+                if(user.getPost(title) != null){
+                    PostProfile postProfile = new PostProfile();
+                    postProfile.setVisible(true);
+                    postProfile.setPost(user.getPost(title), user);
+                }
+            }
+        }
+    }//GEN-LAST:event_lookUserActionPerformed
+
+    private void watchAllPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllPostMouseClicked
+        // TODO add your handling code here:
+        LinkedList<Post> posts = new LinkedList();
+        for (Nodo nodo : arbol.raiz.getPosts()) {
+            User user = (User) nodo;
+            for (Nodo n : user.getPosts()) {
+                Post p = (Post) n;
+                posts.add(p);
+            }
+        }
+        setAllPost(posts);
+    }//GEN-LAST:event_watchAllPostMouseClicked
+
+    private void uploadFilesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadFilesMouseClicked
+        // TODO add your handling code here:
+        File[] files = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "*.txt,*.csv", "txt", "csv");
+        chooser.setFileFilter(filter);
+        int returnValue = chooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            files = chooser.getSelectedFiles();
+        }
+        try {
+            if (files.length == 1) {
+                this.arbol = Serializador.recover(files[0].getCanonicalPath());
+            } else {
+                this.arbol = Lab.createTree(files);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_uploadFilesMouseClicked
+
+    private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
+        // TODO add your handling code here:
+        Serializador.serialize(arbol);
+    }//GEN-LAST:event_saveMouseClicked
+
+    private void CreatorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreatorsMouseClicked
+        // TODO add your handling code here:
+        Creators creators = new Creators();
+        creators.setVisible(true);
+    }//GEN-LAST:event_CreatorsMouseClicked
+
+    private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
+        // TODO add your handling code here:
+        System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
+        TreeDisplay t = new TreeDisplay(arbol);
+        t.setVisible(true);
+    }//GEN-LAST:event_DeveloperSideMouseClicked
+
+    private void UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersMouseClicked
+        // TODO add your handling code here:
+        System.out.println("ESTAS EN CASA :3");
+    }//GEN-LAST:event_UsersMouseClicked
 
     public void setArbol(Arbol arbol) {
         Ventana.arbol = arbol;
@@ -1047,7 +1168,7 @@ public class Ventana extends javax.swing.JFrame {
     private java.awt.Label DeveloperSide;
     private java.awt.Label Users;
     private javax.swing.JLabel close;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel info;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -1061,6 +1182,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JButton lookUser;
     private javax.swing.JPanel mainPost;
     private javax.swing.JTextArea mainPostBodyArea;
     private javax.swing.JTextArea mainPostTitleArea;
@@ -1089,5 +1211,7 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JTextArea smallPostTitleArea3;
     private javax.swing.JTextArea smallPostTitleArea4;
     private java.awt.Label uploadFiles;
+    private javax.swing.JLabel watchAllPost;
+    private javax.swing.JLabel watchAllUsers;
     // End of variables declaration//GEN-END:variables
 }

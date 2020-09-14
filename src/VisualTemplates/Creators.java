@@ -203,7 +203,7 @@ public class Creators extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("AlejandroBlanco2001");
+        jLabel9.setText("SJanna");
 
         minimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         minimize.setText("-");
@@ -229,7 +229,7 @@ public class Creators extends javax.swing.JFrame {
             closeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(closeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(closeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, closeLayout.createSequentialGroup()
                         .addComponent(dev3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,8 +243,8 @@ public class Creators extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(gitL3)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addGap(0, 38, Short.MAX_VALUE))
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         closeLayout.setVerticalGroup(
             closeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -109,13 +109,13 @@ public class Arbol implements Operaciones, Serializable {
     }
 
     @Override
-    public void Tamaño() {
+    public int Tamaño() {
         int cont = raiz.getPosts().size();
         for(Nodo n: raiz.getPosts()){
             User user = (User) n;
             cont += user.getTam();
         }
-        System.out.println(cont);
+        return cont;
     }
 
     public int cantidadDeUsers(){
@@ -141,7 +141,7 @@ public class Arbol implements Operaciones, Serializable {
     }
     
     @Override
-    public void Profundidad() {
-
+    public int Profundidad() {
+        return 0;
     }
 }
