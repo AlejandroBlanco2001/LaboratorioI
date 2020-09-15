@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Arbol;
 
 import java.io.Serializable;
@@ -13,7 +8,7 @@ import java.util.LinkedList;
  * @author alexz
  */
 public class Arbol implements Operaciones, Serializable {
-    
+
     // Nodo vacio
     public User raiz;
 
@@ -49,28 +44,10 @@ public class Arbol implements Operaciones, Serializable {
         }
     }
 
-    public Post getPost(int postId) {
-        for (Nodo user : raiz.getPosts()) {
-            User u = (User) user;
-            if (u.checkPostId(postId)) {
-                return u.getPost(postId);
-            }
-        }
-        return null;
-    }
-
     public void insertarComment(Nodo nodo) {
         Comment comment = (Comment) nodo;
         Post p = getPost(comment.getPostId());
         p.setComments(comment);
-    }
-
-    // TEST ONLY USE
-    public void muestrameTodo() {
-        for (Nodo user : raiz.getPosts()) {
-            User u = (User) user;
-            u.mostrarUser();
-        }
     }
 
     public User busquedaUser(int id) {
@@ -92,56 +69,106 @@ public class Arbol implements Operaciones, Serializable {
         }
         return null;
     }
-    
-    public LinkedList<User> matchPosibbleUsers(String username){
+
+    public LinkedList<User> matchPosibbleUsers(String username) {
         LinkedList<User> matches = new LinkedList();
-        for(Nodo n : raiz.getPosts()){
+        for (Nodo n : raiz.getPosts()) {
             User user = (User) n;
-            if(user.getUsername().toLowerCase().startsWith(username))
+            if (user.getUsername().toLowerCase().startsWith(username)) {
                 matches.add(user);
+            }
         }
         return matches;
     }
-    
-    @Override
-    public void Rotar() {
-      
+
+    public Post getPost(int postId) {
+        for (Nodo user : raiz.getPosts()) {
+            User u = (User) user;
+            if (u.checkPostId(postId)) {
+                return u.getPost(postId);
+            }
+        }
+        return null;
+    }
+
+    public Post getPost(String title) {
+        for (Nodo user : raiz.getPosts()) {
+            User u = (User) user;
+            if (u.checkPostName(title)) {
+                return u.getPost(title);
+            }
+        }
+        return null;
+    }
+
+    public User getUserByPost(String title) {
+        for (Nodo user : raiz.getPosts()) {
+            User u = (User) user;
+            if (u.checkPostName(title)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public User getUserByPost(int id) {
+        for (Nodo user : raiz.getPosts()) {
+            User u = (User) user;
+            if (u.getID() == id) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    // TEST ONLY USE
+    public void muestrameTodo() {
+        for (Nodo user : raiz.getPosts()) {
+            User u = (User) user;
+            u.mostrarUser();
+        }
+    }
+
+    public int cantidadDeUsers() {
+        return raiz.getPosts().size();
+    }
+
+    public int cantidadPosts() {
+        int cont = 0;
+        for (Nodo n : raiz.getPosts()) {
+            User user = (User) n;
+            cont += user.getPosts().size();
+        }
+        return cont;
+    }
+
+    public int cantidadDeComments() {
+        int cont = 0;
+        for (Nodo n : raiz.getPosts()) {
+            User user = (User) n;
+            cont += user.getAllComments();
+        }
+        return cont;
     }
 
     @Override
     public int Tamaño() {
         int cont = raiz.getPosts().size();
-        for(Nodo n: raiz.getPosts()){
+        for (Nodo n : raiz.getPosts()) {
             User user = (User) n;
             cont += user.getTam();
         }
         return cont;
     }
 
-    public int cantidadDeUsers(){
-        return raiz.getPosts().size();
-    }
-    
-    public int cantidadPosts(){
-        int cont = 0;
-        for(Nodo n: raiz.getPosts()){
-            User user = (User) n;
-            cont += user.getPosts().size();
-        }
-        return cont;
-    } 
-    
-    public int cantidadDeComments(){
-        int cont = 0;
-        for(Nodo n: raiz.getPosts()){
-            User user = (User) n;
-            cont += user.getAllComments();
-        }
-        return cont;
-    }
-    
     @Override
     public int Profundidad() {
         return 0;
     }
+
+    @Override
+    public void Rotar() {
+
+    }
+
 }

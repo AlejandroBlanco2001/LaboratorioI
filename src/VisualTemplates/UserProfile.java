@@ -9,8 +9,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,33 +19,13 @@ import javax.swing.JPanel;
  *
  * @author alexz
  */
-public final class UserProfile extends javax.swing.JFrame{
+public final class UserProfile extends TemplateVentana {
 
     private User username;
     private Font font;
-    public JList posts;
+    private PostProfile postProfile;
+    private JList posts;
     DefaultListModel modelList;
-    private int posX,posY;
-
-    public final synchronized void addMouseListener() {
-        super.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                posX = e.getX();
-                posY = e.getY();
-            }
-        });
-    }
-
-    public final synchronized void addMouseMotionListener() {
-        super.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                //Coloca el frame donde se encuentro el mouse mientras lo arrastras
-                setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
-            }
-        });
-    }
 
     public UserProfile() {
         initComponents();
@@ -56,8 +34,6 @@ public final class UserProfile extends javax.swing.JFrame{
         setUndecorated(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setGUI();
-        addMouseListener();
-        addMouseMotionListener();
     }
 
     public void loadComponents() {
@@ -70,6 +46,7 @@ public final class UserProfile extends javax.swing.JFrame{
         }
     }
 
+    @Override
     public void setGUI() {
         font = Ventana.principalFont;
         setTitle("SMALL Solutions");
@@ -87,6 +64,7 @@ public final class UserProfile extends javax.swing.JFrame{
 
     }
 
+    @Override
     public void setImages() {
         ImageIcon icon = new ImageIcon("Resources/icons/user.png");
         Image img = icon.getImage();
@@ -110,6 +88,23 @@ public final class UserProfile extends javax.swing.JFrame{
         loadComponents();
     }
 
+    public void setInfoText() {
+        nameET.setText(username.getPersona().getName());
+        userET.setText(username.getUsername());
+        emailET.setText(username.getEmail());
+        phoneET.setText(username.getPersona().getPhone());
+        websiteET.setText(username.getPersona().getWebsite());
+        streetET.setText(username.getPersona().getAdress().getStreet());
+        suiteET.setText(username.getPersona().getAdress().getSuite());
+        zipcodeET.setText(username.getPersona().getAdress().getZipcode());
+        cityET.setText(username.getPersona().getAdress().getCity());
+        latitudeET.setText(String.valueOf(username.getPersona().getAdress().getCoordenada().getLatitude()));
+        longitudeET.setText(String.valueOf(username.getPersona().getAdress().getCoordenada().getLongitude()));
+        nameCompanyET.setText(username.getPersona().getCompany().getName());
+        bsET.setText(username.getPersona().getCompany().getBs());
+        sloganET.setText(username.getPersona().getCompany().getCatchPhrase());
+    }
+
     /**
      * Creates new form UserProfile
      */
@@ -120,6 +115,40 @@ public final class UserProfile extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ExtraInfo = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        nameE = new javax.swing.JLabel();
+        userE = new javax.swing.JLabel();
+        emailE = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        streetE = new javax.swing.JLabel();
+        suiteE = new javax.swing.JLabel();
+        cityE = new javax.swing.JLabel();
+        zipcodeE = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        latitudeE = new javax.swing.JLabel();
+        longitudeE = new javax.swing.JLabel();
+        phoneE = new javax.swing.JLabel();
+        websiteE = new javax.swing.JLabel();
+        sloganE = new javax.swing.JLabel();
+        nameCompanyE = new javax.swing.JLabel();
+        bsE = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        longitudeET = new javax.swing.JLabel();
+        nameET = new javax.swing.JLabel();
+        phoneET = new javax.swing.JLabel();
+        userET = new javax.swing.JLabel();
+        websiteET = new javax.swing.JLabel();
+        emailET = new javax.swing.JLabel();
+        sloganET = new javax.swing.JLabel();
+        nameCompanyET = new javax.swing.JLabel();
+        streetET = new javax.swing.JLabel();
+        bsET = new javax.swing.JLabel();
+        suiteET = new javax.swing.JLabel();
+        cityET = new javax.swing.JLabel();
+        zipcodeET = new javax.swing.JLabel();
+        latitudeET = new javax.swing.JLabel();
         infoUserPanel = new javax.swing.JPanel();
         nameText = new javax.swing.JLabel();
         emailText = new javax.swing.JLabel();
@@ -141,6 +170,7 @@ public final class UserProfile extends javax.swing.JFrame{
         sloganText = new javax.swing.JLabel();
         email14 = new javax.swing.JLabel();
         bsText = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         postPanel = new javax.swing.JPanel();
         numberPost = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -150,6 +180,232 @@ public final class UserProfile extends javax.swing.JFrame{
         profilePanel = new javax.swing.JPanel();
         profilePic = new javax.swing.JLabel();
         usernamePic = new javax.swing.JLabel();
+
+        jPanel1.setBackground(new java.awt.Color(52, 183, 241));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel1.setText("Basic Info");
+
+        nameE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameE.setText("Name");
+
+        userE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        userE.setText("Username");
+
+        emailE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        emailE.setText("Email");
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel6.setText("Adress");
+
+        streetE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        streetE.setText("Street");
+
+        suiteE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        suiteE.setText("Suite");
+
+        cityE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cityE.setText("City");
+
+        zipcodeE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        zipcodeE.setText("Zipcode");
+
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel11.setText("Geolocation");
+
+        latitudeE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        latitudeE.setText("Latitude");
+
+        longitudeE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        longitudeE.setText("Longitude");
+
+        phoneE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        phoneE.setText("Phone");
+
+        websiteE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        websiteE.setText("Website");
+
+        sloganE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        sloganE.setText("Slogan");
+
+        nameCompanyE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameCompanyE.setText("Name");
+
+        bsE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        bsE.setText("B.S");
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel19.setText("Company");
+
+        longitudeET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        longitudeET.setText("jLabel3");
+
+        nameET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameET.setText("jLabel3");
+
+        phoneET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        phoneET.setText("jLabel3");
+
+        userET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        userET.setText("jLabel3");
+
+        websiteET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        websiteET.setText("jLabel3");
+
+        emailET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        emailET.setText("jLabel3");
+
+        sloganET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        sloganET.setText("jLabel3");
+
+        nameCompanyET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameCompanyET.setText("jLabel3");
+
+        streetET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        streetET.setText("jLabel3");
+
+        bsET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        bsET.setText("jLabel3");
+
+        suiteET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        suiteET.setText("jLabel3");
+
+        cityET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cityET.setText("jLabel3");
+
+        zipcodeET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        zipcodeET.setText("jLabel3");
+
+        latitudeET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        latitudeET.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bsE)
+                    .addComponent(sloganE)
+                    .addComponent(nameCompanyE)
+                    .addComponent(phoneE)
+                    .addComponent(longitudeE)
+                    .addComponent(latitudeE)
+                    .addComponent(zipcodeE)
+                    .addComponent(cityE)
+                    .addComponent(suiteE)
+                    .addComponent(streetE)
+                    .addComponent(websiteE)
+                    .addComponent(emailE)
+                    .addComponent(userE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel19))
+                    .addComponent(nameE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bsET)
+                    .addComponent(sloganET)
+                    .addComponent(nameCompanyET)
+                    .addComponent(phoneET)
+                    .addComponent(longitudeET)
+                    .addComponent(latitudeET)
+                    .addComponent(cityET)
+                    .addComponent(suiteET)
+                    .addComponent(streetET)
+                    .addComponent(websiteET)
+                    .addComponent(emailET)
+                    .addComponent(userET)
+                    .addComponent(nameET)
+                    .addComponent(zipcodeET))
+                .addContainerGap(225, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(userE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(emailE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(phoneE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(websiteE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(streetE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(suiteE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cityE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(zipcodeE)
+                            .addComponent(zipcodeET))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(latitudeE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(longitudeE)
+                            .addComponent(longitudeET))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameCompanyE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sloganE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bsE)
+                            .addComponent(bsET)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameET)
+                            .addComponent(nameE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(userET)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(emailET)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(phoneET)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(websiteET)
+                        .addGap(37, 37, 37)
+                        .addComponent(streetET)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(suiteET)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cityET)
+                        .addGap(58, 58, 58)
+                        .addComponent(latitudeET)
+                        .addGap(72, 72, 72)
+                        .addComponent(nameCompanyET)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sloganET)))
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ExtraInfoLayout = new javax.swing.GroupLayout(ExtraInfo.getContentPane());
+        ExtraInfo.getContentPane().setLayout(ExtraInfoLayout);
+        ExtraInfoLayout.setHorizontalGroup(
+            ExtraInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ExtraInfoLayout.setVerticalGroup(
+            ExtraInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -196,6 +452,15 @@ public final class UserProfile extends javax.swing.JFrame{
 
         bsText.setText("jLabel1");
 
+        jButton2.setBackground(new java.awt.Color(52, 183, 241));
+        jButton2.setText("More Info");
+        jButton2.setToolTipText("Watch all the info about the User");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout infoUserPanelLayout = new javax.swing.GroupLayout(infoUserPanel);
         infoUserPanel.setLayout(infoUserPanelLayout);
         infoUserPanelLayout.setHorizontalGroup(
@@ -228,11 +493,14 @@ public final class UserProfile extends javax.swing.JFrame{
                             .addComponent(nameCompanyText)
                             .addComponent(phoneText)
                             .addComponent(nameText)
-                            .addComponent(websiteText)
                             .addComponent(cityText)
                             .addComponent(usernameText)
-                            .addComponent(emailText))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(emailText)
+                            .addGroup(infoUserPanelLayout.createSequentialGroup()
+                                .addComponent(websiteText)
+                                .addGap(53, 53, 53)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         infoUserPanelLayout.setVerticalGroup(
             infoUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +518,9 @@ public final class UserProfile extends javax.swing.JFrame{
                         .addGap(11, 11, 11)
                         .addComponent(phoneText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(websiteText)
+                        .addGroup(infoUserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(websiteText)
+                            .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cityText))
                     .addGroup(infoUserPanelLayout.createSequentialGroup()
@@ -300,7 +570,9 @@ public final class UserProfile extends javax.swing.JFrame{
         listPost.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listPost);
 
-        jButton1.setText("Ver");
+        jButton1.setBackground(new java.awt.Color(236, 178, 46));
+        jButton1.setText("Watch Post");
+        jButton1.setToolTipText("Watch the selected post");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -324,7 +596,7 @@ public final class UserProfile extends javax.swing.JFrame{
             .addGroup(postPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(181, 181, 181))
+                .addGap(157, 157, 157))
         );
         postPanelLayout.setVerticalGroup(
             postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,16 +671,25 @@ public final class UserProfile extends javax.swing.JFrame{
         // TODO add your handling code here:
         String title = listPost.getSelectedValue();
         int separation = title.indexOf("-");
-        title = title.substring(separation+2);
+        title = title.substring(separation + 2);
         for (Nodo nodo : username.getPosts()) {
             Post p = (Post) nodo;
             if (p.getTitle().equals(title)) {
-                PostProfile postProfile = new PostProfile();
+                postProfile = new PostProfile();
                 postProfile.setVisible(true);
                 postProfile.setPost(p, username);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ExtraInfo.setTitle("SMALL Solutions");
+        ExtraInfo.setResizable(false);
+        ExtraInfo.setVisible(true);
+        setInfoText();
+        ExtraInfo.setSize(new Dimension(600, 700));
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -446,7 +727,12 @@ public final class UserProfile extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog ExtraInfo;
+    private javax.swing.JLabel bsE;
+    private javax.swing.JLabel bsET;
     private javax.swing.JLabel bsText;
+    private javax.swing.JLabel cityE;
+    private javax.swing.JLabel cityET;
     private javax.swing.JLabel cityText;
     private javax.swing.JLabel email10;
     private javax.swing.JLabel email11;
@@ -457,24 +743,59 @@ public final class UserProfile extends javax.swing.JFrame{
     private javax.swing.JLabel email7;
     private javax.swing.JLabel email8;
     private javax.swing.JLabel email9;
+    private javax.swing.JLabel emailE;
+    private javax.swing.JLabel emailET;
     private javax.swing.JLabel emailText;
     private javax.swing.JPanel infoUserPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel latitudeE;
+    private javax.swing.JLabel latitudeET;
     private javax.swing.JList<String> listPost;
+    private javax.swing.JLabel longitudeE;
+    private javax.swing.JLabel longitudeET;
+    private javax.swing.JLabel nameCompanyE;
+    private javax.swing.JLabel nameCompanyET;
     private javax.swing.JLabel nameCompanyText;
+    private javax.swing.JLabel nameE;
+    private javax.swing.JLabel nameET;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel nameText;
     private javax.swing.JLabel nombre2;
     private javax.swing.JLabel numberPost;
+    private javax.swing.JLabel phoneE;
+    private javax.swing.JLabel phoneET;
     private javax.swing.JLabel phoneText;
     private javax.swing.JPanel postPanel;
     private javax.swing.JPanel profilePanel;
     private javax.swing.JLabel profilePic;
+    private javax.swing.JLabel sloganE;
+    private javax.swing.JLabel sloganET;
     private javax.swing.JLabel sloganText;
+    private javax.swing.JLabel streetE;
+    private javax.swing.JLabel streetET;
+    private javax.swing.JLabel suiteE;
+    private javax.swing.JLabel suiteET;
+    private javax.swing.JLabel userE;
+    private javax.swing.JLabel userET;
     private javax.swing.JLabel usernamePic;
     private javax.swing.JLabel usernameText;
+    private javax.swing.JLabel websiteE;
+    private javax.swing.JLabel websiteET;
     private javax.swing.JLabel websiteText;
+    private javax.swing.JLabel zipcodeE;
+    private javax.swing.JLabel zipcodeET;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setFonts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * @author alexz
  */
 public class User extends Nodo {
-    
+
     private final int ID;
     private String username;
     private String email;
@@ -90,6 +90,16 @@ public class User extends Nodo {
         for (Nodo post : hijos) {
             Post p = (Post) post;
             if (p.getId() == postId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkPostName(String postTitle) {
+        for (Nodo post : hijos) {
+            Post p = (Post) post;
+            if (p.getTitle().equals(postTitle)){
                 return true;
             }
         }

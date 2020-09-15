@@ -21,4 +21,13 @@ public class Coordenada implements Serializable {
         this.longitude = longitude;
     }
 
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    
 }

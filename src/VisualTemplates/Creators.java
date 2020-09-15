@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author alexz
  */
-public class Creators extends javax.swing.JFrame {
+public class Creators extends TemplateVentana {
 
     /**
      * Creates new form Creators
@@ -18,15 +18,21 @@ public class Creators extends javax.swing.JFrame {
     private int posX, posY;
 
     public Creators() {
+        super();
         initComponents();
         dispose();
         setUndecorated(true);
         setImages();
-        addMouseMotionListener();
-        addMouseListener();
+        setGUI();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    @Override
+    public void setFonts() {
+
+    }
+
+    @Override
     public void setGUI() {
         jLabel1.setFont(Ventana.principalFont);
         gitL.setFont(Ventana.principalFont);
@@ -41,8 +47,10 @@ public class Creators extends javax.swing.JFrame {
 
     }
 
+    @Override
     public synchronized void addMouseListener() {
         super.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 posX = e.getX();
                 posY = e.getY();
@@ -50,8 +58,10 @@ public class Creators extends javax.swing.JFrame {
         });
     }
 
+    @Override
     public synchronized void addMouseMotionListener() {
         super.addMouseMotionListener(new MouseAdapter() {
+            @Override
             public void mouseDragged(MouseEvent e) {
                 //Coloca el frame donde se encuentro el mouse mientras lo arrastras
                 setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
@@ -59,6 +69,7 @@ public class Creators extends javax.swing.JFrame {
         });
     }
 
+    @Override
     public void setImages() {
         ImageIcon icon1 = new ImageIcon("Resources/icons/dev1.png");
         ImageIcon icon2 = new ImageIcon("Resources/icons/dev2.png");
@@ -348,4 +359,5 @@ public class Creators extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel minimize;
     // End of variables declaration//GEN-END:variables
+
 }

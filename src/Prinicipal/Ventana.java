@@ -3,6 +3,7 @@ package Prinicipal;
 import Arbol.*;
 import VisualTemplates.Creators;
 import VisualTemplates.PostProfile;
+import VisualTemplates.TemplateVentana;
 import VisualTemplates.TreeDisplay;
 import VisualTemplates.UserProfile;
 import java.awt.Color;
@@ -11,8 +12,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -28,39 +27,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author alexz
  */
-public class Ventana extends javax.swing.JFrame {
+public class Ventana extends TemplateVentana {
 
     /**
      * Creates new form Ventana
      */
     private static Arbol arbol;
-    private int posX = 0, posY = 0;
-
-    public synchronized void addMouseListener() {
-        super.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                posX = e.getX();
-                posY = e.getY();
-            }
-        });
-    }
-
-    public synchronized void addMouseMotionListener() {
-        super.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                //Coloca el frame donde se encuentro el mouse mientras lo arrastras
-                setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
-            }
-        });
-    }
+    private static Creators creators;
+    private static UserProfile userProfile;
+    private static PostProfile postProfile;
+    private static TreeDisplay treeDisplay;
 
     public Ventana() {
+        super();
         initComponents();
-        configUI();
-        addMouseListener();
-        addMouseMotionListener();
+        setGUI();
     }
 
     public static Color menu = new Color(234, 76, 137);
@@ -75,9 +56,10 @@ public class Ventana extends javax.swing.JFrame {
     public static Color amarillo = new Color(255, 123, 147);
     public static Font principalFont;
 
-    public void configUI() {
-        importFonts();
-        setImagesSizes();
+    @Override
+    public void setGUI() {
+        setFonts();
+        setImages();
         setTitle("SMALL Solutions");
         menuPanel.setBackground(menu);
         mainPost.setBackground(colorMainPost);
@@ -100,7 +82,8 @@ public class Ventana extends javax.swing.JFrame {
         placeholderSearchPost.changeStyle(Font.ITALIC);
     }
 
-    public void setImagesSizes() {
+    @Override
+    public void setImages() {
         ImageIcon icon = new ImageIcon("Resources/icons/search.png");
         ImageIcon iconEye = new ImageIcon("Resources/icons/ojo.png");
         Image img = icon.getImage();
@@ -113,7 +96,8 @@ public class Ventana extends javax.swing.JFrame {
         watchAllPost.setIcon(new ImageIcon(newimgEye));
     }
 
-    public void importFonts() {
+    @Override
+    public void setFonts() {
         // Code extracted from : https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java by Cᴏʀʏ
         try {
             GraphicsEnvironment ge
@@ -853,7 +837,7 @@ public class Ventana extends javax.swing.JFrame {
         } else {
             u = arbol.busquedaUser(userID);
         }
-        if (u == null) {
+        if (u == null || userID == -1) {
             LinkedList<User> matches = arbol.matchPosibbleUsers(user.toLowerCase());
             if (matches.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
@@ -862,33 +846,29 @@ public class Ventana extends javax.swing.JFrame {
             setPossibleQuery(matches);
             return;
         }
-        UserProfile profile = new UserProfile();
-        profile.setVisible(true);
-        profile.setUsuario(u);
+        userProfile = new UserProfile();
+        userProfile.setVisible(true);
+        userProfile.setUsuario(u);
     }//GEN-LAST:event_searchUserActionPerformed
 
     public void searchPost(String title) {
-        for (Nodo nodo : arbol.raiz.getPosts()) {
-            User user = (User) nodo;
-            if (user.getPost(title) != null) {
-                PostProfile postP = new PostProfile();
-                postP.setPost(user.getPost(title), user);
-                postP.setVisible(true);
-                return;
-            }
+        Post p = arbol.getPost(title);
+        if (p != null) {
+            postProfile = new PostProfile();
+            postProfile.setPost(p, arbol.getUserByPost(title));
+            postProfile.setVisible(true);
+            return;
         }
         JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
     }
 
     public void searchPost(int id) {
-        for (Nodo nodo : arbol.raiz.getPosts()) {
-            User user = (User) nodo;
-            if (user.getPost(id) != null) {
-                PostProfile postP = new PostProfile();
-                postP.setPost(user.getPost(id), user);
-                postP.setVisible(true);
-                return;
-            }
+        Post p = arbol.getPost(id);
+        if (p != null) {
+            postProfile = new PostProfile();
+            postProfile.setPost(p, arbol.getUserByPost(id));
+            postProfile.setVisible(true);
+            return;
         }
         JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
     }
@@ -1003,16 +983,16 @@ public class Ventana extends javax.swing.JFrame {
             for (Nodo nodo : arbol.raiz.getPosts()) {
                 User user = (User) nodo;
                 if (user.getUsername().equals(title)) {
-                    UserProfile userProfile = new UserProfile();
+                    userProfile = new UserProfile();
                     userProfile.setVisible(true);
                     userProfile.setUsuario(user);
                 }
             }
         } else {
-            for(Nodo nodo: arbol.raiz.getPosts()){
+            for (Nodo nodo : arbol.raiz.getPosts()) {
                 User user = (User) nodo;
-                if(user.getPost(title) != null){
-                    PostProfile postProfile = new PostProfile();
+                if (user.getPost(title) != null) {
+                    postProfile = new PostProfile();
                     postProfile.setVisible(true);
                     postProfile.setPost(user.getPost(title), user);
                 }
@@ -1039,7 +1019,7 @@ public class Ventana extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(true);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "*.txt,*.csv", "txt", "csv");
+                "*.txt,*.csv", "txt", "csv");
         chooser.setFileFilter(filter);
         int returnValue = chooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -1065,15 +1045,14 @@ public class Ventana extends javax.swing.JFrame {
 
     private void CreatorsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreatorsMouseClicked
         // TODO add your handling code here:
-        Creators creators = new Creators();
+        creators = new Creators();
         creators.setVisible(true);
     }//GEN-LAST:event_CreatorsMouseClicked
 
     private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
         // TODO add your handling code here:
-        System.out.println("MUESTRA LO QUE QUIERE VER RRRR");
-        TreeDisplay t = new TreeDisplay(arbol);
-        t.setVisible(true);
+        treeDisplay = new TreeDisplay(arbol);
+        treeDisplay.setVisible(true);
     }//GEN-LAST:event_DeveloperSideMouseClicked
 
     private void UsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersMouseClicked
@@ -1214,4 +1193,5 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JLabel watchAllPost;
     private javax.swing.JLabel watchAllUsers;
     // End of variables declaration//GEN-END:variables
+
 }

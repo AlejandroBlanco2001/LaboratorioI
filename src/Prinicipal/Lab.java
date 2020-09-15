@@ -9,6 +9,8 @@ import Parser.Parser;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -16,41 +18,32 @@ import java.util.LinkedList;
  */
 public class Lab {
 
-    public static User user;
     private static Arbol arbol;
+    private static Ventana ventana;
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // TODO code application logic here   
-        Ventana ventana = new Ventana();
+        ventana = new Ventana();
         ventana.dispose();
         ventana.setUndecorated(true);
-        Arbol arbol = new Arbol();
-        Parser p = Parser.getParser();
-        LinkedList<String> tempo = p.getObjects("Users.txt");
-        LinkedList<Nodo> lista = new LinkedList();
-        for (String t : tempo) {
-            lista.add((User) p.cleanData(t));
+        arbol = new Arbol();
+        File[] files = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+            "*.txt,*.csv", "txt", "csv");
+        chooser.setFileFilter(filter);
+        int returnValue = chooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            files = chooser.getSelectedFiles();
         }
-        user = (User) lista.get(0);
-        arbol.Agregar(lista);
-        tempo = p.getObjects("Posts.txt");
-        lista.clear();
-        for (String t : tempo) {
-            lista.add((Post) p.cleanData(t));
-        }
-        arbol.Agregar(lista);
-        lista.clear();
-        tempo = p.getObjects("Comments.txt");
-        for (String t : tempo) {
-            lista.add((Comment) p.cleanData(t));
-        }
-        arbol.Agregar(lista);
+        Lab.createTree(files);
         ventana.setVisible(true);
         ventana.setArbol(arbol);
     }
 
     public static Arbol createTree(File[] files) throws IOException {
-        Arbol arbol = new Arbol();
+        arbol = new Arbol();
         files = organizeFiles(files);
         Parser p = Parser.getParser();
         LinkedList<String> tempo = p.getObjects(files[0].getName(), files[0].getCanonicalPath());
@@ -58,7 +51,6 @@ public class Lab {
         for (String t : tempo) {
             lista.add((User) p.cleanData(t));
         }
-        user = (User) lista.get(0);
         arbol.Agregar(lista);
         tempo = p.getObjects(files[1].getName(), files[1].getCanonicalPath());
         lista.clear();
@@ -71,6 +63,7 @@ public class Lab {
         for (String t : tempo) {
             lista.add((Comment) p.cleanData(t));
         }
+        arbol.Agregar(lista);
         return arbol;
     }
 
@@ -106,9 +99,6 @@ public class Lab {
         return lista;
     }
 
-    public User getUsuario() {
-        return user;
-    }
 
     public Arbol getArbol() {
         return arbol;
