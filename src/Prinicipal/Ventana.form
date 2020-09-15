@@ -289,9 +289,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="BusquedaUser">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BusquedaUserActionPerformed"/>
-          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Ventana_BusquedaUser"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="BusquedaPost">
           <Events>

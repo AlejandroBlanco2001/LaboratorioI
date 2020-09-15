@@ -114,8 +114,11 @@ public class Arbol implements Operaciones, Serializable {
     public User getUserByPost(int id) {
         for (Nodo user : raiz.getPosts()) {
             User u = (User) user;
-            if (u.getID() == id) {
-                return u;
+            for (Nodo post : u.getPosts()) {
+                Post p = (Post) post;
+                if (id == p.getId()) {
+                    return u;
+                }
             }
         }
         return null;

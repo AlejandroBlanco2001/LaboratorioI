@@ -267,12 +267,6 @@ public class Ventana extends TemplateVentana {
             }
         });
 
-        BusquedaUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BusquedaUserActionPerformed(evt);
-            }
-        });
-
         BusquedaPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BusquedaPostActionPerformed(evt);
@@ -784,7 +778,7 @@ public class Ventana extends TemplateVentana {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
@@ -809,10 +803,6 @@ public class Ventana extends TemplateVentana {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BusquedaUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BusquedaUserActionPerformed
 
     private void BusquedaPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BusquedaPostActionPerformed
         // TODO add your handling code here:
