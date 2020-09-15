@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public class Arbol implements Operaciones, Serializable {
 
     // Nodo vacio
-    public User raiz;
+    private User raiz;
 
     public Arbol() {
         raiz = new User();
@@ -169,6 +169,10 @@ public class Arbol implements Operaciones, Serializable {
     @Override
     public void Rotar() {
 
+    }
+
+    public User getRaiz() {
+        return raiz;
     }
 
 }

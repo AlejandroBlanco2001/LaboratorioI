@@ -62,6 +62,7 @@ public class Post extends Nodo {
         }
     }
     
+    // TEST ONLY USE
     public void mostrarPost(){
         StringBuffer sb = new StringBuffer();
         sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " +this.body);

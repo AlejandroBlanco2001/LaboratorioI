@@ -19,13 +19,15 @@ public class Persona implements Serializable {
     private String website;
     private Direccion adress;
     private Compañia company;
-
-    public Persona(String name, String phone, String website) {
+    private User user;
+    
+    public Persona(String name, String phone, String website,User user) {
         this.name = name;
         this.phone = phone;
         this.website = website;
         this.adress = adress;
         this.company = company;
+        this.user = user;
     }
 
     void setAdress(String street, String suite, String city, String zipcode,LinkedList<String> info) {

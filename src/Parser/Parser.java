@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import Arbol.Comment;
+import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
 
@@ -59,7 +60,7 @@ public class Parser {
         return objetos;
     }
 
-    public Object cleanData(String dirtyJSON) {
+    public Nodo cleanData(String dirtyJSON) {
         Pattern pattern = Pattern.compile(RegexPattern.FIRST_PARAMETER.getPattern());
         Matcher matcher = pattern.matcher(dirtyJSON);
         LinkedList<String> code = getBegins(matcher, dirtyJSON, 1, -1);
@@ -75,13 +76,6 @@ public class Parser {
             }
         } else {
             return cleanDataInsideData(info);
-        }
-    }
-
-    // TEST ONLY USE
-    public void printBegins(Matcher radar) {
-        while (radar.find()) {
-            System.out.println("Found match at: " + radar.start() + " to " + radar.end());
         }
     }
 
@@ -158,7 +152,7 @@ public class Parser {
         return sb.toString();
     }
 
-    public Object cleanDataInsideData(LinkedList<String> info) {
+    public Nodo  cleanDataInsideData(LinkedList<String> info) {
         User user = User.createUser(Integer.parseInt(info.get(0)), info.get(2), info.get(3));
         user.addPersona(info);
         return user;

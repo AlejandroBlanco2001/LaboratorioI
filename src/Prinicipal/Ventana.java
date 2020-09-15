@@ -907,7 +907,7 @@ public class Ventana extends TemplateVentana {
         info.setText("All the users in the plataform");
         DefaultListModel model = new DefaultListModel();
         matchesUsers.setModel(model);
-        for (Nodo n : arbol.raiz.getPosts()) {
+        for (Nodo n : arbol.getRaiz().getPosts()) {
             User user = (User) n;
             model.addElement(user.getUsername());
         }
@@ -980,7 +980,7 @@ public class Ventana extends TemplateVentana {
         // TODO add your handling code here:
         String title = matchesUsers.getSelectedValue();
         if (lookUser.getText().equals("Look User")) {
-            for (Nodo nodo : arbol.raiz.getPosts()) {
+            for (Nodo nodo : arbol.getRaiz().getPosts()) {
                 User user = (User) nodo;
                 if (user.getUsername().equals(title)) {
                     userProfile = new UserProfile();
@@ -989,7 +989,7 @@ public class Ventana extends TemplateVentana {
                 }
             }
         } else {
-            for (Nodo nodo : arbol.raiz.getPosts()) {
+            for (Nodo nodo : arbol.getRaiz().getPosts()) {
                 User user = (User) nodo;
                 if (user.getPost(title) != null) {
                     postProfile = new PostProfile();
@@ -1003,7 +1003,7 @@ public class Ventana extends TemplateVentana {
     private void watchAllPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllPostMouseClicked
         // TODO add your handling code here:
         LinkedList<Post> posts = new LinkedList();
-        for (Nodo nodo : arbol.raiz.getPosts()) {
+        for (Nodo nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
             for (Nodo n : user.getPosts()) {
                 Post p = (Post) n;

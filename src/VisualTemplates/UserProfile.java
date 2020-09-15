@@ -1,5 +1,6 @@
 package VisualTemplates;
 
+import Arbol.Arbol;
 import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
@@ -25,7 +26,7 @@ public final class UserProfile extends TemplateVentana {
     private Font font;
     private PostProfile postProfile;
     private JList posts;
-    DefaultListModel modelList;
+    private DefaultListModel modelList;
 
     public UserProfile() {
         initComponents();
@@ -669,16 +670,15 @@ public final class UserProfile extends TemplateVentana {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Arbol arbol = Ventana.getArbol();
         String title = listPost.getSelectedValue();
         int separation = title.indexOf("-");
         title = title.substring(separation + 2);
-        for (Nodo nodo : username.getPosts()) {
-            Post p = (Post) nodo;
-            if (p.getTitle().equals(title)) {
-                postProfile = new PostProfile();
-                postProfile.setVisible(true);
-                postProfile.setPost(p, username);
-            }
+        Post post = arbol.getPost(title);
+        if (post != null) {
+            postProfile = new PostProfile();
+            postProfile.setVisible(true);
+            postProfile.setPost(post, username);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

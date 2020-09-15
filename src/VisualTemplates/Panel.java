@@ -27,7 +27,6 @@ public class Panel extends JPanel {
     private final int radio = 15;
     private final int espacioVertical = 130;
     private Arbol arbol;
-    private LinkedList<Nodo> hijos;
 
     public Panel(Arbol arbol) {
         this.arbol = arbol;
@@ -39,19 +38,20 @@ public class Panel extends JPanel {
             setPreferredSize(d);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (arbol != null && arbol.raiz != null) {
+        if (arbol != null && arbol.getRaiz() != null) {
             if (getWidth() <900) {
-                dibujar(g, arbol.raiz, 100, 30, getWidth() / 10);
+                dibujar(g, arbol.getRaiz(), 100, 30, getWidth() / 10);
             } else {
-                dibujar(g, arbol.raiz, 3350, 15, 3000);
+                dibujar(g, arbol.getRaiz(), 3350, 15, 3000);
             }
         }
     }
 
     private void dibujar(Graphics g, Nodo Raiz, int x, int y, int espacioH) {
-        if (Raiz == arbol.raiz) {
+        if (Raiz == arbol.getRaiz()) {
             g.setColor(Ventana.menu);
         } else if (Raiz instanceof User) {
             g.setColor(Ventana.morado);
@@ -65,7 +65,6 @@ public class Panel extends JPanel {
         g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
 
         LinkedList<Nodo> hijos = Raiz.getHijos();
-        Nodo padre = Raiz;
         Point coordsPadre = new Point(x, y);
         if (hijos != null) {
             for (Nodo hijo : hijos) {

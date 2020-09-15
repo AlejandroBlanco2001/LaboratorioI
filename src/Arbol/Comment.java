@@ -28,7 +28,7 @@ public class Comment extends Nodo {
         this.body = body;
         this.email = email;
     }
-
+    
     public static Comment cleanInfo(LinkedList<String> separatedData) {
         int a = 0;
         for (String i : separatedData) {
@@ -67,6 +67,7 @@ public class Comment extends Nodo {
         return temporaryData;
     }
 
+    // Test only use
     public void mostrarComment() {
         StringBuffer sb = new StringBuffer();
         sb.append("\t \t \n " + "ID del comment" + this.id).append("\t \t \n" + "post del Comment id: " +this.postId).append("\t \t \n" + "Email del comentarista" + this.email).append("\t \t \n" + "Persona del comment" + this.name).append("\t \t \n" + "Cuerpo del comment:" + this.body);

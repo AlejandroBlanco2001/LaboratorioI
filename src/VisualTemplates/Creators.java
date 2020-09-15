@@ -15,7 +15,6 @@ public class Creators extends TemplateVentana {
     /**
      * Creates new form Creators
      */
-    private int posX, posY;
 
     public Creators() {
         super();
@@ -45,28 +44,6 @@ public class Creators extends TemplateVentana {
         jLabel9.setFont(Ventana.principalFont);
         jLabel11.setFont(Ventana.principalFont);
 
-    }
-
-    @Override
-    public synchronized void addMouseListener() {
-        super.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                posX = e.getX();
-                posY = e.getY();
-            }
-        });
-    }
-
-    @Override
-    public synchronized void addMouseMotionListener() {
-        super.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                //Coloca el frame donde se encuentro el mouse mientras lo arrastras
-                setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
-            }
-        });
     }
 
     @Override

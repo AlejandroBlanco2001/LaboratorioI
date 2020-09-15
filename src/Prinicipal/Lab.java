@@ -37,7 +37,11 @@ public class Lab {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             files = chooser.getSelectedFiles();
         }
-        Lab.createTree(files);
+        if(files.length == 0){
+            Serializador.recover(files[0].getCanonicalPath());
+        }else{
+            Lab.createTree(files);
+        }
         ventana.setVisible(true);
         ventana.setArbol(arbol);
     }
@@ -90,7 +94,7 @@ public class Lab {
     // TEST ONLY USE
     public static LinkedList<Post> getRandomPost(Arbol arbol) {
         LinkedList<Post> lista = new LinkedList();
-        for (Nodo nodo : arbol.raiz.getPosts()) {
+        for (Nodo nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
             if (user.getPosts().get(0) != null) {
                 lista.add((Post) user.getPosts().get(0));

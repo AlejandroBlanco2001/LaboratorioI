@@ -56,7 +56,7 @@ public class User extends Nodo {
     }
 
     public void addPersona(LinkedList<String> info) {
-        this.persona = new Persona(info.get(1), info.get(10), info.get(11));
+        this.persona = new Persona(info.get(1), info.get(10), info.get(11),this);
         this.persona.setAdress(info.get(4), info.get(5), info.get(6), info.get(7), info);
     }
 
@@ -106,8 +106,9 @@ public class User extends Nodo {
         return false;
     }
 
+    // Test only use
     public void mostrarUser() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("ID del user:" + this.ID).append("\n Email del user: " + this.email).append("\n Nombre de usuario:" + this.username);
         System.out.println(sb.toString());
         for (Nodo nodo : hijos) {
