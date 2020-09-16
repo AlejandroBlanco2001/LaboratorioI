@@ -22,6 +22,7 @@ import javax.swing.JPanel;
  *
  * @author Alex
  */
+
 public class Panel extends JPanel {
 
     private final int radio = 15;
@@ -63,7 +64,6 @@ public class Panel extends JPanel {
         g.fillOval(x - radio, y - radio, 2 * radio, 2 * radio);
         g.setColor(Color.BLACK);
         g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
-
         LinkedList<Nodo> hijos = Raiz.getHijos();
         Point coordsPadre = new Point(x, y);
         if (hijos != null) {
@@ -81,7 +81,6 @@ public class Panel extends JPanel {
         int yy1 = (int) (y1 - radio * (y1 - y2) / d);
         int xx2 = (int) (x2 + radio * (x1 - x2) / d);
         int yy2 = (int) (y2 + radio * (y1 - y2) / d);
-
         g.drawLine(xx1, yy1, xx2, yy2);
 
     }

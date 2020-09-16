@@ -37,8 +37,8 @@ public class Lab {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             files = chooser.getSelectedFiles();
         }
-        if(files.length == 0){
-            Serializador.recover(files[0].getCanonicalPath());
+        if(files.length == 1){
+            arbol = Serializador.recover(files[0].getCanonicalPath());
         }else{
             Lab.createTree(files);
         }

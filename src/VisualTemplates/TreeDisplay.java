@@ -6,10 +6,17 @@
 package VisualTemplates;
 
 import Arbol.Arbol;
+import Arbol.Comment;
+import Arbol.Nodo;
+import Arbol.Post;
+import Arbol.User;
+import Prinicipal.Ventana;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,15 +31,17 @@ public class TreeDisplay extends TemplateVentana {
     private Panel dp;
     private Boolean toggle = true;
     private Arbol ab;
+    private Ventana ventana;
 
-    public TreeDisplay(Arbol ab) {
+    public TreeDisplay(Arbol ab, Ventana ventana) {
         this.ab = ab;
+        this.ventana = ventana;
         dp = new Panel(ab);
         Dimension d = new Dimension(783, 440);
         dp.setMinimumSize(d);
         dp.setMaximumSize(d);
         dp.setPreferredSize(d);
-        this.setResizable(false);
+        setResizable(false);
         setUndecorated(true);
         initComponents();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -54,6 +63,17 @@ public class TreeDisplay extends TemplateVentana {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CommentsView = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        postCreator = new javax.swing.JLabel();
+        creator = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        body = new javax.swing.JTextArea();
+        title = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -80,6 +100,108 @@ public class TreeDisplay extends TemplateVentana {
         jButton10 = new javax.swing.JButton();
         close = new javax.swing.JLabel();
         minimize = new javax.swing.JLabel();
+
+        jPanel3.setBackground(new java.awt.Color(46, 182, 125));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Post:");
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Title");
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Body");
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("By");
+
+        postCreator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        postCreator.setForeground(new java.awt.Color(255, 255, 255));
+        postCreator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        postCreator.setText("jLabel11");
+
+        creator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        creator.setForeground(new java.awt.Color(255, 255, 255));
+        creator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        creator.setText("jLabel12");
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        body.setColumns(20);
+        body.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        body.setLineWrap(true);
+        body.setRows(5);
+        jScrollPane1.setViewportView(body);
+
+        title.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("jLabel13");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel4)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(186, 186, 186)
+                            .addComponent(jLabel10)
+                            .addGap(8, 8, 8))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGap(186, 186, 186)
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel4)
+                .addGap(14, 14, 14)
+                .addComponent(postCreator)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel10)
+                .addGap(11, 11, 11)
+                .addComponent(creator)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel8)
+                .addGap(21, 21, 21)
+                .addComponent(title)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CommentsViewLayout = new javax.swing.GroupLayout(CommentsView.getContentPane());
+        CommentsView.getContentPane().setLayout(CommentsViewLayout);
+        CommentsViewLayout.setHorizontalGroup(
+            CommentsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CommentsViewLayout.setVerticalGroup(
+            CommentsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,7 +264,6 @@ public class TreeDisplay extends TemplateVentana {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(numberUsers)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
                                     .addGap(15, 15, 15))
                                 .addComponent(numberPost)
@@ -193,24 +314,74 @@ public class TreeDisplay extends TemplateVentana {
         jPanel2.setBackground(new java.awt.Color(234, 76, 137));
 
         jButton1.setText("Search for specific User");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Search for specific Post ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Search Comment of a Post");
+        jButton3.setText("Search Comments of a Post");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Give all Users");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Give all Posts");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Give all Comments");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Search Post of a User");
+        jButton7.setText("Search Posts of a User");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Search for specific Comment");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("Number of Post of a User");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton10.setText("Number of Comment of a Post");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -330,6 +501,60 @@ public class TreeDisplay extends TemplateVentana {
 
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    public User searchUser() {
+        String username = JOptionPane.showInputDialog(null, "Ingrese el ID o el username del User", "Busqueda de User", JOptionPane.DEFAULT_OPTION);
+        int ID;
+        User user;
+        try {
+            ID = Integer.parseInt(username);
+        } catch (NumberFormatException e) {
+            ID = -1;
+        }
+        if (ID == -1) {
+            user = ab.busquedaUser(username);
+        } else {
+            user = ab.busquedaUser(ID);
+        }
+        return user;
+    }
+
+    public Comment searchComment() {
+        String title = JOptionPane.showInputDialog(null, "Ingrese el ID, titulo del Comment, cuerpo de Comment o email del creador", "Busqueda de Comments de un POST", JOptionPane.DEFAULT_OPTION);
+        int ID;
+        Comment comment;
+        try {
+            ID = Integer.parseInt(title);
+        } catch (NumberFormatException e) {
+            ID = -1;
+        }
+        if (ID == -1) {
+            comment = ab.getComment(title);
+        } else {
+            comment = ab.getComment(ID);
+        }
+        if (comment == null) {
+            JOptionPane.showMessageDialog(null, "ERROR", "Comentario no encontrado", JOptionPane.ERROR_MESSAGE);
+        }
+        return comment;
+    }
+
+    public Post searchPost() {
+        String title = JOptionPane.showInputDialog(null, "Ingrese el ID o el titulo del Post", "Busqueda de Comments de un POST", JOptionPane.DEFAULT_OPTION);
+        int ID;
+        Post post;
+        try {
+            ID = Integer.parseInt(title);
+        } catch (NumberFormatException e) {
+            ID = -1;
+        }
+        if (ID == -1) {
+            post = ab.getPost(title);
+        } else {
+            post = ab.getPost(ID);
+        }
+        return post;
+    }
+
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
         dispose();
@@ -340,10 +565,120 @@ public class TreeDisplay extends TemplateVentana {
         setState(Creators.ICONIFIED);
     }//GEN-LAST:event_minimizeMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        User user = searchUser();
+        if (user != null) {
+            UserProfile userProfile = new UserProfile();
+            userProfile.setUsuario(user);
+            userProfile.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        User user = searchUser();
+        if (user != null) {
+            UserProfile userProfile = new UserProfile();
+            userProfile.setUsuario(user);
+            userProfile.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Post post = searchPost();
+        User user = ab.getUserByPost(post.getTitle());
+        if (post != null) {
+            PostProfile postProfile = new PostProfile();
+            postProfile.setPost(post, user);
+            postProfile.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        ventana.setAllUsers();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        LinkedList<Post> posts = new LinkedList();
+        for (Nodo nodo : ab.getRaiz().getPosts()) {
+            User user = (User) nodo;
+            for (Nodo n : user.getPosts()) {
+                Post post = (Post) n;
+                posts.add(post);
+            }
+        }
+        ventana.setAllPost(posts);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        LinkedList<Comment> comment = new LinkedList();
+        for (Nodo nodo : ab.getRaiz().getPosts()) {
+            User user = (User) nodo;
+            for (Nodo n : user.getPosts()) {
+                Post post = (Post) n;
+                for (Nodo nod : post.getComments()) {
+                    Comment c = (Comment) nod;
+                    comment.add(c);
+                }
+            }
+        }
+        ventana.setAllComments(comment);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Post post = searchPost();
+        User user = ab.getUserByPost(post.getTitle());
+        if (post != null) {
+            PostProfile postProfile = new PostProfile();
+            postProfile.setPost(post, user);
+            postProfile.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        Comment c = searchComment();
+        Post post = ab.getPost(c.getPostId());
+        CommentsView.setTitle("SMALL SOLUTIONS");
+        creator.setText(c.getEmail());
+        title.setText(c.getName());
+        body.setText(c.getBody());
+        postCreator.setText(post.getTitle());
+        CommentsView.setSize(new Dimension(450, 400));
+        CommentsView.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        User user = searchUser();
+        if (user != null) {
+            UserProfile userProfile = new UserProfile();
+            userProfile.setUsuario(user);
+            userProfile.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        Post post = searchPost();
+        User user = ab.getUserByPost(post.getTitle());
+        if (post != null) {
+            PostProfile postProfile = new PostProfile();
+            postProfile.setPost(post, user);
+            postProfile.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[], Arbol ar) {
+    public static void main(String args[], Arbol ar, Ventana ventana) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -370,14 +705,17 @@ public class TreeDisplay extends TemplateVentana {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TreeDisplay(ar).setVisible(true);
+                new TreeDisplay(ar, ventana).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog CommentsView;
     private javax.swing.JScrollPane TreeScroll;
+    private javax.swing.JTextArea body;
     private javax.swing.JLabel close;
+    private javax.swing.JLabel creator;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -389,19 +727,27 @@ public class TreeDisplay extends TemplateVentana {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel minimize;
     private javax.swing.JTextField numberComments;
     private javax.swing.JTextField numberNodes;
     private javax.swing.JTextField numberPost;
     private javax.swing.JTextField numberUsers;
+    private javax.swing.JLabel postCreator;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 
     @Override

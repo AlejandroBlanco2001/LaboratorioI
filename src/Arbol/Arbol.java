@@ -178,4 +178,23 @@ public class Arbol implements Operaciones, Serializable {
         return raiz;
     }
 
+    public Comment getComment(String title) {
+        for (Nodo n : raiz.getPosts()) {
+            User user = (User) n;
+            if (user.getComment(title) != null) {
+                return (Comment) user.getComment(title);
+            }
+        }
+        return null;
+    }
+
+    public Comment getComment(int ID) {
+        for (Nodo n : raiz.getPosts()) {
+            User user = (User) n;
+            if (user.getComment(ID) != null) {
+                return (Comment) user.getComment(ID);
+            }
+        }
+        return null;
+    }
 }

@@ -80,6 +80,9 @@ public class Ventana extends TemplateVentana {
         TextPrompt placeholderSearchPost = new TextPrompt("Search Post", BusquedaPost);
         placeholderSearchPost.changeAlpha(0.75f);
         placeholderSearchPost.changeStyle(Font.ITALIC);
+        TextPrompt placeholderSearchComment = new TextPrompt("Search Comment", busquedaComment);
+        placeholderSearchComment.changeAlpha(0.75f);
+        placeholderSearchComment.changeStyle(Font.ITALIC);
     }
 
     @Override
@@ -92,8 +95,10 @@ public class Ventana extends TemplateVentana {
         Image newimgEye = imgEye.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
         searchUser.setIcon(new ImageIcon(newimg));
         searchPost.setIcon(new ImageIcon(newimg));
+        searchComment.setIcon(new ImageIcon(newimg));
         watchAllUsers.setIcon(new ImageIcon(newimgEye));
         watchAllPost.setIcon(new ImageIcon(newimgEye));
+        watchAllComments.setIcon(new ImageIcon(newimgEye));
     }
 
     @Override
@@ -132,6 +137,17 @@ public class Ventana extends TemplateVentana {
         matchesUsers = new javax.swing.JList<>();
         info = new javax.swing.JLabel();
         lookUser = new javax.swing.JButton();
+        CommentsView = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        postCreator = new javax.swing.JLabel();
+        creator = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        body = new javax.swing.JTextArea();
+        title = new javax.swing.JLabel();
         menuPanel = new javax.swing.JPanel();
         Users = new java.awt.Label();
         DeveloperSide = new java.awt.Label();
@@ -144,6 +160,9 @@ public class Ventana extends TemplateVentana {
         searchPost = new javax.swing.JButton();
         watchAllUsers = new javax.swing.JLabel();
         watchAllPost = new javax.swing.JLabel();
+        searchComment = new javax.swing.JButton();
+        busquedaComment = new javax.swing.JTextField();
+        watchAllComments = new javax.swing.JLabel();
         postPanel = new javax.swing.JPanel();
         mainPost = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -235,6 +254,108 @@ public class Ventana extends TemplateVentana {
         possibleMatchesLayout.setVerticalGroup(
             possibleMatchesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel3.setBackground(new java.awt.Color(46, 182, 125));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Post:");
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Title");
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Body");
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("By");
+
+        postCreator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        postCreator.setForeground(new java.awt.Color(255, 255, 255));
+        postCreator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        postCreator.setText("jLabel11");
+
+        creator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        creator.setForeground(new java.awt.Color(255, 255, 255));
+        creator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        creator.setText("jLabel12");
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        body.setColumns(20);
+        body.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        body.setLineWrap(true);
+        body.setRows(5);
+        jScrollPane2.setViewportView(body);
+
+        title.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("jLabel13");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel4)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(186, 186, 186)
+                            .addComponent(jLabel10)
+                            .addGap(8, 8, 8))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addGap(186, 186, 186)
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel4)
+                .addGap(14, 14, 14)
+                .addComponent(postCreator)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel10)
+                .addGap(11, 11, 11)
+                .addComponent(creator)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel8)
+                .addGap(21, 21, 21)
+                .addComponent(title)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CommentsViewLayout = new javax.swing.GroupLayout(CommentsView.getContentPane());
+        CommentsView.getContentPane().setLayout(CommentsViewLayout);
+        CommentsViewLayout.setHorizontalGroup(
+            CommentsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CommentsViewLayout.setVerticalGroup(
+            CommentsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -331,6 +452,33 @@ public class Ventana extends TemplateVentana {
             }
         });
 
+        searchComment.setBackground(new java.awt.Color(234, 76, 137));
+        searchComment.setToolTipText("Search the post title");
+        searchComment.setBorder(null);
+        searchComment.setBorderPainted(false);
+        searchComment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchComment.setDoubleBuffered(true);
+        searchComment.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        searchComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchCommentActionPerformed(evt);
+            }
+        });
+
+        busquedaComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busquedaCommentActionPerformed(evt);
+            }
+        });
+
+        watchAllComments.setToolTipText("See all comments");
+        watchAllComments.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        watchAllComments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                watchAllCommentsMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -365,7 +513,14 @@ public class Ventana extends TemplateVentana {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(8, 8, 8)))
-                        .addGap(2, 2, 2))))
+                        .addGap(2, 2, 2))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addComponent(searchComment, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(busquedaComment, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(watchAllComments, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +537,13 @@ public class Ventana extends TemplateVentana {
                     .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(watchAllPost)))
-                .addGap(104, 104, 104)
+                .addGap(18, 18, 18)
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchComment, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(busquedaComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(watchAllComments)))
+                .addGap(59, 59, 59)
                 .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(DeveloperSide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -544,10 +705,10 @@ public class Ventana extends TemplateVentana {
             smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGroup(smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         smallPost1Layout.setVerticalGroup(
             smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -810,25 +971,16 @@ public class Ventana extends TemplateVentana {
 
     private void searchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserActionPerformed
         // TODO add your handling code here:
-        String user = BusquedaUser.getText();
-        if (user.isEmpty()) {
-            return;
-        }
-        int userID = 0;
-        User u;
+        String text = BusquedaUser.getText();
+        User user = searchUser(text);
+        int ID = 0;
         try {
-            userID = Integer.parseInt(user);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-            userID = -1;
+            Integer.parseInt(BusquedaUser.getText());
+        } catch (Exception e) {
+            ID = -1;
         }
-        if (userID == -1) {
-            u = arbol.busquedaUser(user.toLowerCase());
-        } else {
-            u = arbol.busquedaUser(userID);
-        }
-        if (u == null || userID == -1) {
-            LinkedList<User> matches = arbol.matchPosibbleUsers(user.toLowerCase());
+        if (user == null || ID == -1) {
+            LinkedList<User> matches = arbol.matchPosibbleUsers(text.toLowerCase());
             if (matches.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -838,71 +990,8 @@ public class Ventana extends TemplateVentana {
         }
         userProfile = new UserProfile();
         userProfile.setVisible(true);
-        userProfile.setUsuario(u);
+        userProfile.setUsuario(user);
     }//GEN-LAST:event_searchUserActionPerformed
-
-    public void searchPost(String title) {
-        Post p = arbol.getPost(title);
-        if (p != null) {
-            postProfile = new PostProfile();
-            postProfile.setPost(p, arbol.getUserByPost(title));
-            postProfile.setVisible(true);
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void searchPost(int id) {
-        Post p = arbol.getPost(id);
-        if (p != null) {
-            postProfile = new PostProfile();
-            postProfile.setPost(p, arbol.getUserByPost(id));
-            postProfile.setVisible(true);
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
-    }
-
-    public void setAllPost(LinkedList<Post> posts) {
-        possibleMatches.setTitle("SMALL Solutions");
-        possibleMatches.setResizable(false);
-        possibleMatches.setVisible(true);
-        info.setText("All the Post are");
-        lookUser.setText("Look Post");
-        DefaultListModel model = new DefaultListModel();
-        matchesUsers.setModel(model);
-        for (Post p : posts) {
-            model.addElement(p.getTitle());
-        }
-        possibleMatches.setSize(new Dimension(400, 500));
-    }
-
-    public void setPossibleQuery(LinkedList<User> matches) {
-        possibleMatches.setTitle("SMALL Solutions");
-        possibleMatches.setResizable(false);
-        possibleMatches.setVisible(true);
-        info.setText("Maybe you are looking for");
-        DefaultListModel model = new DefaultListModel();
-        matchesUsers.setModel(model);
-        for (User m : matches) {
-            model.addElement(m.getUsername());
-        }
-        possibleMatches.setSize(new Dimension(400, 500));
-    }
-
-    public void setAllUsers() {
-        possibleMatches.setTitle("SMALL Solutions");
-        possibleMatches.setResizable(false);
-        possibleMatches.setVisible(true);
-        info.setText("All the users in the plataform");
-        DefaultListModel model = new DefaultListModel();
-        matchesUsers.setModel(model);
-        for (Nodo n : arbol.getRaiz().getPosts()) {
-            User user = (User) n;
-            model.addElement(user.getUsername());
-        }
-        possibleMatches.setSize(new Dimension(400, 500));
-    }
 
     private void searchPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPostActionPerformed
         // TODO add your handling code here:
@@ -968,25 +1057,30 @@ public class Ventana extends TemplateVentana {
 
     private void lookUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookUserActionPerformed
         // TODO add your handling code here:
-        String title = matchesUsers.getSelectedValue();
+        String titleS = matchesUsers.getSelectedValue();
         if (lookUser.getText().equals("Look User")) {
-            for (Nodo nodo : arbol.getRaiz().getPosts()) {
-                User user = (User) nodo;
-                if (user.getUsername().equals(title)) {
-                    userProfile = new UserProfile();
-                    userProfile.setVisible(true);
-                    userProfile.setUsuario(user);
-                }
-            }
+            User user = arbol.busquedaUser(titleS);
+            userProfile = new UserProfile();
+            userProfile.setVisible(true);
+            userProfile.setUsuario(user);
+        } else if (lookUser.getText().equals("Look Post")) {
+            Post post = arbol.getPost(titleS);
+            User user = arbol.getUserByPost(post.getTitle());
+            postProfile = new PostProfile();
+            postProfile.setVisible(true);
+            postProfile.setPost(post, user);
         } else {
-            for (Nodo nodo : arbol.getRaiz().getPosts()) {
-                User user = (User) nodo;
-                if (user.getPost(title) != null) {
-                    postProfile = new PostProfile();
-                    postProfile.setVisible(true);
-                    postProfile.setPost(user.getPost(title), user);
-                }
-            }
+            Comment c = arbol.getComment(titleS);
+            Post p = arbol.getPost(c.getPostId());
+            CommentsView.setTitle("SMALL SOLUTIONS");
+            creator.setText(c.getEmail());
+            title.setText(c.getName());
+            body.setText(c.getBody());
+            postCreator.setText(p.getTitle());
+            CommentsView.setSize(new Dimension(450, 400));
+            CommentsView.setVisible(true);
+            CommentsView.setResizable(false);
+            lookUser.setText("Look the Comment");
         }
     }//GEN-LAST:event_lookUserActionPerformed
 
@@ -1041,7 +1135,7 @@ public class Ventana extends TemplateVentana {
 
     private void DeveloperSideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeveloperSideMouseClicked
         // TODO add your handling code here:
-        treeDisplay = new TreeDisplay(arbol);
+        treeDisplay = new TreeDisplay(arbol, this);
         treeDisplay.setVisible(true);
     }//GEN-LAST:event_DeveloperSideMouseClicked
 
@@ -1050,6 +1144,41 @@ public class Ventana extends TemplateVentana {
         System.out.println("ESTAS EN CASA :3");
     }//GEN-LAST:event_UsersMouseClicked
 
+    private void searchCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCommentActionPerformed
+        // TODO add your handling code here:
+        Comment c = searchComment();
+        Post post = arbol.getPost(c.getPostId());
+        CommentsView.setTitle("SMALL SOLUTIONS");
+        creator.setText(c.getEmail());
+        title.setText(c.getName());
+        body.setText(c.getBody());
+        postCreator.setText(post.getTitle());
+        CommentsView.setSize(new Dimension(450, 400));
+        CommentsView.setVisible(true);
+        CommentsView.setResizable(false);
+        lookUser.setText("Look the Comment");
+    }//GEN-LAST:event_searchCommentActionPerformed
+
+    private void busquedaCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaCommentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_busquedaCommentActionPerformed
+
+    private void watchAllCommentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllCommentsMouseClicked
+        // TODO add your handling code here:
+        LinkedList<Comment> comment = new LinkedList();
+        for (Nodo nodo : arbol.getRaiz().getPosts()) {
+            User user = (User) nodo;
+            for (Nodo n : user.getPosts()) {
+                Post post = (Post) n;
+                for (Nodo nod : post.getComments()) {
+                    Comment c = (Comment) nod;
+                    comment.add(c);
+                }
+            }
+        }
+        setAllComments(comment);
+    }//GEN-LAST:event_watchAllCommentsMouseClicked
+
     public void setArbol(Arbol arbol) {
         Ventana.arbol = arbol;
         getPostForShowing();
@@ -1057,6 +1186,123 @@ public class Ventana extends TemplateVentana {
 
     public static Arbol getArbol() {
         return arbol;
+    }
+
+    public User searchUser(String user) {
+        if (user.isEmpty()) {
+            return null;
+        }
+        int userID = 0;
+        User u;
+        try {
+            userID = Integer.parseInt(user);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            userID = -1;
+        }
+        if (userID == -1) {
+            u = arbol.busquedaUser(user.toLowerCase());
+        } else {
+            u = arbol.busquedaUser(userID);
+        }
+        return u;
+    }
+
+    public Comment searchComment() {
+        String title = busquedaComment.getText();
+        int ID;
+        Comment comment;
+        try {
+            ID = Integer.parseInt(title);
+        } catch (NumberFormatException e) {
+            ID = -1;
+        }
+        if (ID == -1) {
+            comment = arbol.getComment(title);
+        } else {
+            comment = arbol.getComment(ID);
+        }
+        if (comment == null) {
+            JOptionPane.showMessageDialog(null, "ERROR", "Comentario no encontrado", JOptionPane.ERROR_MESSAGE);
+        }
+        return comment;
+    }
+
+    public void searchPost(String title) {
+        Post p = arbol.getPost(title);
+        if (p != null) {
+            postProfile = new PostProfile();
+            postProfile.setPost(p, arbol.getUserByPost(title));
+            postProfile.setVisible(true);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void searchPost(int id) {
+        Post p = arbol.getPost(id);
+        if (p != null) {
+            postProfile = new PostProfile();
+            postProfile.setPost(p, arbol.getUserByPost(id));
+            postProfile.setVisible(true);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void setAllPost(LinkedList<Post> posts) {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        info.setText("All the Post are");
+        lookUser.setText("Look Post");
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (Post p : posts) {
+            model.addElement(p.getTitle());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
+    }
+
+    public void setPossibleQuery(LinkedList<User> matches) {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        info.setText("Maybe you are looking for");
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (User m : matches) {
+            model.addElement(m.getUsername());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
+    }
+
+    public void setAllUsers() {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        info.setText("All the users in the plataform");
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (Nodo n : arbol.getRaiz().getPosts()) {
+            User user = (User) n;
+            model.addElement(user.getUsername());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
+    }
+
+    public void setAllComments(LinkedList<Comment> c) {
+        possibleMatches.setTitle("SMALL Solutions");
+        possibleMatches.setResizable(false);
+        possibleMatches.setVisible(true);
+        lookUser.setText("Look Comments");
+        info.setText("All the comments in the plataform");
+        DefaultListModel model = new DefaultListModel();
+        matchesUsers.setModel(model);
+        for (Comment co : c) {
+            model.addElement(co.getName());
+        }
+        possibleMatches.setSize(new Dimension(400, 500));
     }
 
     public void getPostForShowing() {
@@ -1133,17 +1379,27 @@ public class Ventana extends TemplateVentana {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BusquedaPost;
     private javax.swing.JTextField BusquedaUser;
+    private javax.swing.JDialog CommentsView;
     private java.awt.Label Creators;
     private java.awt.Label DeveloperSide;
     private java.awt.Label Users;
+    private javax.swing.JTextArea body;
+    private javax.swing.JTextField busquedaComment;
     private javax.swing.JLabel close;
+    private javax.swing.JLabel creator;
     private javax.swing.JLabel info;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -1162,8 +1418,10 @@ public class Ventana extends TemplateVentana {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel minimize;
     private javax.swing.JDialog possibleMatches;
+    private javax.swing.JLabel postCreator;
     private javax.swing.JPanel postPanel;
     private java.awt.Label save;
+    private javax.swing.JButton searchComment;
     private javax.swing.JButton searchPost;
     private javax.swing.JButton searchUser;
     private javax.swing.JPanel smallPost1;
@@ -1179,7 +1437,9 @@ public class Ventana extends TemplateVentana {
     private javax.swing.JTextArea smallPostTitleArea2;
     private javax.swing.JTextArea smallPostTitleArea3;
     private javax.swing.JTextArea smallPostTitleArea4;
+    private javax.swing.JLabel title;
     private java.awt.Label uploadFiles;
+    private javax.swing.JLabel watchAllComments;
     private javax.swing.JLabel watchAllPost;
     private javax.swing.JLabel watchAllUsers;
     // End of variables declaration//GEN-END:variables

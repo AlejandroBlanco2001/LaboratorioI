@@ -10,6 +10,7 @@ import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
 import Prinicipal.Ventana;
+import java.awt.Dimension;
 import javax.swing.DefaultListModel;
 
 /**
@@ -19,7 +20,7 @@ import javax.swing.DefaultListModel;
 public class PostProfile extends TemplateVentana {
 
     private static UserProfile userProfile;
-    
+
     /**
      * Creates new form PostProfile
      */
@@ -83,6 +84,17 @@ public class PostProfile extends TemplateVentana {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CommentsView = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        postCreator = new javax.swing.JLabel();
+        creator = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        body1 = new javax.swing.JTextArea();
+        title = new javax.swing.JLabel();
         commentPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         CommentsList = new javax.swing.JList<>();
@@ -90,11 +102,115 @@ public class PostProfile extends TemplateVentana {
         close = new javax.swing.JLabel();
         close1 = new javax.swing.JLabel();
         numberComments = new javax.swing.JLabel();
+        watchComment = new javax.swing.JButton();
         postPart = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         body = new javax.swing.JTextArea();
         titlePost = new javax.swing.JLabel();
         authorPost = new javax.swing.JLabel();
+
+        jPanel3.setBackground(new java.awt.Color(46, 182, 125));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Post:");
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Title");
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Body");
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("By");
+
+        postCreator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        postCreator.setForeground(new java.awt.Color(255, 255, 255));
+        postCreator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        postCreator.setText("jLabel11");
+
+        creator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        creator.setForeground(new java.awt.Color(255, 255, 255));
+        creator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        creator.setText("jLabel12");
+
+        jScrollPane4.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane4.setBorder(null);
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        body1.setEditable(false);
+        body1.setColumns(20);
+        body1.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        body1.setLineWrap(true);
+        body1.setRows(5);
+        jScrollPane4.setViewportView(body1);
+
+        title.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        title.setForeground(new java.awt.Color(255, 255, 255));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("jLabel13");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel4)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(186, 186, 186)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(8, 8, 8))
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel4)
+                .addGap(14, 14, 14)
+                .addComponent(postCreator)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel10)
+                .addGap(11, 11, 11)
+                .addComponent(creator)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel8)
+                .addGap(21, 21, 21)
+                .addComponent(title)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CommentsViewLayout = new javax.swing.GroupLayout(CommentsView.getContentPane());
+        CommentsView.getContentPane().setLayout(CommentsViewLayout);
+        CommentsViewLayout.setHorizontalGroup(
+            CommentsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CommentsViewLayout.setVerticalGroup(
+            CommentsViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +240,13 @@ public class PostProfile extends TemplateVentana {
 
         numberComments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        watchComment.setText("Watch Comment");
+        watchComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                watchCommentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout commentPanelLayout = new javax.swing.GroupLayout(commentPanel);
         commentPanel.setLayout(commentPanelLayout);
         commentPanelLayout.setHorizontalGroup(
@@ -135,15 +258,17 @@ public class PostProfile extends TemplateVentana {
                 .addComponent(close)
                 .addGap(18, 18, 18))
             .addGroup(commentPanelLayout.createSequentialGroup()
-                .addGroup(commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(commentPanelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(commentPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(CommentsText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(numberComments, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(commentPanelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(CommentsText, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(numberComments, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(commentPanelLayout.createSequentialGroup()
+                            .addGap(121, 121, 121)
+                            .addComponent(watchComment))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         commentPanelLayout.setVerticalGroup(
@@ -157,9 +282,11 @@ public class PostProfile extends TemplateVentana {
                 .addGroup(commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CommentsText)
                     .addComponent(numberComments))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(watchComment)
+                .addGap(24, 24, 24))
         );
 
         jScrollPane3.setBorder(null);
@@ -249,6 +376,35 @@ public class PostProfile extends TemplateVentana {
         this.setState(PostProfile.ICONIFIED);
     }//GEN-LAST:event_close1MouseClicked
 
+    private void watchCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_watchCommentActionPerformed
+        // TODO add your handling code here:
+        int index = CommentsList.getSelectedIndex();
+        Comment c = getComment(index);
+        if(c == null){
+            System.out.println("KHE");
+            return;
+        }
+        CommentsView.setTitle("SMALL SOLUTIONS");
+        creator.setText(c.getEmail());
+        title.setText(c.getName());
+        body1.setText(c.getBody());
+        postCreator.setText(post.getTitle());
+        CommentsView.setSize(new Dimension(450, 400));
+        CommentsView.setVisible(true);
+        CommentsView.setResizable(false);
+    }//GEN-LAST:event_watchCommentActionPerformed
+
+    public Comment getComment(int index) {
+        int cont = 0;
+        for (Nodo nodo : post.getComments()) {
+            if(cont == index){
+                return (Comment) nodo;
+            }
+            cont++;
+        }
+        return null;
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -288,16 +444,28 @@ public class PostProfile extends TemplateVentana {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> CommentsList;
     private javax.swing.JLabel CommentsText;
+    private javax.swing.JDialog CommentsView;
     private javax.swing.JLabel authorPost;
     private javax.swing.JTextArea body;
+    private javax.swing.JTextArea body1;
     private javax.swing.JLabel close;
     private javax.swing.JLabel close1;
     private javax.swing.JPanel commentPanel;
+    private javax.swing.JLabel creator;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel numberComments;
+    private javax.swing.JLabel postCreator;
     private javax.swing.JPanel postPart;
+    private javax.swing.JLabel title;
     private javax.swing.JLabel titlePost;
+    private javax.swing.JButton watchComment;
     // End of variables declaration//GEN-END:variables
 
 }

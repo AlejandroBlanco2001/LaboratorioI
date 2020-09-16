@@ -56,7 +56,7 @@ public class User extends Nodo {
     }
 
     public void addPersona(LinkedList<String> info) {
-        this.persona = new Persona(info.get(1), info.get(10), info.get(11),this);
+        this.persona = new Persona(info.get(1), info.get(10), info.get(11), this);
         this.persona.setAdress(info.get(4), info.get(5), info.get(6), info.get(7), info);
     }
 
@@ -99,11 +99,31 @@ public class User extends Nodo {
     public boolean checkPostName(String postTitle) {
         for (Nodo post : hijos) {
             Post p = (Post) post;
-            if (p.getTitle().equals(postTitle)){
+            if (p.getTitle().equals(postTitle)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Comment getComment(int ID) {
+        for (Nodo nodo : this.getPosts()) {
+            Post p = (Post) nodo;
+            if (p.getComment(ID) != null) {
+                return (Comment) p.getComment(ID);
+            }
+        }
+        return null;
+    }
+
+    public Comment getComment(String title) {
+        for (Nodo nodo : this.getPosts()) {
+            Post p = (Post) nodo;
+            if (p.getComment(title) != null) {
+                return (Comment) p.getComment(title);
+            }
+        }
+        return null;
     }
 
     // Test only use

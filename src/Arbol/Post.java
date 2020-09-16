@@ -13,8 +13,8 @@ public class Post extends Nodo {
     private String title;
     private String body;
 
-    private static String temporaryData[] = new String[4];  
-    
+    private static String temporaryData[] = new String[4];
+
     private Post(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
@@ -33,7 +33,7 @@ public class Post extends Nodo {
         int idTemp = Integer.parseInt(temporaryData[1]);
         String tittleT = temporaryData[2];
         String bodyT = temporaryData[3];
-        return new Post(userIdTemp,idTemp,tittleT,bodyT);
+        return new Post(userIdTemp, idTemp, tittleT, bodyT);
     }
 
     public int getUserId() {
@@ -55,19 +55,39 @@ public class Post extends Nodo {
     public static String[] getTemporaryData() {
         return temporaryData;
     }
-    
-    public void setComments(Nodo comment){
-        if(comment != null){
+
+    public void setComments(Nodo comment) {
+        if (comment != null) {
             hijos.add(comment);
         }
     }
-    
+
+    public Comment getComment(int ID) {
+        for (Nodo nodo : getComments()) {
+            Comment c = (Comment) nodo;
+            if (c.getId() == ID) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public Comment getComment(String title) {
+        for (Nodo nodo : getComments()) {
+            Comment c = (Comment) nodo;
+            if (c.getBody().equals(title) || c.getEmail().equals(title) || c.getName().equals(title)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
     // TEST ONLY USE
-    public void mostrarPost(){
+    public void mostrarPost() {
         StringBuffer sb = new StringBuffer();
-        sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " +this.body);
+        sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " + this.body);
         System.out.println(sb.toString());
-        for(Nodo nodo: hijos){
+        for (Nodo nodo : hijos) {
             Comment c = (Comment) nodo;
             c.mostrarComment();
         }
@@ -76,6 +96,5 @@ public class Post extends Nodo {
     public LinkedList<Nodo> getComments() {
         return hijos;
     }
-    
-    
+
 }
