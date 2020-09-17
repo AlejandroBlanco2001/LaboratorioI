@@ -14,7 +14,7 @@ import java.awt.Dimension;
 import javax.swing.DefaultListModel;
 
 /**
- *
+ * Clase encargada de mostrar en pantalla toda la informacion respecto a un Post en especifico
  * @author alexz
  */
 public class PostProfile extends TemplateVentana {
@@ -54,6 +54,9 @@ public class PostProfile extends TemplateVentana {
         fillModel();
     }
 
+    /** 
+     *  Metodo que se encarga de ingresar en una {@code JList} todos los {@link Comment} de un Post
+     */
     public void fillModel() {
         int cont = 1;
         for (Nodo nodo : post.getComments()) {
@@ -63,12 +66,32 @@ public class PostProfile extends TemplateVentana {
         }
     }
 
+    /**
+     * Metodo que se encarga de inicializar el {@link Post} y {@link User} que manejara esta ventana
+     * @param p Post a manejar
+     * @param username Usuario a manejar
+     */
     public void setPost(Post p, User username) {
         this.post = p;
         this.username = username;
         setGUI();
     }
 
+    /**
+     * Metodo que se encarga de mostrar en pantalla un Comment en especifico
+     * @param index Posicion en el {@code JList} que ocupa el Comment, este coincide con su posicion en el Arbol
+     * @return cont Cantidad de comentarios que tiene el Post
+     */
+    public Comment getComment(int index) {
+        int cont = 0;
+        for (Nodo nodo : post.getComments()) {
+            if(cont == index){
+                return (Comment) nodo;
+            }
+            cont++;
+        }
+        return null;
+    }
     @Override
     public void setFonts() {
     }
@@ -394,16 +417,6 @@ public class PostProfile extends TemplateVentana {
         CommentsView.setResizable(false);
     }//GEN-LAST:event_watchCommentActionPerformed
 
-    public Comment getComment(int index) {
-        int cont = 0;
-        for (Nodo nodo : post.getComments()) {
-            if(cont == index){
-                return (Comment) nodo;
-            }
-            cont++;
-        }
-        return null;
-    }
 
     /**
      * @param args the command line arguments

@@ -17,7 +17,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 /**
- *
+ * Clase encargada de mostrar en pantalla toda la informacion que concierne a la clase {@link User}
  * @author alexz
  */
 public final class UserProfile extends TemplateVentana {
@@ -25,7 +25,6 @@ public final class UserProfile extends TemplateVentana {
     private User username;
     private Font font;
     private PostProfile postProfile;
-    private JList posts;
     private DefaultListModel modelList;
 
     public UserProfile() {
@@ -37,6 +36,9 @@ public final class UserProfile extends TemplateVentana {
         setGUI();
     }
 
+    /**
+     * Metodo encargado de llenar la {@code JList} con los {@link Post} del User a mostrar
+     */
     public void loadComponents() {
         listPost.setModel(modelList);
         int cont = 1;
@@ -73,6 +75,10 @@ public final class UserProfile extends TemplateVentana {
         profilePic.setIcon(new ImageIcon(newimg));
     }
 
+    /**
+     * Metodo que se encarga de asignar el User a mostrar en dicha instanciacion
+     * @param user Usuario a mostrar
+     */
     public void setUsuario(User user) {
         this.username = user;
         nameText.setText(user.getPersona().getName());
@@ -89,6 +95,9 @@ public final class UserProfile extends TemplateVentana {
         loadComponents();
     }
 
+    /**
+     * Metodo encargado de mostrar por medio de {@code JDialog} toda la informacion del User
+     */
     public void setInfoText() {
         nameET.setText(username.getPersona().getName());
         userET.setText(username.getUsername());

@@ -3,7 +3,7 @@ package Arbol;
 import java.util.LinkedList;
 
 /**
- *
+ * Clase que abstrae la idea del Post
  * @author alexz
  */
 public class Post extends Nodo {
@@ -15,6 +15,14 @@ public class Post extends Nodo {
 
     private static String temporaryData[] = new String[4];
 
+    /**
+     * Constructor privado del Post, que se encarga de verificar que solo el se pueda crear a el mismo
+     *
+     * @param userId ID del User que hizo el Post
+     * @param id ID del Post
+     * @param title Titulo del Post
+     * @param body Cuerpo del Post
+     */
     private Post(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
@@ -23,6 +31,12 @@ public class Post extends Nodo {
         hijos = new LinkedList();
     }
 
+    /**
+     * Metodo que se encarga de separar los datos y crear el objeto Post
+     *
+     * @param separatedData {@code LinkedList} que contiene todos los datos ordenados segun su aparicion en el JSON
+     * @return Post {@link Post} el Post creado
+     */
     public static Post cleanInfo(LinkedList<String> separatedData) {
         int a = 0;
         for (String i : separatedData) {
@@ -36,32 +50,54 @@ public class Post extends Nodo {
         return new Post(userIdTemp, idTemp, tittleT, bodyT);
     }
 
+    /**
+     * Metodo que retorna el ID del User que creo el Post
+     * @return userId ID del User que creo el Post
+     */
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * Metodo que retorna el ID del Post
+     * @return id ID del Post
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Metodo que retorna el titulo del Post
+     * @return title Titulo del Post
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Metodo que retorna el cuerpo del Post
+     * @return body Cuerpo de Post
+     */
     public String getBody() {
         return body;
     }
 
-    public static String[] getTemporaryData() {
-        return temporaryData;
-    }
-
+    /**
+     * Metodo que se encarga de agregar los Nodos a el Post
+     * @param comment {@link Nodo} Nodo a agregar
+     */
     public void setComments(Nodo comment) {
         if (comment != null) {
             hijos.add(comment);
         }
     }
 
+    /**
+     * Metodo que se encarga de obtener un Comment especifico a partir de su ID
+     *
+     * @param ID ID del Comment
+     * @return c {@link Comment} Devuelve el Comment a buscar, {@code null} en caso contrario devuelve
+     */
     public Comment getComment(int ID) {
         for (Nodo nodo : getComments()) {
             Comment c = (Comment) nodo;
@@ -72,6 +108,12 @@ public class Post extends Nodo {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de obtener un Comment especifico a partir de su Titulo, Cuerpo o email del creador
+     *
+     * @param title Titulo, cuerpo o email del creador del Comment
+     * @return c {@link Comment} Devuelve el Comment a buscar, {@code null} en caso contrario devuelve
+     */
     public Comment getComment(String title) {
         for (Nodo nodo : getComments()) {
             Comment c = (Comment) nodo;
@@ -83,8 +125,12 @@ public class Post extends Nodo {
     }
 
     // TEST ONLY USE
+
+    /**
+     * Metodo que se encargar de mostrar en consola toda la informacion del Post
+     */
     public void mostrarPost() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " + this.body);
         System.out.println(sb.toString());
         for (Nodo nodo : hijos) {
@@ -93,6 +139,10 @@ public class Post extends Nodo {
         }
     }
 
+    /**
+     * Metodo que se encargar de devolver los hijos del Post
+     * @return hijos Hijos del nodo
+     */
     public LinkedList<Nodo> getComments() {
         return hijos;
     }

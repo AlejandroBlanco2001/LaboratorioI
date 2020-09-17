@@ -13,11 +13,11 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
- * @author alexz
+ *  Clase prinicipal encargada de la creacion parcial del arbol, se encarga de dar inicio a la {@link Ventana}
+*   @author alexz
  */
 public class Lab {
-
+    
     private static Arbol arbol;
     private static Ventana ventana;
 
@@ -31,21 +31,28 @@ public class Lab {
         JFileChooser chooser = new JFileChooser();
         chooser.setMultiSelectionEnabled(true);
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "*.txt,*.csv", "txt", "csv");
+                "*.txt,*.csv", "txt", "csv");
         chooser.setFileFilter(filter);
         int returnValue = chooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             files = chooser.getSelectedFiles();
         }
-        if(files.length == 1){
+        if (files.length == 1) {
             arbol = Serializador.recover(files[0].getCanonicalPath());
-        }else{
+        } else {
             Lab.createTree(files);
         }
         ventana.setVisible(true);
         ventana.setArbol(arbol);
     }
 
+    /**
+     * Se encarga de crear el {@link Arbol} a partir de una arreglo de {@code File} previamente ordenado por el metodo {@code organizeFiles}.
+     *
+     * @param files Arreglo de tipo {@code File}, que contiene las rutas de los archivos
+     * @return El arreglo de Files ordenado de la forma: User, Post , Comment
+     * @throws java.io.IOException En el caso de que el archivo no exista
+     */
     public static Arbol createTree(File[] files) throws IOException {
         arbol = new Arbol();
         files = organizeFiles(files);
@@ -71,6 +78,12 @@ public class Lab {
         return arbol;
     }
 
+    /**
+     * Se encargar de recibir un arreglo de tipo {@code File}, para ser ordenados de manera que su lectura, sea facilitada para el Parser.
+     *
+     * @param files Arreglo de tipo {@code File}, de los archivos seleccionados por el usuario
+     * @return El arreglo de {@code Files} ordenado de la forma: {@link User}, {@link Post}, {@link Comment}
+     */
     public static File[] organizeFiles(File[] files) {
         int cont = 0;
         File aux;
@@ -92,6 +105,12 @@ public class Lab {
     }
 
     // TEST ONLY USE
+    /**
+     * Se encargar de obtener una cantidad de Post de manera aleatoria para ser desplegados por la Ventana.
+     *
+     * @param arbol {@link Arbol} Arbol n-ario que contiene toda la informacion.
+     * @return Una {@code LinkedList<Post>} con los posts seleccionados.
+     */
     public static LinkedList<Post> getRandomPost(Arbol arbol) {
         LinkedList<Post> lista = new LinkedList();
         for (Nodo nodo : arbol.getRaiz().getPosts()) {
@@ -102,7 +121,6 @@ public class Lab {
         }
         return lista;
     }
-
 
     public Arbol getArbol() {
         return arbol;

@@ -6,7 +6,7 @@
 package Parser;
 
 /**
- *
+ * Enumerador que se encarga de almacenar todas las expresiones regulares a manejar en el software
  * @author alexz
  */
 public enum RegexPattern {
@@ -19,6 +19,11 @@ public enum RegexPattern {
     private String pattern;
     private String patternName;
 
+    /**
+     * Constructor privado, solo se pueden crear de manera manual
+     * @param pattern Expresion regular de busqueda
+     * @param patternName Nombre que se le quiere dar la Expresion Regular
+     */
     private RegexPattern(String pattern, String patternName) {
         this.pattern = pattern;
         this.patternName = patternName;

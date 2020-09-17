@@ -2,12 +2,10 @@ package VisualTemplates;
 
 import Prinicipal.Ventana;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Clase encarga de mostrar los creadores del software
  * @author alexz
  */
 public class Creators extends TemplateVentana {

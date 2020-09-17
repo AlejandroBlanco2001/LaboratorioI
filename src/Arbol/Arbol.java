@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 /**
+ * Clase que abstrae la idea de la estructura de Arbol, esta contiene toda la información y es la encargada de tener la raiz del mismo.
  *
  * @author alexz
  */
@@ -12,6 +13,9 @@ public class Arbol implements Operaciones, Serializable {
     // Nodo vacio
     private User raiz;
 
+    /**
+     * Constructor del Arbol, crear un {@link Nodo} de tipo {@link User} vacio
+     */
     public Arbol() {
         raiz = new User();
     }
@@ -29,11 +33,23 @@ public class Arbol implements Operaciones, Serializable {
         }
     }
 
+    /**
+     * Metodo que se encarga de la creacion del nivel de Usuarios, por la forma de la creacion, solo es necesario castearlo a {@link User}
+     *
+     * @param nodo {@link Nodo} Nodo a ingresar al Arbol
+     */
     public void insertarUser(Nodo nodo) {
         User user = (User) nodo;
         raiz.setPost(user);
     }
 
+    /**
+     * Metodo que se encarga de la creacion del nivel de Post, por la forma de la creacion, solo es necesario castearlo a {@link Post}
+     *
+     * Usando el campo {@code postId} de la clase {@link Post}, se compara con el ID de cada usuario existente en el {@link Arbol}
+     *
+     * @param nodo {@link Nodo} Nodo a ingresar al nivel de Post
+     */
     public void insertarPost(Nodo nodo) {
         Post post = (Post) nodo;
         for (Nodo user : raiz.getPosts()) {
@@ -44,12 +60,23 @@ public class Arbol implements Operaciones, Serializable {
         }
     }
 
+    /**
+     * Metodo que se encarga de la creacion del nivel de Comment, por la forma de la creacion, solo es necesario castearlo a {@link Comment}
+     *
+     * @param nodo {@link Nodo} Nodo a ingresar al Arbol
+     */
     public void insertarComment(Nodo nodo) {
         Comment comment = (Comment) nodo;
         Post p = getPost(comment.getPostId());
         p.setComments(comment);
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Usuario en especifico
+     *
+     * @param id ID del usuario a buscar
+     * @return {@link User} retorna el Usuario con dicho ID.
+     */
     public User busquedaUser(int id) {
         for (Nodo n : raiz.getPosts()) {
             User user = (User) n;
@@ -60,6 +87,12 @@ public class Arbol implements Operaciones, Serializable {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Usuario en especifico
+     *
+     * @param username Nombre de usuario a buscar
+     * @return {@link User} retorna el Usuario con dicho nombre de usuario.
+     */
     public User busquedaUser(String username) {
         for (Nodo n : raiz.getPosts()) {
             User user = (User) n;
@@ -70,6 +103,12 @@ public class Arbol implements Operaciones, Serializable {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de devolver todas las coincidencias de primeros caracteres del los nombre de usuario.
+     *
+     * @param username coincidencia a buscar
+     * @return {@code LinkedList<User>} donde contiene todos los usuarios que contengan esas coincidencias.
+     */
     public LinkedList<User> matchPosibbleUsers(String username) {
         LinkedList<User> matches = new LinkedList();
         for (Nodo n : raiz.getPosts()) {
@@ -81,6 +120,12 @@ public class Arbol implements Operaciones, Serializable {
         return matches;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Post, partiendo del usuario que lo creo
+     *
+     * @param postId Campo {@code postId} que contiene el ID del usuario que creo dicho Post
+     * @return {@link Post} retorna el Post especifico de dicho usuario especifico.
+     */
     public Post getPost(int postId) {
         for (Nodo user : raiz.getPosts()) {
             User u = (User) user;
@@ -91,6 +136,12 @@ public class Arbol implements Operaciones, Serializable {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Post, partiendo si el Usuario tiene un post con dicho nombre
+     *
+     * @param title Campo {@code title} que contiene el titulo del Post
+     * @return {@link Post} retorna el Post especifico de dicho usuario especifico.
+     */
     public Post getPost(String title) {
         for (Nodo user : raiz.getPosts()) {
             User u = (User) user;
@@ -101,6 +152,12 @@ public class Arbol implements Operaciones, Serializable {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un User, partiendo de su pertenencia de algun Post en especifico
+     *
+     * @param title Campo {@code title} Titulo del Post
+     * @return {@link User} retorna el User especifico que contenga dicho Post
+     */
     public User getUserByPost(String title) {
         for (Nodo user : raiz.getPosts()) {
             User u = (User) user;
@@ -111,6 +168,12 @@ public class Arbol implements Operaciones, Serializable {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un User, partiendo de su pertenencia de algun Post en especifico
+     *
+     * @param id Campo {@code id} ID del Post
+     * @return {@link User} retorna el User especifico que contenga dicho Post
+     */
     public User getUserByPost(int id) {
         for (Nodo user : raiz.getPosts()) {
             User u = (User) user;
@@ -125,6 +188,10 @@ public class Arbol implements Operaciones, Serializable {
     }
 
     // TEST ONLY USE
+
+    /**
+     * Metodo de prueba que se usa para mostrar toda la informacion del Arbol
+     */
     public void muestrameTodo() {
         for (Nodo user : raiz.getPosts()) {
             User u = (User) user;
@@ -132,10 +199,20 @@ public class Arbol implements Operaciones, Serializable {
         }
     }
 
+    /**
+     * Metodo que se encarga de contar la cantidad de Users en el Arbol
+     *
+     * @return Cantidad de {@link Nodo} tipo {@link User} en el {@link Arbol}
+     */
     public int cantidadDeUsers() {
         return raiz.getPosts().size();
     }
 
+    /**
+     * Metodo que se encarga de contar la cantidad de Post en el Arbol
+     *
+     * @return cont Cantidad de {@link Nodo} tipo {@link Post} en el {@link Arbol}
+     */
     public int cantidadPosts() {
         int cont = 0;
         for (Nodo n : raiz.getPosts()) {
@@ -145,6 +222,11 @@ public class Arbol implements Operaciones, Serializable {
         return cont;
     }
 
+    /**
+     * Metodo que se encarga de contar la cantidad de Comment en el Arbol
+     *
+     * @return cont Cantidad de {@link Nodo} tipo {@link Comment} en el {@link Arbol}
+     */
     public int cantidadDeComments() {
         int cont = 0;
         for (Nodo n : raiz.getPosts()) {
@@ -174,10 +256,21 @@ public class Arbol implements Operaciones, Serializable {
 
     }
 
+    /**
+     * Metodo que se obtener la raiz
+     *
+     * @return raiz {@link Nodo} raiz del Arbol
+     */
     public User getRaiz() {
         return raiz;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Comment, partiendo de su titulo, email generador o su cuerpo.
+     *
+     * @param title cuerpo, email o titulo del Comment
+     * @return comment Comentario especifico a buscar
+     */
     public Comment getComment(String title) {
         for (Nodo n : raiz.getPosts()) {
             User user = (User) n;
@@ -188,6 +281,12 @@ public class Arbol implements Operaciones, Serializable {
         return null;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Comment, partiendo de su ID.
+     *
+     * @param ID Campo {@code ID} del Comment
+     * @return comment Comentario especifico a buscar
+     */
     public Comment getComment(int ID) {
         for (Nodo n : raiz.getPosts()) {
             User user = (User) n;

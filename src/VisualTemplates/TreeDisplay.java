@@ -555,6 +555,14 @@ public class TreeDisplay extends TemplateVentana {
         return post;
     }
 
+    @Override
+    public void setFonts() {
+    }
+
+    @Override
+    public void setImages() {
+    }
+
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
         dispose();
@@ -677,6 +685,8 @@ public class TreeDisplay extends TemplateVentana {
 
     /**
      * @param args the command line arguments
+     * @param ar Arbol a manejar
+     * @param ventana Ventana para obtener los apartados de GUI
      */
     public static void main(String args[], Arbol ar, Ventana ventana) {
         /* Set the Nimbus look and feel */
@@ -749,15 +759,5 @@ public class TreeDisplay extends TemplateVentana {
     private javax.swing.JLabel postCreator;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
-
-    @Override
-    public void setFonts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setImages() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

@@ -8,7 +8,7 @@ package Arbol;
 import java.util.LinkedList;
 
 /**
- *
+ * Clase que abstrae la idea del Comment
  * @author alexz
  */
 public class Comment extends Nodo {
@@ -21,6 +21,14 @@ public class Comment extends Nodo {
 
     private static String temporaryData[] = new String[5];
 
+    /**
+     * Constructor privado de Comment, para evitar su creacion por alguien distinto a el mismo.
+     * @param postId ID del Post del que proviene
+     * @param id ID del propio Comment
+     * @param name Titulo del Comment
+     * @param body Cuerpo del Comment
+     * @param email Email de la persona que creo el Comment
+     */
     private Comment(int postId, int id, String name, String body, String email) {
         this.postId = postId;
         this.id = id;
@@ -29,6 +37,11 @@ public class Comment extends Nodo {
         this.email = email;
     }
     
+    /**
+     * Metodo que se encarga de separar los datos y crear el objeto Comment
+     * @param separatedData {@code LinkedList<String>} que contiene todos los datos ordenados segun su aparicion en el JSON
+     * @return Comment {@link Comment} el Comment creado
+     */
     public static Comment cleanInfo(LinkedList<String> separatedData) {
         int a = 0;
         for (String i : separatedData) {
@@ -43,31 +56,51 @@ public class Comment extends Nodo {
         return new Comment(postIdTemp, idTemp, tittleT, bodyT, emailT);
     }
 
+    /**
+     * Metodo que se encarga de devolver el ID del Post en el cual se creo el Comment
+     * @return postId ID del Post en el cual se encuentra el Comment
+     */
     public int getPostId() {
         return postId;
     }
 
+    /**
+     * Metodo que se encarga de devolver el ID del Comment
+     * @return id ID del Comment
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Metodo que se encarga de devolver el nombre del Comment
+     * @return name Nombre del Comment
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Metodo que se encarga de devolver el cuerpo del Comment
+     * @return body Cuerpo del Comment
+     */
     public String getBody() {
         return body;
     }
 
+    /**
+     * Metodo que se encarga de devolver el Email asociado al Comment 
+     * @return email E-Mail asociado al Comment
+     */
     public String getEmail() {
         return email;
     }
-
-    public static String[] getTemporaryData() {
-        return temporaryData;
-    }
-
+    
     // Test only use
+
+    /**
+     * Metodo de prueba que se encarga de mostrar por consola la informacion del Comment
+     */
     public void mostrarComment() {
         StringBuffer sb = new StringBuffer();
         sb.append("\t \t \n " + "ID del comment" + this.id).append("\t \t \n" + "post del Comment id: " +this.postId).append("\t \t \n" + "Email del comentarista" + this.email).append("\t \t \n" + "Persona del comment" + this.name).append("\t \t \n" + "Cuerpo del comment:" + this.body);

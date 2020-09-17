@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
+ * Clase que actua como la ventana principal del programa
  * @author alexz
  */
 public class Ventana extends TemplateVentana {
@@ -1188,6 +1188,12 @@ public class Ventana extends TemplateVentana {
         return arbol;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un User para ser desplegado en pantalla
+     *
+     * @param user Nombre de usuario del User a buscar
+     * @return u {@link User} Usuario a mostrar en pantalla
+     */
     public User searchUser(String user) {
         if (user.isEmpty()) {
             return null;
@@ -1208,6 +1214,11 @@ public class Ventana extends TemplateVentana {
         return u;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Comment para ser desplegado en pantalla
+     *
+     * @return comment {@link Comment} Comentario a mostrar en pantalla
+     */
     public Comment searchComment() {
         String title = busquedaComment.getText();
         int ID;
@@ -1228,6 +1239,11 @@ public class Ventana extends TemplateVentana {
         return comment;
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Post para ser desplegado en pantalla a partir de su Titulo
+     *
+     * @param title Titulo del Post a buscar
+     */
     public void searchPost(String title) {
         Post p = arbol.getPost(title);
         if (p != null) {
@@ -1239,6 +1255,11 @@ public class Ventana extends TemplateVentana {
         JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Metodo que se encarga de la busqueda de un Post para ser desplegado en pantalla a partir de su ID
+     *
+     * @param id ID del post a buscar
+     */
     public void searchPost(int id) {
         Post p = arbol.getPost(id);
         if (p != null) {
@@ -1250,6 +1271,11 @@ public class Ventana extends TemplateVentana {
         JOptionPane.showMessageDialog(null, "ERROR", "Post no encontrado", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Metodo que se encarga de mostrar todos los {@link Nodo} de tipo {@link Post} en Pantalla
+     *
+     * @param posts {@code LinkedList<Post>} que contiene todos los Post del Arbol
+     */
     public void setAllPost(LinkedList<Post> posts) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
@@ -1264,6 +1290,11 @@ public class Ventana extends TemplateVentana {
         possibleMatches.setSize(new Dimension(400, 500));
     }
 
+    /**
+     * Metodo que se encarga de mostrar en pantalla todos los {@link User} que contienen las coincidencias de nombre
+     *
+     * @param matches {@code LinkedList<User>} que contiene todas las coincidencias de los User
+     */
     public void setPossibleQuery(LinkedList<User> matches) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
@@ -1277,6 +1308,9 @@ public class Ventana extends TemplateVentana {
         possibleMatches.setSize(new Dimension(400, 500));
     }
 
+    /**
+     * Metodo que se encarga de mostrar todos los {@link Nodo} de tipo {@link User} en Pantalla
+     */
     public void setAllUsers() {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
@@ -1291,6 +1325,10 @@ public class Ventana extends TemplateVentana {
         possibleMatches.setSize(new Dimension(400, 500));
     }
 
+    /**
+     * Metodo que se encarga de mostrar todos los {@link Nodo} de tipo {@link Comment} en Pantalla
+     * @param c {@code LinkedList<Comment>} que contiene todos los {@link Nodo} de tipo {@link Comment} del Arbol
+     */
     public void setAllComments(LinkedList<Comment> c) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
@@ -1305,6 +1343,9 @@ public class Ventana extends TemplateVentana {
         possibleMatches.setSize(new Dimension(400, 500));
     }
 
+    /**
+     * Metodo que se encarga de mostrar algunos de los {@link Nodo} de tipo {@link Post} en el menu lateral derecho
+     */
     public void getPostForShowing() {
         LinkedList<Post> lista = Lab.getRandomPost(arbol);
         if (lista.size() >= 6) {
@@ -1314,6 +1355,10 @@ public class Ventana extends TemplateVentana {
         }
     }
 
+    /**
+     * Metodo que se encarga de inicializar los valores de los TextArea del panel derecho
+     * @param info {@code LinkedList<Post>} Que tiene todos los Post para ser mostrados
+     */
     public void setAllText(LinkedList<Post> info) {
         mainPostTitleArea.append(info.get(0).getTitle());
         mainPostTitleArea.setLineWrap(true);
