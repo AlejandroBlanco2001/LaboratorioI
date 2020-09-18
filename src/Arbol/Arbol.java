@@ -110,8 +110,8 @@ public class Arbol implements Operaciones, Serializable {
      * @param username coincidencia a buscar
      * @return {@code LinkedList<User>} donde contiene todos los usuarios que contengan esas coincidencias.
      */
-    public LinkedList<User> matchPosibbleUsers(String username) {
-        LinkedList<User> matches = new LinkedList();
+    public ListaEnlazada<User> matchPosibbleUsers(String username) {
+        ListaEnlazada<User> matches = new ListaEnlazada();
         for (Object n : raiz.getPosts()) {
             User user = (User) n;
             if (user.getUsername().toLowerCase().startsWith(username)) {

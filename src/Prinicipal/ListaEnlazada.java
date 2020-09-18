@@ -159,4 +159,12 @@ public class ListaEnlazada<T> implements Iterable<T> {
         }
         return cont;
     }
+    
+    /**
+     * Metodo que se encarga de devolver si la Lista Enlazada Simple esta vacia
+     * @return Estado {@code True} si el PTR es distinto de Null.
+     */
+    public boolean isEmpty(){
+        return PTR == null;
+    }
 }

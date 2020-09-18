@@ -14,7 +14,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -297,6 +296,7 @@ public class Ventana extends TemplateVentana {
         jScrollPane2.setBorder(null);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        body.setEditable(false);
         body.setColumns(20);
         body.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         body.setLineWrap(true);
@@ -457,7 +457,7 @@ public class Ventana extends TemplateVentana {
         });
 
         searchComment.setBackground(new java.awt.Color(70, 24, 110));
-        searchComment.setToolTipText("Search the post title");
+        searchComment.setToolTipText("Search the comment title");
         searchComment.setBorder(null);
         searchComment.setBorderPainted(false);
         searchComment.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -978,6 +978,7 @@ public class Ventana extends TemplateVentana {
 
     private void searchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserActionPerformed
         // TODO add your handling code here:
+        currentAllSearch = "User";
         String text = BusquedaUser.getText();
         User user = searchUser(text);
         int ID = 0;
@@ -987,7 +988,7 @@ public class Ventana extends TemplateVentana {
             ID = -1;
         }
         if (user == null || ID == -1) {
-            LinkedList<User> matches = arbol.matchPosibbleUsers(text.toLowerCase());
+            ListaEnlazada<User> matches = arbol.matchPosibbleUsers(text.toLowerCase());
             if (matches.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -1002,6 +1003,7 @@ public class Ventana extends TemplateVentana {
 
     private void searchPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPostActionPerformed
         // TODO add your handling code here:
+        currentAllSearch = "Post";
         String searchTag = BusquedaPost.getText();
         int id = 0;
         try {
@@ -1068,12 +1070,14 @@ public class Ventana extends TemplateVentana {
         String titleS = matchesUsers.getSelectedValue();
         if (currentAllSearch.equals("User")) {
             User user = arbol.busquedaUser(titleS.toLowerCase());
+            lookUser.setText("Look User");
             userProfile = new UserProfile();
             userProfile.setVisible(true);
             userProfile.setUsuario(user);
         } else if (currentAllSearch.equals("Post")) {
             Post post = arbol.getPost(titleS);
             User user = arbol.getUserByPost(post.getTitle());
+            lookUser.setText("Look Post");
             postProfile = new PostProfile();
             postProfile.setVisible(true);
             postProfile.setPost(post, user);
@@ -1088,14 +1092,14 @@ public class Ventana extends TemplateVentana {
             CommentsView.setSize(new Dimension(450, 400));
             CommentsView.setVisible(true);
             CommentsView.setResizable(false);
-            lookUser.setText("Look the Comment");
+            lookUser.setText("Look Comment");
         }
     }//GEN-LAST:event_lookUserActionPerformed
 
     private void watchAllPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllPostMouseClicked
         // TODO add your handling code here:
         currentAllSearch = "Post";
-        LinkedList<Post> posts = new LinkedList();
+        ListaEnlazada<Post> posts = new ListaEnlazada();
         for (Object nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
             for (Object n : user.getPosts()) {
@@ -1155,6 +1159,7 @@ public class Ventana extends TemplateVentana {
 
     private void searchCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCommentActionPerformed
         // TODO add your handling code here:
+        currentAllSearch = "Comment";
         Comment c = searchComment();
         Post post = arbol.getPost(c.getPostId());
         CommentsView.setTitle("SMALL SOLUTIONS");
@@ -1175,7 +1180,7 @@ public class Ventana extends TemplateVentana {
     private void watchAllCommentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllCommentsMouseClicked
         // TODO add your handling code here:
         currentAllSearch = "Comments";
-        LinkedList<Comment> comment = new LinkedList();
+        ListaEnlazada<Comment> comment = new ListaEnlazada();
         for (Object nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
             for (Object n : user.getPosts()) {
@@ -1286,7 +1291,7 @@ public class Ventana extends TemplateVentana {
      *
      * @param posts {@code LinkedList<Post>} que contiene todos los Post del Arbol
      */
-    public void setAllPost(LinkedList<Post> posts) {
+    public void setAllPost(ListaEnlazada<Post> posts) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
         possibleMatches.setVisible(true);
@@ -1305,7 +1310,7 @@ public class Ventana extends TemplateVentana {
      *
      * @param matches {@code LinkedList<User>} que contiene todas las coincidencias de los User
      */
-    public void setPossibleQuery(LinkedList<User> matches) {
+    public void setPossibleQuery(ListaEnlazada<User> matches) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
         possibleMatches.setVisible(true);
@@ -1323,9 +1328,11 @@ public class Ventana extends TemplateVentana {
      */
     public void setAllUsers() {
         possibleMatches.setTitle("SMALL Solutions");
+        lookUser.setText("Look User");
         possibleMatches.setResizable(false);
         possibleMatches.setVisible(true);
         info.setText("All the users in the plataform");
+
         DefaultListModel model = new DefaultListModel();
         matchesUsers.setModel(model);
         for (Object n : arbol.getRaiz().getPosts()) {
@@ -1340,7 +1347,7 @@ public class Ventana extends TemplateVentana {
      *
      * @param c {@code LinkedList<Comment>} que contiene todos los {@link Nodo} de tipo {@link Comment} del Arbol
      */
-    public void setAllComments(LinkedList<Comment> c) {
+    public void setAllComments(ListaEnlazada<Comment> c) {
         possibleMatches.setTitle("SMALL Solutions");
         possibleMatches.setResizable(false);
         possibleMatches.setVisible(true);
@@ -1397,6 +1404,12 @@ public class Ventana extends TemplateVentana {
         mediumPostBodyArea.append(info.get(5).getBody());
         mediumPostBodyArea.setLineWrap(true);
     }
+
+    public void setCurrentAllSearch(String currentAllSearch) {
+        this.currentAllSearch = currentAllSearch;
+    }
+
+  
 
     /**
      * @param args the command line arguments

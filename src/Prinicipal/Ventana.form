@@ -269,6 +269,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="body">
                   <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="12" style="2"/>
@@ -602,7 +603,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6e" green="18" red="46" type="rgb"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Search the post title"/>
+            <Property name="toolTipText" type="java.lang.String" value="Search the comment title"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>

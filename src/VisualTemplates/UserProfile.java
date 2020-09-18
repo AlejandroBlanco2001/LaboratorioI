@@ -191,7 +191,7 @@ public final class UserProfile extends TemplateVentana {
         profilePic = new javax.swing.JLabel();
         usernamePic = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(52, 183, 241));
+        jPanel1.setBackground(new java.awt.Color(118, 41, 186));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel1.setText("Basic Info");
@@ -338,7 +338,6 @@ public final class UserProfile extends TemplateVentana {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -403,7 +402,7 @@ public final class UserProfile extends TemplateVentana {
                         .addComponent(nameCompanyET)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sloganET)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ExtraInfoLayout = new javax.swing.GroupLayout(ExtraInfo.getContentPane());

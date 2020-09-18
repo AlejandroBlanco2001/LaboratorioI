@@ -31,16 +31,6 @@ public class Creators extends TemplateVentana {
 
     @Override
     public void setGUI() {
-        jLabel1.setFont(Ventana.principalFont);
-        gitL.setFont(Ventana.principalFont);
-        jLabel3.setFont(Ventana.principalFont);
-        gitL2.setFont(Ventana.principalFont);
-        gitL3.setFont(Ventana.principalFont);
-        jLabel6.setFont(Ventana.principalFont);
-        jLabel7.setFont(Ventana.principalFont);
-        jLabel8.setFont(Ventana.principalFont);
-        jLabel9.setFont(Ventana.principalFont);
-        jLabel11.setFont(Ventana.principalFont);
 
     }
 
@@ -93,17 +83,20 @@ public class Creators extends TemplateVentana {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(52, 183, 241));
+        jPanel3.setBackground(new java.awt.Color(85, 57, 110));
         jPanel3.setPreferredSize(new java.awt.Dimension(250, 435));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Isaac  Blanco");
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("AlejandroBlanco2001");
 
+        gitL.setForeground(new java.awt.Color(255, 255, 255));
         gitL.setText("GitHub");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -113,16 +106,13 @@ public class Creators extends TemplateVentana {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(dev1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(gitL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(48, Short.MAX_VALUE))))
+                .addComponent(gitL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addComponent(dev1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,17 +128,20 @@ public class Creators extends TemplateVentana {
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(236, 178, 46));
+        jPanel1.setBackground(new java.awt.Color(118, 41, 186));
         jPanel1.setPreferredSize(new java.awt.Dimension(250, 0));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Alex Figueroa");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Alefig12");
 
+        gitL2.setForeground(new java.awt.Color(255, 255, 255));
         gitL2.setText("GitHub");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -180,17 +173,20 @@ public class Creators extends TemplateVentana {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        close.setBackground(new java.awt.Color(46, 182, 125));
+        close.setBackground(new java.awt.Color(70, 24, 110));
         close.setPreferredSize(new java.awt.Dimension(250, 100));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Shalem Janna");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("SJanna");
 
+        minimize.setForeground(new java.awt.Color(255, 255, 255));
         minimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         minimize.setText("-");
         minimize.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -199,6 +195,7 @@ public class Creators extends TemplateVentana {
             }
         });
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("X");
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -207,6 +204,7 @@ public class Creators extends TemplateVentana {
             }
         });
 
+        gitL3.setForeground(new java.awt.Color(255, 255, 255));
         gitL3.setText("GitHub");
 
         javax.swing.GroupLayout closeLayout = new javax.swing.GroupLayout(close);

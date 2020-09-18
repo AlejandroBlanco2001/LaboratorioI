@@ -2,19 +2,17 @@ package VisualTemplates;
 
 import Arbol.Arbol;
 import Arbol.Comment;
-import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
+import Prinicipal.ListaEnlazada;
 import Prinicipal.Ventana;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 /**
  * Clase que se encarga de mostrar en pantalla por medio de {@code JFrame} el Arbol de manera grafica
+ *
  * @author Alex
  */
 public class TreeDisplay extends TemplateVentana {
@@ -29,7 +27,8 @@ public class TreeDisplay extends TemplateVentana {
     private Ventana ventana;
 
     /**
-     * Constructor 
+     * Constructor
+     *
      * @param ab Arbol a graficar
      * @param ventana Ventana que maneja la GUI General
      */
@@ -510,6 +509,7 @@ public class TreeDisplay extends TemplateVentana {
 
     /**
      * Metodo que se encarga de la busqueda de un {@link User} dado su ID o su Nombre.
+     *
      * @return user User a buscar
      */
     public User searchUser() {
@@ -528,9 +528,10 @@ public class TreeDisplay extends TemplateVentana {
         }
         return user;
     }
-    
+
     /**
      * Metodo que se encarga de la busqueda de un {@link Comment} dado su ID, su titulo, su cuerpo o el email del creador.
+     *
      * @return comment Comment a buscar
      */
     public Comment searchComment() {
@@ -552,9 +553,10 @@ public class TreeDisplay extends TemplateVentana {
         }
         return comment;
     }
-    
+
     /**
      * Metodo que se encarga de la busqueda de un {@link Post} dado su ID, su titulo, su cuerpo o el email del creador.
+     *
      * @return comment Comment a buscar
      */
     public Post searchPost() {
@@ -625,12 +627,14 @@ public class TreeDisplay extends TemplateVentana {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        ventana.setCurrentAllSearch("User");
         ventana.setAllUsers();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        LinkedList<Post> posts = new LinkedList();
+        ventana.setCurrentAllSearch("Post");
+        ListaEnlazada<Post> posts = new ListaEnlazada();
         for (Object nodo : ab.getRaiz().getPosts()) {
             User user = (User) nodo;
             for (Object n : user.getPosts()) {
@@ -643,7 +647,8 @@ public class TreeDisplay extends TemplateVentana {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        LinkedList<Comment> comment = new LinkedList();
+        ventana.setCurrentAllSearch("Comment");
+        ListaEnlazada<Comment> comment = new ListaEnlazada();
         for (Object nodo : ab.getRaiz().getPosts()) {
             User user = (User) nodo;
             for (Object n : user.getPosts()) {
