@@ -47,8 +47,8 @@ public class PostProfile extends TemplateVentana {
         body.append(post.getBody());
         body.setLineWrap(true);
         CommentsText.setFont(Ventana.principalFont);
-        commentPanel.setBackground(Ventana.mediumPostColor);
-        postPart.setBackground(Ventana.post3);
+        commentPanel.setBackground(Ventana.bigMenuThings);
+        postPart.setBackground(Ventana.post2);
         CommentsList.setModel(model);
         numberComments.setText("# Comments : " + post.getComments().size());
         fillModel();
@@ -59,7 +59,7 @@ public class PostProfile extends TemplateVentana {
      */
     public void fillModel() {
         int cont = 1;
-        for (Nodo nodo : post.getComments()) {
+        for (Object nodo : post.getComments()) {
             Comment c = (Comment) nodo;
             model.addElement(cont + " - By: " + c.getName() + " : " + c.getBody() + " \n | Contact Adress " + c.getEmail());
             cont++;
@@ -84,7 +84,7 @@ public class PostProfile extends TemplateVentana {
      */
     public Comment getComment(int index) {
         int cont = 0;
-        for (Nodo nodo : post.getComments()) {
+        for (Object nodo : post.getComments()) {
             if(cont == index){
                 return (Comment) nodo;
             }
@@ -132,22 +132,26 @@ public class PostProfile extends TemplateVentana {
         titlePost = new javax.swing.JLabel();
         authorPost = new javax.swing.JLabel();
 
-        jPanel3.setBackground(new java.awt.Color(46, 182, 125));
+        jPanel3.setBackground(new java.awt.Color(85, 57, 110));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Post:");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Title");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Body");
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("By");
 
         postCreator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
@@ -183,29 +187,19 @@ public class PostProfile extends TemplateVentana {
             .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(186, 186, 186)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(8, 8, 8))
-                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(14, 14, 14)
                 .addComponent(postCreator)
@@ -221,7 +215,7 @@ public class PostProfile extends TemplateVentana {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout CommentsViewLayout = new javax.swing.GroupLayout(CommentsView.getContentPane());
@@ -244,9 +238,11 @@ public class PostProfile extends TemplateVentana {
         CommentsList.setToolTipText("");
         jScrollPane2.setViewportView(CommentsList);
 
+        CommentsText.setForeground(new java.awt.Color(255, 255, 255));
         CommentsText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CommentsText.setText("Comments");
 
+        close.setForeground(new java.awt.Color(255, 255, 255));
         close.setText("X");
         close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -254,6 +250,7 @@ public class PostProfile extends TemplateVentana {
             }
         });
 
+        close1.setForeground(new java.awt.Color(255, 255, 255));
         close1.setText("-");
         close1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -261,8 +258,11 @@ public class PostProfile extends TemplateVentana {
             }
         });
 
+        numberComments.setForeground(new java.awt.Color(255, 255, 255));
         numberComments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        watchComment.setBackground(new java.awt.Color(85, 57, 110));
+        watchComment.setForeground(new java.awt.Color(255, 255, 255));
         watchComment.setText("Watch Comment");
         watchComment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,7 +275,7 @@ public class PostProfile extends TemplateVentana {
         commentPanelLayout.setHorizontalGroup(
             commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, commentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(close1)
                 .addGap(18, 18, 18)
                 .addComponent(close)
@@ -297,7 +297,7 @@ public class PostProfile extends TemplateVentana {
         commentPanelLayout.setVerticalGroup(
             commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, commentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(commentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(close)
                     .addComponent(close1))
@@ -321,9 +321,11 @@ public class PostProfile extends TemplateVentana {
         body.setWrapStyleWord(true);
         jScrollPane3.setViewportView(body);
 
+        titlePost.setForeground(new java.awt.Color(255, 255, 255));
         titlePost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titlePost.setText("jLabel1");
 
+        authorPost.setForeground(new java.awt.Color(255, 255, 255));
         authorPost.setText("jLabel1");
         authorPost.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -336,17 +338,18 @@ public class PostProfile extends TemplateVentana {
         postPartLayout.setHorizontalGroup(
             postPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postPartLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postPartLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(postPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postPartLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(authorPost))
-                    .addComponent(titlePost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postPartLayout.createSequentialGroup()
+                        .addGroup(postPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(postPartLayout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(authorPost))
+                            .addComponent(titlePost, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(66, 66, 66))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postPartLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         postPartLayout.setVerticalGroup(
             postPartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +358,7 @@ public class PostProfile extends TemplateVentana {
                 .addComponent(titlePost)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(authorPost)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -366,7 +369,7 @@ public class PostProfile extends TemplateVentana {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(postPart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(commentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -375,8 +378,7 @@ public class PostProfile extends TemplateVentana {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(commentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(postPart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(postPart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();

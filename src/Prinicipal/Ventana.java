@@ -25,6 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Clase que actua como la ventana principal del programa
+ *
  * @author alexz
  */
 public class Ventana extends TemplateVentana {
@@ -37,6 +38,7 @@ public class Ventana extends TemplateVentana {
     private static UserProfile userProfile;
     private static PostProfile postProfile;
     private static TreeDisplay treeDisplay;
+    public String currentAllSearch;
 
     public Ventana() {
         super();
@@ -44,13 +46,14 @@ public class Ventana extends TemplateVentana {
         setGUI();
     }
 
-    public static Color menu = new Color(234, 76, 137);
+    public static Color menu = new Color(70, 24, 110);
+    public static Color bigMenuThings = new Color(85, 57, 110);
+    public static Color post2 = new Color(118, 41, 186);
+    public static Color post3 = new Color(151, 52, 237);
     public static Color colorMainPost = new Color(52, 183, 241);
     public static Color backgroundGeneral = new Color(205, 238, 252);
     public static Color post1 = new Color(74, 21, 75);
     public static Color mediumPostColor = new Color(52, 183, 241);
-    public static Color post2 = new Color(236, 178, 46);
-    public static Color post3 = new Color(46, 182, 125);
     public static Color post4 = new Color(195, 35, 97);
     public static Color morado = new Color(231, 123, 255);
     public static Color amarillo = new Color(255, 123, 147);
@@ -62,12 +65,12 @@ public class Ventana extends TemplateVentana {
         setImages();
         setTitle("SMALL Solutions");
         menuPanel.setBackground(menu);
-        mainPost.setBackground(colorMainPost);
-        smallPost1.setBackground(post2);
-        smallPost2.setBackground(post3);
-        smallPost3.setBackground(menu);
+        mainPost.setBackground(bigMenuThings);
+        smallPost1.setBackground(post3);
+        smallPost2.setBackground(post2);
+        smallPost3.setBackground(post3);
         smallPost4.setBackground(post2);
-        mediumPost.setBackground(colorMainPost);
+        mediumPost.setBackground(bigMenuThings);
         this.setBackground(backgroundGeneral);
         searchUser.setBorder(null);
         searchUser.setBackground(menu);
@@ -92,7 +95,7 @@ public class Ventana extends TemplateVentana {
         Image img = icon.getImage();
         Image imgEye = iconEye.getImage();
         Image newimg = img.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
-        Image newimgEye = imgEye.getScaledInstance(16, 16, java.awt.Image.SCALE_SMOOTH);
+        Image newimgEye = imgEye.getScaledInstance(24, 24, java.awt.Image.SCALE_SMOOTH);
         searchUser.setIcon(new ImageIcon(newimg));
         searchPost.setIcon(new ImageIcon(newimg));
         searchComment.setIcon(new ImageIcon(newimg));
@@ -197,7 +200,7 @@ public class Ventana extends TemplateVentana {
         close = new javax.swing.JLabel();
         minimize = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(46, 182, 125));
+        jPanel1.setBackground(new java.awt.Color(85, 57, 110));
 
         jScrollPane13.setBorder(null);
         jScrollPane13.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -207,6 +210,8 @@ public class Ventana extends TemplateVentana {
         matchesUsers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane13.setViewportView(matchesUsers);
 
+        info.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        info.setForeground(new java.awt.Color(255, 255, 255));
         info.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         info.setText("Maybe you are looking for");
 
@@ -239,7 +244,7 @@ public class Ventana extends TemplateVentana {
                 .addGap(39, 39, 39)
                 .addComponent(info)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lookUser)
                 .addContainerGap())
@@ -256,22 +261,26 @@ public class Ventana extends TemplateVentana {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(46, 182, 125));
+        jPanel3.setBackground(new java.awt.Color(85, 57, 110));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Post:");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Title");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Body");
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("By");
 
         postCreator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
@@ -303,32 +312,22 @@ public class Ventana extends TemplateVentana {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
             .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(186, 186, 186)
-                            .addComponent(jLabel10)
-                            .addGap(8, 8, 8))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(186, 186, 186)
-                            .addComponent(jLabel8)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel4)
                 .addGap(14, 14, 14)
                 .addComponent(postCreator)
@@ -344,7 +343,7 @@ public class Ventana extends TemplateVentana {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CommentsViewLayout = new javax.swing.GroupLayout(CommentsView.getContentPane());
@@ -359,10 +358,11 @@ public class Ventana extends TemplateVentana {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(205, 238, 252));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         Users.setAlignment(java.awt.Label.CENTER);
         Users.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Users.setForeground(new java.awt.Color(255, 255, 255));
         Users.setText("label1");
         Users.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -372,6 +372,7 @@ public class Ventana extends TemplateVentana {
 
         DeveloperSide.setAlignment(java.awt.Label.CENTER);
         DeveloperSide.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        DeveloperSide.setForeground(new java.awt.Color(255, 255, 255));
         DeveloperSide.setText("label1");
         DeveloperSide.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -381,6 +382,7 @@ public class Ventana extends TemplateVentana {
 
         Creators.setAlignment(java.awt.Label.CENTER);
         Creators.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Creators.setForeground(new java.awt.Color(255, 255, 255));
         Creators.setText("label1");
         Creators.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -396,6 +398,7 @@ public class Ventana extends TemplateVentana {
 
         save.setAlignment(java.awt.Label.CENTER);
         save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        save.setForeground(new java.awt.Color(255, 255, 255));
         save.setText("label1");
         save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -405,6 +408,7 @@ public class Ventana extends TemplateVentana {
 
         uploadFiles.setAlignment(java.awt.Label.CENTER);
         uploadFiles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        uploadFiles.setForeground(new java.awt.Color(255, 255, 255));
         uploadFiles.setText("label1");
         uploadFiles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -452,7 +456,7 @@ public class Ventana extends TemplateVentana {
             }
         });
 
-        searchComment.setBackground(new java.awt.Color(234, 76, 137));
+        searchComment.setBackground(new java.awt.Color(70, 24, 110));
         searchComment.setToolTipText("Search the post title");
         searchComment.setBorder(null);
         searchComment.setBorderPainted(false);
@@ -487,40 +491,38 @@ public class Ventana extends TemplateVentana {
                 .addContainerGap()
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(DeveloperSide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(menuPanelLayout.createSequentialGroup()
-                                .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuPanelLayout.createSequentialGroup()
+                                .addComponent(searchComment, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(watchAllUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(menuPanelLayout.createSequentialGroup()
-                                .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(busquedaComment, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(watchAllPost, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Users, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Creators, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(watchAllComments, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
                             .addGroup(menuPanelLayout.createSequentialGroup()
-                                .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(searchPost, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(uploadFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(8, 8, 8)))
-                        .addGap(2, 2, 2))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addComponent(searchComment, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaComment, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(watchAllComments, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(menuPanelLayout.createSequentialGroup()
+                                        .addComponent(BusquedaPost, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(watchAllPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(menuPanelLayout.createSequentialGroup()
+                                        .addComponent(BusquedaUser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(watchAllUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, menuPanelLayout.createSequentialGroup()
+                                .addComponent(DeveloperSide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Users, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Creators, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -543,13 +545,13 @@ public class Ventana extends TemplateVentana {
                     .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(busquedaComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(watchAllComments)))
-                .addGap(59, 59, 59)
+                .addGap(163, 163, 163)
                 .addComponent(Users, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(DeveloperSide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(Creators, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 428, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uploadFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -561,7 +563,7 @@ public class Ventana extends TemplateVentana {
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         mainPostTitleArea.setEditable(false);
-        mainPostTitleArea.setBackground(new java.awt.Color(52, 183, 241));
+        mainPostTitleArea.setBackground(new java.awt.Color(85, 57, 110));
         mainPostTitleArea.setColumns(20);
         mainPostTitleArea.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
         mainPostTitleArea.setForeground(new java.awt.Color(255, 255, 255));
@@ -583,9 +585,10 @@ public class Ventana extends TemplateVentana {
         jScrollPane7.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         mainPostBodyArea.setEditable(false);
-        mainPostBodyArea.setBackground(new java.awt.Color(52, 183, 241));
+        mainPostBodyArea.setBackground(new java.awt.Color(85, 57, 110));
         mainPostBodyArea.setColumns(20);
         mainPostBodyArea.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        mainPostBodyArea.setForeground(new java.awt.Color(255, 255, 255));
         mainPostBodyArea.setRows(5);
         jScrollPane7.setViewportView(mainPostBodyArea);
 
@@ -621,7 +624,7 @@ public class Ventana extends TemplateVentana {
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostTitleArea2.setEditable(false);
-        smallPostTitleArea2.setBackground(new java.awt.Color(46, 182, 125));
+        smallPostTitleArea2.setBackground(new java.awt.Color(118, 41, 186));
         smallPostTitleArea2.setColumns(20);
         smallPostTitleArea2.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
         smallPostTitleArea2.setForeground(new java.awt.Color(255, 255, 255));
@@ -640,9 +643,10 @@ public class Ventana extends TemplateVentana {
         jScrollPane9.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostBodyArea2.setEditable(false);
-        smallPostBodyArea2.setBackground(new java.awt.Color(46, 182, 125));
+        smallPostBodyArea2.setBackground(new java.awt.Color(118, 41, 186));
         smallPostBodyArea2.setColumns(20);
         smallPostBodyArea2.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        smallPostBodyArea2.setForeground(new java.awt.Color(255, 255, 255));
         smallPostBodyArea2.setRows(5);
         jScrollPane9.setViewportView(smallPostBodyArea2);
 
@@ -655,7 +659,7 @@ public class Ventana extends TemplateVentana {
                 .addGroup(smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(66, 66, 66))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         smallPost2Layout.setVerticalGroup(
             smallPost2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,7 +678,7 @@ public class Ventana extends TemplateVentana {
         smallPostTitleArea.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostTitleArea1.setEditable(false);
-        smallPostTitleArea1.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostTitleArea1.setBackground(new java.awt.Color(151, 52, 237));
         smallPostTitleArea1.setColumns(20);
         smallPostTitleArea1.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
         smallPostTitleArea1.setForeground(new java.awt.Color(255, 255, 255));
@@ -693,9 +697,10 @@ public class Ventana extends TemplateVentana {
         jScrollPane10.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostBodyArea1.setEditable(false);
-        smallPostBodyArea1.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostBodyArea1.setBackground(new java.awt.Color(151, 52, 237));
         smallPostBodyArea1.setColumns(20);
         smallPostBodyArea1.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        smallPostBodyArea1.setForeground(new java.awt.Color(255, 255, 255));
         smallPostBodyArea1.setRows(5);
         jScrollPane10.setViewportView(smallPostBodyArea1);
 
@@ -706,8 +711,8 @@ public class Ventana extends TemplateVentana {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(smallPost1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(smallPostTitleArea, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
         smallPost1Layout.setVerticalGroup(
@@ -720,13 +725,15 @@ public class Ventana extends TemplateVentana {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        smallPost3.setBackground(new java.awt.Color(118, 41, 186));
+
         jScrollPane4.setBorder(null);
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane4.setToolTipText("");
         jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostTitleArea3.setEditable(false);
-        smallPostTitleArea3.setBackground(new java.awt.Color(234, 76, 137));
+        smallPostTitleArea3.setBackground(new java.awt.Color(151, 52, 237));
         smallPostTitleArea3.setColumns(20);
         smallPostTitleArea3.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
         smallPostTitleArea3.setForeground(new java.awt.Color(255, 255, 255));
@@ -745,9 +752,10 @@ public class Ventana extends TemplateVentana {
         jScrollPane8.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostBodyArea3.setEditable(false);
-        smallPostBodyArea3.setBackground(new java.awt.Color(234, 76, 137));
+        smallPostBodyArea3.setBackground(new java.awt.Color(151, 52, 237));
         smallPostBodyArea3.setColumns(20);
         smallPostBodyArea3.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        smallPostBodyArea3.setForeground(new java.awt.Color(255, 255, 255));
         smallPostBodyArea3.setRows(5);
         jScrollPane8.setViewportView(smallPostBodyArea3);
 
@@ -758,11 +766,11 @@ public class Ventana extends TemplateVentana {
             .addGroup(smallPost3Layout.createSequentialGroup()
                 .addGroup(smallPost3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, smallPost3Layout.createSequentialGroup()
-                        .addContainerGap(19, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(smallPost3Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane4)))
                 .addContainerGap())
         );
         smallPost3Layout.setVerticalGroup(
@@ -781,7 +789,7 @@ public class Ventana extends TemplateVentana {
         jScrollPane5.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         mediumPostTitleArea.setEditable(false);
-        mediumPostTitleArea.setBackground(new java.awt.Color(52, 183, 241));
+        mediumPostTitleArea.setBackground(new java.awt.Color(85, 57, 110));
         mediumPostTitleArea.setColumns(20);
         mediumPostTitleArea.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
         mediumPostTitleArea.setForeground(new java.awt.Color(255, 255, 255));
@@ -800,9 +808,10 @@ public class Ventana extends TemplateVentana {
         jScrollPane11.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         mediumPostBodyArea.setEditable(false);
-        mediumPostBodyArea.setBackground(new java.awt.Color(52, 183, 241));
+        mediumPostBodyArea.setBackground(new java.awt.Color(85, 57, 110));
         mediumPostBodyArea.setColumns(20);
         mediumPostBodyArea.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        mediumPostBodyArea.setForeground(new java.awt.Color(255, 255, 255));
         mediumPostBodyArea.setRows(5);
         jScrollPane11.setViewportView(mediumPostBodyArea);
 
@@ -826,7 +835,7 @@ public class Ventana extends TemplateVentana {
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jScrollPane6.setBorder(null);
@@ -835,7 +844,7 @@ public class Ventana extends TemplateVentana {
         jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostTitleArea4.setEditable(false);
-        smallPostTitleArea4.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostTitleArea4.setBackground(new java.awt.Color(118, 41, 186));
         smallPostTitleArea4.setColumns(20);
         smallPostTitleArea4.setFont(new java.awt.Font("Nirmala UI Semilight", 3, 12)); // NOI18N
         smallPostTitleArea4.setForeground(new java.awt.Color(255, 255, 255));
@@ -854,9 +863,10 @@ public class Ventana extends TemplateVentana {
         jScrollPane12.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         smallPostBodyArea4.setEditable(false);
-        smallPostBodyArea4.setBackground(new java.awt.Color(236, 178, 46));
+        smallPostBodyArea4.setBackground(new java.awt.Color(118, 41, 186));
         smallPostBodyArea4.setColumns(20);
         smallPostBodyArea4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        smallPostBodyArea4.setForeground(new java.awt.Color(255, 255, 255));
         smallPostBodyArea4.setRows(5);
         jScrollPane12.setViewportView(smallPostBodyArea4);
 
@@ -887,20 +897,18 @@ public class Ventana extends TemplateVentana {
             postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postPanelLayout.createSequentialGroup()
                 .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postPanelLayout.createSequentialGroup()
-                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, postPanelLayout.createSequentialGroup()
+                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(mediumPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(postPanelLayout.createSequentialGroup()
-                                .addComponent(smallPost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                                .addComponent(smallPost2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
-                            .addGroup(postPanelLayout.createSequentialGroup()
-                                .addComponent(mediumPost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(smallPost3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(smallPost4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(mainPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(smallPost1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(smallPost2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(smallPost4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(smallPost3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         postPanelLayout.setVerticalGroup(
@@ -913,11 +921,10 @@ public class Ventana extends TemplateVentana {
                     .addComponent(smallPost1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(smallPost2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(smallPost3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(smallPost4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mediumPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mediumPost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(smallPost4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         close.setText("X");
@@ -1052,18 +1059,19 @@ public class Ventana extends TemplateVentana {
 
     private void watchAllUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllUsersMouseClicked
         // TODO add your handling code here:
+        currentAllSearch = "User";
         setAllUsers();
     }//GEN-LAST:event_watchAllUsersMouseClicked
 
     private void lookUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookUserActionPerformed
         // TODO add your handling code here:
         String titleS = matchesUsers.getSelectedValue();
-        if (lookUser.getText().equals("Look User")) {
-            User user = arbol.busquedaUser(titleS);
+        if (currentAllSearch.equals("User")) {
+            User user = arbol.busquedaUser(titleS.toLowerCase());
             userProfile = new UserProfile();
             userProfile.setVisible(true);
             userProfile.setUsuario(user);
-        } else if (lookUser.getText().equals("Look Post")) {
+        } else if (currentAllSearch.equals("Post")) {
             Post post = arbol.getPost(titleS);
             User user = arbol.getUserByPost(post.getTitle());
             postProfile = new PostProfile();
@@ -1086,10 +1094,11 @@ public class Ventana extends TemplateVentana {
 
     private void watchAllPostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllPostMouseClicked
         // TODO add your handling code here:
+        currentAllSearch = "Post";
         LinkedList<Post> posts = new LinkedList();
-        for (Nodo nodo : arbol.getRaiz().getPosts()) {
+        for (Object nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
-            for (Nodo n : user.getPosts()) {
+            for (Object n : user.getPosts()) {
                 Post p = (Post) n;
                 posts.add(p);
             }
@@ -1165,12 +1174,13 @@ public class Ventana extends TemplateVentana {
 
     private void watchAllCommentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_watchAllCommentsMouseClicked
         // TODO add your handling code here:
+        currentAllSearch = "Comments";
         LinkedList<Comment> comment = new LinkedList();
-        for (Nodo nodo : arbol.getRaiz().getPosts()) {
+        for (Object nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
-            for (Nodo n : user.getPosts()) {
+            for (Object n : user.getPosts()) {
                 Post post = (Post) n;
-                for (Nodo nod : post.getComments()) {
+                for (Object nod : post.getComments()) {
                     Comment c = (Comment) nod;
                     comment.add(c);
                 }
@@ -1318,7 +1328,7 @@ public class Ventana extends TemplateVentana {
         info.setText("All the users in the plataform");
         DefaultListModel model = new DefaultListModel();
         matchesUsers.setModel(model);
-        for (Nodo n : arbol.getRaiz().getPosts()) {
+        for (Object n : arbol.getRaiz().getPosts()) {
             User user = (User) n;
             model.addElement(user.getUsername());
         }
@@ -1327,6 +1337,7 @@ public class Ventana extends TemplateVentana {
 
     /**
      * Metodo que se encarga de mostrar todos los {@link Nodo} de tipo {@link Comment} en Pantalla
+     *
      * @param c {@code LinkedList<Comment>} que contiene todos los {@link Nodo} de tipo {@link Comment} del Arbol
      */
     public void setAllComments(LinkedList<Comment> c) {
@@ -1347,7 +1358,7 @@ public class Ventana extends TemplateVentana {
      * Metodo que se encarga de mostrar algunos de los {@link Nodo} de tipo {@link Post} en el menu lateral derecho
      */
     public void getPostForShowing() {
-        LinkedList<Post> lista = Lab.getRandomPost(arbol);
+        ListaEnlazada<Post> lista = Lab.getRandomPost(arbol);
         if (lista.size() >= 6) {
             setAllText(lista);
         } else {
@@ -1357,9 +1368,10 @@ public class Ventana extends TemplateVentana {
 
     /**
      * Metodo que se encarga de inicializar los valores de los TextArea del panel derecho
+     *
      * @param info {@code LinkedList<Post>} Que tiene todos los Post para ser mostrados
      */
-    public void setAllText(LinkedList<Post> info) {
+    public void setAllText(ListaEnlazada<Post> info) {
         mainPostTitleArea.append(info.get(0).getTitle());
         mainPostTitleArea.setLineWrap(true);
         mainPostBodyArea.append(info.get(0).getBody());

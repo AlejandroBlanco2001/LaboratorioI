@@ -6,6 +6,7 @@ import Arbol.Comment;
 import Arbol.Nodo;
 import Arbol.User;
 import Parser.Parser;
+import Prinicipal.ListaEnlazada.Node;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -13,11 +14,12 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *  Clase prinicipal encargada de la creacion parcial del arbol, se encarga de dar inicio a la {@link Ventana}
-*   @author alexz
+ * Clase prinicipal encargada de la creacion parcial del arbol, se encarga de dar inicio a la {@link Ventana}
+ *
+ * @author alexz
  */
 public class Lab {
-    
+
     private static Arbol arbol;
     private static Ventana ventana;
 
@@ -57,22 +59,22 @@ public class Lab {
         arbol = new Arbol();
         files = organizeFiles(files);
         Parser p = Parser.getParser();
-        LinkedList<String> tempo = p.getObjects(files[0].getName(), files[0].getCanonicalPath());
-        LinkedList<Nodo> lista = new LinkedList();
-        for (String t : tempo) {
-            lista.add((User) p.cleanData(t));
+        ListaEnlazada<String> tempo = p.getObjects(files[0].getName(), files[0].getCanonicalPath());
+        ListaEnlazada<Nodo> lista = new ListaEnlazada();
+        for (Object t : tempo) {
+            lista.add((User) p.cleanData((String) t));
         }
         arbol.Agregar(lista);
         tempo = p.getObjects(files[1].getName(), files[1].getCanonicalPath());
         lista.clear();
-        for (String t : tempo) {
-            lista.add((Post) p.cleanData(t));
+        for (Object t : tempo) {
+            lista.add((Post) p.cleanData((String) t));
         }
         arbol.Agregar(lista);
         lista.clear();
         tempo = p.getObjects(files[2].getName(), files[2].getCanonicalPath());
-        for (String t : tempo) {
-            lista.add((Comment) p.cleanData(t));
+        for (Object t : tempo) {
+            lista.add((Comment) p.cleanData((String) t));
         }
         arbol.Agregar(lista);
         return arbol;
@@ -111,9 +113,9 @@ public class Lab {
      * @param arbol {@link Arbol} Arbol n-ario que contiene toda la informacion.
      * @return Una {@code LinkedList<Post>} con los posts seleccionados.
      */
-    public static LinkedList<Post> getRandomPost(Arbol arbol) {
-        LinkedList<Post> lista = new LinkedList();
-        for (Nodo nodo : arbol.getRaiz().getPosts()) {
+    public static ListaEnlazada<Post> getRandomPost(Arbol arbol) {
+        ListaEnlazada<Post> lista = new ListaEnlazada();
+        for (Object nodo : arbol.getRaiz().getPosts()) {
             User user = (User) nodo;
             if (user.getPosts().get(0) != null) {
                 lista.add((Post) user.getPosts().get(0));

@@ -1,5 +1,6 @@
 package Arbol;
 
+import Prinicipal.ListaEnlazada;
 import java.io.Serializable;
 import java.util.LinkedList;
 
@@ -12,13 +13,13 @@ public abstract class Nodo implements Serializable{
     /**
      * Hijos de cada nodo
      */
-    protected LinkedList<Nodo> hijos;
+    protected ListaEnlazada<Nodo> hijos;
     
     /**
      * Metodo que se encarga de devolver los hijos de un Nodo en especifico
      * @return hijos Hijos de cada nodo
      */
-    public LinkedList getHijos() {
+    public ListaEnlazada<Nodo> getHijos() {
         return hijos;
     }
     

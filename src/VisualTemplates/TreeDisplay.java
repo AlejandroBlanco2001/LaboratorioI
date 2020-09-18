@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package VisualTemplates;
 
 import Arbol.Arbol;
@@ -19,7 +14,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que se encarga de mostrar en pantalla por medio de {@code JFrame} el Arbol de manera grafica
  * @author Alex
  */
 public class TreeDisplay extends TemplateVentana {
@@ -33,6 +28,11 @@ public class TreeDisplay extends TemplateVentana {
     private Arbol ab;
     private Ventana ventana;
 
+    /**
+     * Constructor 
+     * @param ab Arbol a graficar
+     * @param ventana Ventana que maneja la GUI General
+     */
     public TreeDisplay(Arbol ab, Ventana ventana) {
         this.ab = ab;
         this.ventana = ventana;
@@ -205,9 +205,10 @@ public class TreeDisplay extends TemplateVentana {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(52, 183, 241));
+        jPanel1.setBackground(new java.awt.Color(85, 57, 110));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Switch View");
         jLabel1.setToolTipText("Switch between scroll view/compact view");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,33 +218,48 @@ public class TreeDisplay extends TemplateVentana {
         });
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Number of Nodes");
 
         numberNodes.setEditable(false);
+        numberNodes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         numberNodes.setText("jTextField1");
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Number of Users");
 
         numberUsers.setEditable(false);
+        numberUsers.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         numberUsers.setText("jTextField1");
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Number of Posts");
 
         numberPost.setEditable(false);
+        numberPost.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         numberPost.setText("jTextField1");
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Number of Comments");
 
         numberComments.setEditable(false);
+        numberComments.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         numberComments.setText("jTextField1");
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Tree Levels");
 
         jTextField6.setEditable(false);
+        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setText("3");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -257,29 +273,18 @@ public class TreeDisplay extends TemplateVentana {
                         .addComponent(jLabel1)
                         .addGap(27, 27, 27))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(numberUsers)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(15, 15, 15))
-                                .addComponent(numberPost)
-                                .addComponent(numberNodes)
-                                .addComponent(numberComments)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(9, 9, 9)
-                                    .addComponent(jLabel6))
-                                .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel2)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(numberUsers)
+                            .addComponent(numberPost)
+                            .addComponent(numberNodes)
+                            .addComponent(numberComments)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46))))
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +316,7 @@ public class TreeDisplay extends TemplateVentana {
 
         TreeScroll.setVisible(true);
 
-        jPanel2.setBackground(new java.awt.Color(234, 76, 137));
+        jPanel2.setBackground(new java.awt.Color(151, 52, 237));
 
         jButton1.setText("Search for specific User");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -389,26 +394,26 @@ public class TreeDisplay extends TemplateVentana {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(113, 113, 113)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(92, 92, 92)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jButton6)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(95, 95, 95)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(98, 98, 98)
-                .addComponent(jButton10)
-                .addGap(63, 63, 63))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(97, 97, 97))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,24 +424,26 @@ public class TreeDisplay extends TemplateVentana {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton7))
-                            .addComponent(jButton1))
+                                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(41, 41, 41)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jButton2)
-                            .addComponent(jButton10))
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton8)
-                            .addComponent(jButton5))
+                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton6)
-                            .addComponent(jButton9))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(44, 44, 44))
         );
 
         close.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
@@ -467,7 +474,7 @@ public class TreeDisplay extends TemplateVentana {
                 .addComponent(minimize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(close)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -501,6 +508,10 @@ public class TreeDisplay extends TemplateVentana {
 
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    /**
+     * Metodo que se encarga de la busqueda de un {@link User} dado su ID o su Nombre.
+     * @return user User a buscar
+     */
     public User searchUser() {
         String username = JOptionPane.showInputDialog(null, "Ingrese el ID o el username del User", "Busqueda de User", JOptionPane.DEFAULT_OPTION);
         int ID;
@@ -517,7 +528,11 @@ public class TreeDisplay extends TemplateVentana {
         }
         return user;
     }
-
+    
+    /**
+     * Metodo que se encarga de la busqueda de un {@link Comment} dado su ID, su titulo, su cuerpo o el email del creador.
+     * @return comment Comment a buscar
+     */
     public Comment searchComment() {
         String title = JOptionPane.showInputDialog(null, "Ingrese el ID, titulo del Comment, cuerpo de Comment o email del creador", "Busqueda de Comments de un POST", JOptionPane.DEFAULT_OPTION);
         int ID;
@@ -537,7 +552,11 @@ public class TreeDisplay extends TemplateVentana {
         }
         return comment;
     }
-
+    
+    /**
+     * Metodo que se encarga de la busqueda de un {@link Post} dado su ID, su titulo, su cuerpo o el email del creador.
+     * @return comment Comment a buscar
+     */
     public Post searchPost() {
         String title = JOptionPane.showInputDialog(null, "Ingrese el ID o el titulo del Post", "Busqueda de Comments de un POST", JOptionPane.DEFAULT_OPTION);
         int ID;
@@ -612,9 +631,9 @@ public class TreeDisplay extends TemplateVentana {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         LinkedList<Post> posts = new LinkedList();
-        for (Nodo nodo : ab.getRaiz().getPosts()) {
+        for (Object nodo : ab.getRaiz().getPosts()) {
             User user = (User) nodo;
-            for (Nodo n : user.getPosts()) {
+            for (Object n : user.getPosts()) {
                 Post post = (Post) n;
                 posts.add(post);
             }
@@ -625,11 +644,11 @@ public class TreeDisplay extends TemplateVentana {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         LinkedList<Comment> comment = new LinkedList();
-        for (Nodo nodo : ab.getRaiz().getPosts()) {
+        for (Object nodo : ab.getRaiz().getPosts()) {
             User user = (User) nodo;
-            for (Nodo n : user.getPosts()) {
+            for (Object n : user.getPosts()) {
                 Post post = (Post) n;
-                for (Nodo nod : post.getComments()) {
+                for (Object nod : post.getComments()) {
                     Comment c = (Comment) nod;
                     comment.add(c);
                 }

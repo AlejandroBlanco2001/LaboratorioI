@@ -1,5 +1,7 @@
 package Arbol;
 
+import Prinicipal.ListaEnlazada;
+import Prinicipal.ListaEnlazada.Node;
 import java.util.LinkedList;
 
 /**
@@ -28,7 +30,7 @@ public class Post extends Nodo {
         this.id = id;
         this.title = title;
         this.body = body;
-        hijos = new LinkedList();
+        hijos = new ListaEnlazada();
     }
 
     /**
@@ -37,10 +39,10 @@ public class Post extends Nodo {
      * @param separatedData {@code LinkedList} que contiene todos los datos ordenados segun su aparicion en el JSON
      * @return Post {@link Post} el Post creado
      */
-    public static Post cleanInfo(LinkedList<String> separatedData) {
+    public static Post cleanInfo(ListaEnlazada<String> separatedData) {
         int a = 0;
-        for (String i : separatedData) {
-            temporaryData[a] = i;
+        for(Object t: separatedData){
+            temporaryData[a] = (String) t;
             a++;
         }
         int userIdTemp = Integer.parseInt(temporaryData[0]);
@@ -99,7 +101,7 @@ public class Post extends Nodo {
      * @return c {@link Comment} Devuelve el Comment a buscar, {@code null} en caso contrario devuelve
      */
     public Comment getComment(int ID) {
-        for (Nodo nodo : getComments()) {
+        for (Object nodo : getComments()) {
             Comment c = (Comment) nodo;
             if (c.getId() == ID) {
                 return c;
@@ -115,7 +117,7 @@ public class Post extends Nodo {
      * @return c {@link Comment} Devuelve el Comment a buscar, {@code null} en caso contrario devuelve
      */
     public Comment getComment(String title) {
-        for (Nodo nodo : getComments()) {
+        for (Object nodo : getComments()) {
             Comment c = (Comment) nodo;
             if (c.getBody().equals(title) || c.getEmail().equals(title) || c.getName().equals(title)) {
                 return c;
@@ -133,7 +135,7 @@ public class Post extends Nodo {
         StringBuilder sb = new StringBuilder();
         sb.append("\t \n" + "ID del post:" + this.id).append("\t \n" + "ID del post del user" + this.userId).append("\t \n" + "Titulo del post" + this.title).append("\t \n" + "Contenido: " + this.body);
         System.out.println(sb.toString());
-        for (Nodo nodo : hijos) {
+        for (Object nodo : hijos) {
             Comment c = (Comment) nodo;
             c.mostrarComment();
         }
@@ -143,7 +145,7 @@ public class Post extends Nodo {
      * Metodo que se encargar de devolver los hijos del Post
      * @return hijos Hijos del nodo
      */
-    public LinkedList<Nodo> getComments() {
+    public ListaEnlazada<Nodo> getComments() {
         return hijos;
     }
 

@@ -5,6 +5,7 @@
  */
 package Arbol;
 
+import Prinicipal.ListaEnlazada;
 import java.util.LinkedList;
 
 /**
@@ -17,9 +18,9 @@ public interface Operaciones {
     /**
      * Metodo que cumple la funcion de agregar nodos en cierto nivel del Arbol.
      *
-     * @param nodos {@code LinkedList} Nodos a agregar al Arbol
+     * @param nodos {@code ListaEnlazada} Nodos a agregar al Arbol
      */
-    public void Agregar(LinkedList<Nodo> nodos);
+    public void Agregar(ListaEnlazada<Nodo> nodos);
 
     /**
      * Metodo que dependiendo del Arbol que se quiera crear, cumple la funcion de balancear el Arbol.

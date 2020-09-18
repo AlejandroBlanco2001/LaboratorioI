@@ -42,7 +42,7 @@ public final class UserProfile extends TemplateVentana {
     public void loadComponents() {
         listPost.setModel(modelList);
         int cont = 1;
-        for (Nodo nodo : username.getPosts()) {
+        for (Object nodo : username.getPosts()) {
             Post p = (Post) nodo;
             modelList.addElement(cont + " - " + p.getTitle());
             cont++;
@@ -53,9 +53,9 @@ public final class UserProfile extends TemplateVentana {
     public void setGUI() {
         font = Ventana.principalFont;
         setTitle("SMALL Solutions");
-        infoUserPanel.setBackground(Ventana.mediumPostColor);
+        infoUserPanel.setBackground(Ventana.post2);
         profilePanel.setBackground(Ventana.post3);
-        postPanel.setBackground(Ventana.post2);
+        postPanel.setBackground(Ventana.bigMenuThings);
         JLabel texto = new JLabel("Hola");
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(250, 250));
@@ -422,47 +422,68 @@ public final class UserProfile extends TemplateVentana {
 
         infoUserPanel.setFont(getFont());
 
+        nameText.setForeground(new java.awt.Color(255, 255, 255));
         nameText.setText("jLabel1");
 
+        emailText.setForeground(new java.awt.Color(255, 255, 255));
         emailText.setText("jLabel1");
 
+        usernameText.setForeground(new java.awt.Color(255, 255, 255));
         usernameText.setText("jLabel1");
 
+        phoneText.setForeground(new java.awt.Color(255, 255, 255));
         phoneText.setText("jLabel1");
 
+        websiteText.setForeground(new java.awt.Color(255, 255, 255));
         websiteText.setText("jLabel1");
 
+        cityText.setForeground(new java.awt.Color(255, 255, 255));
         cityText.setText("jLabel1");
 
+        email5.setForeground(new java.awt.Color(255, 255, 255));
         email5.setText("Basic Information");
 
+        email6.setForeground(new java.awt.Color(255, 255, 255));
         email6.setText("Company");
 
+        email7.setForeground(new java.awt.Color(255, 255, 255));
         email7.setText("City");
 
+        email8.setForeground(new java.awt.Color(255, 255, 255));
         email8.setText("Website");
 
+        email9.setForeground(new java.awt.Color(255, 255, 255));
         email9.setText("Phone");
 
+        email10.setForeground(new java.awt.Color(255, 255, 255));
         email10.setText("E-mail");
 
+        email11.setForeground(new java.awt.Color(255, 255, 255));
         email11.setText("Username");
 
+        nameLabel.setForeground(new java.awt.Color(255, 255, 255));
         nameLabel.setText("Name:");
 
+        nombre2.setForeground(new java.awt.Color(255, 255, 255));
         nombre2.setText("Name:");
 
+        nameCompanyText.setForeground(new java.awt.Color(255, 255, 255));
         nameCompanyText.setText("jLabel1");
 
+        email12.setForeground(new java.awt.Color(255, 255, 255));
         email12.setText("Slogan");
 
+        sloganText.setForeground(new java.awt.Color(255, 255, 255));
         sloganText.setText("jLabel1");
 
+        email14.setForeground(new java.awt.Color(255, 255, 255));
         email14.setText("B.S");
 
+        bsText.setForeground(new java.awt.Color(255, 255, 255));
         bsText.setText("jLabel1");
 
-        jButton2.setBackground(new java.awt.Color(52, 183, 241));
+        jButton2.setBackground(new java.awt.Color(118, 41, 186));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("More Info");
         jButton2.setToolTipText("Watch all the info about the User");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -564,9 +585,11 @@ public final class UserProfile extends TemplateVentana {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        numberPost.setForeground(new java.awt.Color(255, 255, 255));
         numberPost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         numberPost.setText("jLabel1");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("X");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -580,7 +603,8 @@ public final class UserProfile extends TemplateVentana {
         listPost.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listPost);
 
-        jButton1.setBackground(new java.awt.Color(236, 178, 46));
+        jButton1.setBackground(new java.awt.Color(85, 57, 110));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Watch Post");
         jButton1.setToolTipText("Watch the selected post");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -621,6 +645,7 @@ public final class UserProfile extends TemplateVentana {
                 .addGap(19, 19, 19))
         );
 
+        usernamePic.setForeground(new java.awt.Color(255, 255, 255));
         usernamePic.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         usernamePic.setText("jLabel1");
 

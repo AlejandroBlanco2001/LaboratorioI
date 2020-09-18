@@ -1,5 +1,6 @@
 package Arbol;
 
+import Prinicipal.ListaEnlazada;
 import java.io.Serializable;
 import java.util.LinkedList;
 
@@ -26,7 +27,7 @@ public class User extends Nodo {
         this.ID = ID;
         this.username = username;
         this.email = email;
-        hijos = new LinkedList();
+        hijos = new ListaEnlazada();
     }
 
     /**
@@ -34,7 +35,7 @@ public class User extends Nodo {
      */
     public User() {
         this.ID = 0;
-        hijos = new LinkedList();
+        hijos = new ListaEnlazada();
     }
 
     /**
@@ -93,7 +94,7 @@ public class User extends Nodo {
      * Metodo que obtiene los hijos de un User
      * @return hijos Hijos del User
      */
-    public LinkedList<Nodo> getPosts() {
+    public ListaEnlazada<Nodo> getPosts() {
         return hijos;
     }
 
@@ -101,7 +102,7 @@ public class User extends Nodo {
      * Metodo que se encarga de añadir una {@link Persona} al User
      * @param info {@code LinkedList<String>} que contiene los datos para crear la Persona y sus partes
      */
-    public void addPersona(LinkedList<String> info) {
+    public void addPersona(ListaEnlazada<String> info) {
         this.persona = new Persona(info.get(1), info.get(10), info.get(11), this);
         this.persona.setAdress(info.get(4), info.get(5), info.get(6), info.get(7), info);
     }
@@ -122,7 +123,7 @@ public class User extends Nodo {
      * @return p {@link Post} devuelve el Post a buscar, {@code null} en caso de no encontrarlo 
      */
     public Post getPost(int id) {
-        for (Nodo post : hijos) {
+        for (Object post : hijos) {
             Post p = (Post) post;
             if (p.getId() == id) {
                 return p;
@@ -137,7 +138,7 @@ public class User extends Nodo {
      * @return p {@link Post} devuelve el Post a buscar, {@code null} en caso de no encontrarlo 
      */
     public Post getPost(String title) {
-        for (Nodo post : hijos) {
+        for (Object post : hijos) {
             Post p = (Post) post;
             if (p.getTitle().equals(title)) {
                 return p;
@@ -153,7 +154,7 @@ public class User extends Nodo {
      * @return Post {@code True} si encuentra el Post a buscar, {@code False} en caso contrario
      */
     public boolean checkPostId(int postId) {
-        for (Nodo post : hijos) {
+        for (Object post : hijos) {
             Post p = (Post) post;
             if (p.getId() == postId) {
                 return true;
@@ -169,7 +170,7 @@ public class User extends Nodo {
      * @return Post {@code True} si encuentra el Post a buscar, {@code False} en caso contrario
      */
     public boolean checkPostName(String postTitle) {
-        for (Nodo post : hijos) {
+        for (Object post : hijos) {
             Post p = (Post) post;
             if (p.getTitle().equals(postTitle)) {
                 return true;
@@ -185,7 +186,7 @@ public class User extends Nodo {
      * @return Comment Comment a buscar en especifico, {@code null} en caso de no encontrarlo
      */
     public Comment getComment(int ID) {
-        for (Nodo nodo : this.getPosts()) {
+        for (Object nodo : this.getPosts()) {
             Post p = (Post) nodo;
             if (p.getComment(ID) != null) {
                 return (Comment) p.getComment(ID);
@@ -201,7 +202,7 @@ public class User extends Nodo {
      * @return Comment Comment a buscar en especifico, {@code null} en caso de no encontrarlo
      */
     public Comment getComment(String title) {
-        for (Nodo nodo : this.getPosts()) {
+        for (Object nodo : this.getPosts()) {
             Post p = (Post) nodo;
             if (p.getComment(title) != null) {
                 return (Comment) p.getComment(title);
@@ -219,7 +220,7 @@ public class User extends Nodo {
         StringBuilder sb = new StringBuilder();
         sb.append("ID del user:" + this.ID).append("\n Email del user: " + this.email).append("\n Nombre de usuario:" + this.username);
         System.out.println(sb.toString());
-        for (Nodo nodo : hijos) {
+        for (Object nodo : hijos) {
             Post p = (Post) nodo;
             p.mostrarPost();
         }
@@ -232,7 +233,7 @@ public class User extends Nodo {
      */
     public int getTam() {
         int cont = this.hijos.size();
-        for (Nodo n : hijos) {
+        for (Object n : hijos) {
             Post p = (Post) n;
             cont += p.getComments().size();
         }
@@ -246,7 +247,7 @@ public class User extends Nodo {
      */
     public int getAllComments() {
         int cont = 0;
-        for (Nodo n : hijos) {
+        for (Object n : hijos) {
             Post p = (Post) n;
             cont += p.getComments().size();
         }

@@ -5,6 +5,8 @@
  */
 package Arbol;
 
+import Prinicipal.ListaEnlazada;
+import Prinicipal.ListaEnlazada.Node;
 import java.util.LinkedList;
 
 /**
@@ -42,10 +44,10 @@ public class Comment extends Nodo {
      * @param separatedData {@code LinkedList<String>} que contiene todos los datos ordenados segun su aparicion en el JSON
      * @return Comment {@link Comment} el Comment creado
      */
-    public static Comment cleanInfo(LinkedList<String> separatedData) {
+    public static Comment cleanInfo(ListaEnlazada<String> separatedData) {
         int a = 0;
-        for (String i : separatedData) {
-            temporaryData[a] = i;
+        for(Object t: separatedData){
+            temporaryData[a] = (String) t;
             a++;
         }
         int postIdTemp = Integer.parseInt(temporaryData[0]);

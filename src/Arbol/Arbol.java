@@ -2,6 +2,7 @@ package Arbol;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import Prinicipal.ListaEnlazada;
 
 /**
  * Clase que abstrae la idea de la estructura de Arbol, esta contiene toda la información y es la encargada de tener la raiz del mismo.
@@ -21,14 +22,14 @@ public class Arbol implements Operaciones, Serializable {
     }
 
     @Override
-    public void Agregar(LinkedList<Nodo> insercciones) {
-        for (Nodo i : insercciones) {
+    public void Agregar(ListaEnlazada<Nodo> insercciones) {
+        for (Object i : insercciones) {
             if (i instanceof User) {
-                insertarUser(i);
+                insertarUser((User) i);
             } else if (i instanceof Post) {
-                insertarPost(i);
+                insertarPost((Post) i);
             } else {
-                insertarComment(i);
+                insertarComment((Comment) i);
             }
         }
     }
@@ -52,7 +53,7 @@ public class Arbol implements Operaciones, Serializable {
      */
     public void insertarPost(Nodo nodo) {
         Post post = (Post) nodo;
-        for (Nodo user : raiz.getPosts()) {
+        for (Object user : raiz.getPosts()) {
             User u = (User) user;
             if (u.getID() == post.getUserId()) {
                 u.setPost(post);
@@ -78,7 +79,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return {@link User} retorna el Usuario con dicho ID.
      */
     public User busquedaUser(int id) {
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             if (user.getID() == id) {
                 return user;
@@ -94,7 +95,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return {@link User} retorna el Usuario con dicho nombre de usuario.
      */
     public User busquedaUser(String username) {
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             if (user.getUsername().toLowerCase().equals(username)) {
                 return user;
@@ -111,7 +112,7 @@ public class Arbol implements Operaciones, Serializable {
      */
     public LinkedList<User> matchPosibbleUsers(String username) {
         LinkedList<User> matches = new LinkedList();
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             if (user.getUsername().toLowerCase().startsWith(username)) {
                 matches.add(user);
@@ -127,7 +128,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return {@link Post} retorna el Post especifico de dicho usuario especifico.
      */
     public Post getPost(int postId) {
-        for (Nodo user : raiz.getPosts()) {
+        for (Object user : raiz.getPosts()) {
             User u = (User) user;
             if (u.checkPostId(postId)) {
                 return u.getPost(postId);
@@ -143,7 +144,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return {@link Post} retorna el Post especifico de dicho usuario especifico.
      */
     public Post getPost(String title) {
-        for (Nodo user : raiz.getPosts()) {
+        for (Object user : raiz.getPosts()) {
             User u = (User) user;
             if (u.checkPostName(title)) {
                 return u.getPost(title);
@@ -159,7 +160,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return {@link User} retorna el User especifico que contenga dicho Post
      */
     public User getUserByPost(String title) {
-        for (Nodo user : raiz.getPosts()) {
+        for (Object user : raiz.getPosts()) {
             User u = (User) user;
             if (u.checkPostName(title)) {
                 return u;
@@ -175,9 +176,9 @@ public class Arbol implements Operaciones, Serializable {
      * @return {@link User} retorna el User especifico que contenga dicho Post
      */
     public User getUserByPost(int id) {
-        for (Nodo user : raiz.getPosts()) {
+        for (Object user : raiz.getPosts()) {
             User u = (User) user;
-            for (Nodo post : u.getPosts()) {
+            for (Object post : u.getPosts()) {
                 Post p = (Post) post;
                 if (id == p.getId()) {
                     return u;
@@ -193,7 +194,7 @@ public class Arbol implements Operaciones, Serializable {
      * Metodo de prueba que se usa para mostrar toda la informacion del Arbol
      */
     public void muestrameTodo() {
-        for (Nodo user : raiz.getPosts()) {
+        for (Object user : raiz.getPosts()) {
             User u = (User) user;
             u.mostrarUser();
         }
@@ -215,7 +216,7 @@ public class Arbol implements Operaciones, Serializable {
      */
     public int cantidadPosts() {
         int cont = 0;
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             cont += user.getPosts().size();
         }
@@ -229,7 +230,7 @@ public class Arbol implements Operaciones, Serializable {
      */
     public int cantidadDeComments() {
         int cont = 0;
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             cont += user.getAllComments();
         }
@@ -239,7 +240,7 @@ public class Arbol implements Operaciones, Serializable {
     @Override
     public int Tamaño() {
         int cont = raiz.getPosts().size();
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             cont += user.getTam();
         }
@@ -272,7 +273,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return comment Comentario especifico a buscar
      */
     public Comment getComment(String title) {
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             if (user.getComment(title) != null) {
                 return (Comment) user.getComment(title);
@@ -288,7 +289,7 @@ public class Arbol implements Operaciones, Serializable {
      * @return comment Comentario especifico a buscar
      */
     public Comment getComment(int ID) {
-        for (Nodo n : raiz.getPosts()) {
+        for (Object n : raiz.getPosts()) {
             User user = (User) n;
             if (user.getComment(ID) != null) {
                 return (Comment) user.getComment(ID);

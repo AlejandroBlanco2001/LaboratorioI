@@ -1,5 +1,6 @@
 package Arbol;
 
+import Prinicipal.ListaEnlazada;
 import java.io.Serializable;
 import java.util.LinkedList;
 
@@ -40,7 +41,7 @@ public class Persona implements Serializable {
      * @param zipcode Codigo postal de la Direccion
      * @param info Informacion de los campos restantes
      */
-    public void setAdress(String street, String suite, String city, String zipcode,LinkedList<String> info) {
+    public void setAdress(String street, String suite, String city, String zipcode,ListaEnlazada<String> info) {
         this.adress = new Direccion(street,suite,city,zipcode);
         this.adress.setGeo(Float.parseFloat(info.get(8)),Float.parseFloat(info.get(9)));
         this.company = new Compañia(info.get(12),info.get(13),info.get(14));

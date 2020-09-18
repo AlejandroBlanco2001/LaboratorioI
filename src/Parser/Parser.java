@@ -10,6 +10,7 @@ import Arbol.Comment;
 import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
+import Prinicipal.ListaEnlazada;
 
 /**
  * Clase que se encarga de abstraer la idea de un Parse de JSON, se encarga de la manipulacion y extraccion de datos de los JSON con la estrucutara dada por los presentes en JSONPLACEHOLDER
@@ -19,13 +20,13 @@ import Arbol.User;
 public class Parser {
 
     private static Parser parser;
-    private LinkedList<String> objetos;
+    private ListaEnlazada<String> objetos;
 
     /**
      * Constructor Privado, con el fin de asegurar que solo el puede llamarse unicamente una vez a el mismo
      */
     private Parser() {
-        objetos = new LinkedList();
+        objetos = new ListaEnlazada();
     }
 
     /**
@@ -46,7 +47,7 @@ public class Parser {
      * @param fileName Nombre del archivo
      * @return objetos {@code LinkedList<String>} con la division de cada objeto del JSON
      */
-    public LinkedList<String> getObjects(String fileName) {
+    public ListaEnlazada<String> getObjects(String fileName) {
         String JSON = getData(fileName);
         if (!fileName.equals("Users.txt")) {
             Pattern pattern = Pattern.compile(RegexPattern.OBJECT.getPattern());
@@ -67,7 +68,7 @@ public class Parser {
      * @param fileRoute Ruta canonica del archivo
      * @return {@code LinkedList<String>} con la division de cada objeto del JSON
      */
-    public LinkedList<String> getObjects(String fileName, String fileRoute) {
+    public ListaEnlazada<String> getObjects(String fileName, String fileRoute) {
         String JSON = getData(fileRoute);
         if (!fileName.equals("Users.txt")) {
             Pattern pattern = Pattern.compile(RegexPattern.OBJECT.getPattern());
@@ -90,11 +91,11 @@ public class Parser {
     public Nodo cleanData(String dirtyJSON) {
         Pattern pattern = Pattern.compile(RegexPattern.FIRST_PARAMETER.getPattern());
         Matcher matcher = pattern.matcher(dirtyJSON);
-        LinkedList<String> code = getBegins(matcher, dirtyJSON, 1, -1);
+        ListaEnlazada<String> code = getBegins(matcher, dirtyJSON, 1, -1);
         String identifier = code.get(0);
         pattern = Pattern.compile(RegexPattern.INSIDE_DATA.getPattern());
         matcher = pattern.matcher(dirtyJSON);
-        LinkedList info = getKeyInfo(matcher, dirtyJSON);
+        ListaEnlazada<String> info = getKeyInfo(matcher, dirtyJSON);
         if (identifier.equals("userId") || identifier.equals("postId")) {
             if (identifier.equals("userId")) {
                 return Post.cleanInfo(info);
@@ -115,8 +116,8 @@ public class Parser {
      * @param fix_end Cantidad numerica para recortar caracteres hacia atras
      * @return separated_objetcs {@code LinkedList<String>} donde contiene cada {@code Substring} de las coincidencias, en la mayoria de los casos son objetos individuales
      */
-    public LinkedList<String> getBegins(Matcher radar, String JSON, int fix_start, int fix_end) {
-        LinkedList<String> separated_objects = new LinkedList();
+    public ListaEnlazada<String> getBegins(Matcher radar, String JSON, int fix_start, int fix_end) {
+        ListaEnlazada<String> separated_objects = new ListaEnlazada();
         int i = 0;
         int inicio = 0;
         int fin = 0;
@@ -140,8 +141,8 @@ public class Parser {
      * @param JSON Cadena de texto con el JSON a analizar
      * @return separated_objetcs {@code LinkedList<String>} donde contiene cada {@code Substring} de las coincidencias, en la mayoria de los casos son objetos individuales
      */
-    public LinkedList<String> getBegins(Matcher radar, String JSON) {
-        LinkedList<String> separated_objects = new LinkedList();
+    public ListaEnlazada<String> getBegins(Matcher radar, String JSON) {
+        ListaEnlazada<String> separated_objects = new ListaEnlazada();
         int i = 0;
         int inicio = 0;
         int fin = 0;
@@ -168,8 +169,8 @@ public class Parser {
      * @param JSON Cadena que representa un objeto individual de tipo JSON
      * @return info {@code LinkedList<String>} que contiene los pares "Key,Data" de cada objeto individual 
      */
-    public LinkedList<String> getKeyInfo(Matcher radar, String JSON) {
-        LinkedList<String> info = new LinkedList();
+    public ListaEnlazada<String> getKeyInfo(Matcher radar, String JSON) {
+        ListaEnlazada<String> info = new ListaEnlazada();
         int count = 0;
         while (radar.find()) {
             if (count % 2 != 0) {
@@ -211,8 +212,8 @@ public class Parser {
      * @param info Pares "Key,Data" que conforman al Objeto Complejo
      * @return user Usuario que tiene sus componentes conectados
      */
-    public Nodo cleanDataInsideData(LinkedList<String> info) {
-        User user = User.createUser(Integer.parseInt(info.get(0)), info.get(2), info.get(3));
+    public Nodo cleanDataInsideData(ListaEnlazada<String> info) {
+        User user = User.createUser(Integer.parseInt(info.get(0)),info.get(2),info.get(3));
         user.addPersona(info);
         return user;
     }

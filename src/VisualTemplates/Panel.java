@@ -5,6 +5,7 @@ import Arbol.Comment;
 import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
+import Prinicipal.ListaEnlazada;
 import Prinicipal.Ventana;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -62,19 +63,20 @@ public class Panel extends JPanel {
         if (Raiz == arbol.getRaiz()) {
             g.setColor(Ventana.menu);
         } else if (Raiz instanceof User) {
-            g.setColor(Ventana.morado);
+            g.setColor(Ventana.bigMenuThings);
         } else if (Raiz instanceof Post) {
-            g.setColor(Ventana.post3);
+            g.setColor(Ventana.post2);
         } else if (Raiz instanceof Comment) {
-            g.setColor(Ventana.colorMainPost);
+            g.setColor(Ventana.post3);
         }
         g.fillOval(x - radio, y - radio, 2 * radio, 2 * radio);
         g.setColor(Color.BLACK);
         g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
-        LinkedList<Nodo> hijos = Raiz.getHijos();
+        ListaEnlazada<Nodo> hijos = Raiz.getHijos();
         Point coordsPadre = new Point(x, y);
         if (hijos != null) {
-            for (Nodo hijo : hijos) {
+            for (Object h : hijos) {
+                Nodo hijo = (Nodo) h;
                 dibujarLinea(g, x - espacioH, y + espacioVertical, coordsPadre.x, coordsPadre.y);
                 dibujar(g, hijo, x - espacioH, y + espacioVertical, espacioH / hijos.size());
                 x += espacioH;
