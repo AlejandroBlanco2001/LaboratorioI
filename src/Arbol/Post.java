@@ -1,8 +1,6 @@
 package Arbol;
 
 import Prinicipal.ListaEnlazada;
-import Prinicipal.ListaEnlazada.Node;
-import java.util.LinkedList;
 
 /**
  * Clase que abstrae la idea del Post
@@ -147,6 +145,19 @@ public class Post extends Nodo {
      */
     public ListaEnlazada<Nodo> getComments() {
         return hijos;
+    }
+    
+    @Override
+    public String getAllData(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("P").append(",").append(this.userId).append(",").append(this.id).append(",").append(this.title).append(",").append(this.body).append("\n");
+        for(Object nodo: this.getHijos()){
+            Comment c = (Comment) nodo;
+            sb.append(c.getAllData());
+            System.out.println("Comment ID: " + c.getId());
+        }
+        return sb.toString();
+        
     }
 
 }

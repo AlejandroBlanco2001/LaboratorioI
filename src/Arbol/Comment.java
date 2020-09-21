@@ -6,8 +6,6 @@
 package Arbol;
 
 import Prinicipal.ListaEnlazada;
-import Prinicipal.ListaEnlazada.Node;
-import java.util.LinkedList;
 
 /**
  * Clase que abstrae la idea del Comment
@@ -107,5 +105,12 @@ public class Comment extends Nodo {
         StringBuffer sb = new StringBuffer();
         sb.append("\t \t \n " + "ID del comment" + this.id).append("\t \t \n" + "post del Comment id: " +this.postId).append("\t \t \n" + "Email del comentarista" + this.email).append("\t \t \n" + "Persona del comment" + this.name).append("\t \t \n" + "Cuerpo del comment:" + this.body);
         System.out.println(sb.toString());
+    }
+    
+    @Override
+    public String getAllData(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("C").append(",").append(this.postId).append(",").append(this.id).append(",").append(this.name).append(",").append(this.body).append(",").append(this.email).append("\n");
+        return sb.toString();
     }
 }

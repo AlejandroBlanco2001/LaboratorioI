@@ -1,14 +1,11 @@
 package Arbol;
 
 import Prinicipal.ListaEnlazada;
-import java.io.Serializable;
-import java.util.LinkedList;
-
 /**
  * Clase que abstrae la idea de una Persona natural que posee una cuenta User
  * @author alexz
  */
-public class Persona implements Serializable {
+public class Persona{
     
     private String name;
     private String phone;
@@ -87,5 +84,31 @@ public class Persona implements Serializable {
         return company;
     }
 
+    /**
+     * Metodo que se encarga de la creacion o modificacion del objeto {@link Coordenada} de cada Persona
+     * @param adress Direccion a crear 
+     */
+    public void setAdress(Direccion adress) {
+        this.adress = adress;
+    }
+
+    /**
+     * Metodo que se encarga de la creacion o modificacion del objeto {@link Compañia} de cada Persona
+     * @param company Compañia a crear
+     */
+    public void setCompany(Compañia company) {
+        this.company = company;
+    }
+
+    /**
+     * Metodo que se encarga de volver los datos de Persona en una String separados por coma
+     *
+     * @return String Cadena que contiene todos los datos del Persona
+     */
+    public String getAllData(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.name).append(",").append(this.phone).append(",").append(this.website).append("\n").append(this.adress.getAllData()).append("\n").append(this.company.getAllData());
+        return sb.toString();
+    }
     
 }

@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Arbol;
 
 import java.io.Serializable;
 
 /**
  * Clase que abstrae la idea de la Direccion
- * @author alexz
+ * @author Isaac Blanco
  */
 
 
@@ -82,6 +77,17 @@ public class Direccion implements Serializable {
      */
     public Coordenada getCoordenada() {
         return coordenada;
+    }
+    
+    /**
+     * Metodo que se encarga de volver los datos de Direccion en una String separados por coma
+     *
+     * @return String Cadena que contiene todos los datos del Direccion y sus componentes
+     */
+    public String getAllData(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.street).append(",").append(this.suite).append(",").append(this.city).append(",").append(this.zipcode).append("\n").append(this.coordenada.getAllData());
+        return sb.toString();
     }
     
     

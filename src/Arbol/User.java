@@ -1,12 +1,10 @@
 package Arbol;
 
 import Prinicipal.ListaEnlazada;
-import java.io.Serializable;
-import java.util.LinkedList;
 
 /**
  * Clase que abstrae la idea del User
- * @author alexz
+ * @author Isaac Blanco
  */
 public class User extends Nodo {
 
@@ -252,5 +250,32 @@ public class User extends Nodo {
             cont += p.getComments().size();
         }
         return cont;
+    }
+    
+    @Override
+    public String getAllData(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("U").append(",").append(this.ID).append(",").append(this.username).append(",").append(this.email).append("\n").append(this.persona.getAllData());
+        for(Object nodo: this.getHijos()){
+            Post p = (Post) nodo;
+            sb.append(p.getAllData());
+            System.out.println("ID :" + p.getId());
+        }
+        return sb.toString();
+    }
+    
+    /**
+     * Metodo que se encarga de a partir de los datos de las clases {@link Persona}, {@link Direccion}, {@link Coordenada} y {@link Compañia} completar la creacion de un objeto User 
+     * @param user User el cual debe ser terminado, necesario para la bidirecionalidad con Persona
+     * @param personaData {@link ListaEnlazada} con los datos seperados del objeto {@link Persona}
+     * @param adressData {@link ListaEnlazada} con los datos separados del objeto {@link Direccion}
+     * @param geoData {@link ListaEnlazada} con los datos separados del objeto {@link Coordenada}
+     * @param companyData {@link ListaEnlazada} con los datos separados del objeto {@link Compañia}
+     */
+    public void setAllData(User user, ListaEnlazada<String> personaData, ListaEnlazada<String> adressData, ListaEnlazada<String> geoData, ListaEnlazada<String> companyData){
+        this.persona = new Persona(personaData.get(0),personaData.get(1),personaData.get(2),user);
+        this.persona.setAdress(new Direccion(adressData.get(0),adressData.get(1),adressData.get(2),adressData.get(3)));
+        this.persona.getAdress().setGeo(Float.parseFloat(geoData.get(0)), Float.parseFloat(geoData.get(1)));
+        this.persona.setCompany(new Compañia(companyData.get(0),companyData.get(1),companyData.get(2)));
     }
 }

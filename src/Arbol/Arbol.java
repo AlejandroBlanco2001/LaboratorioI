@@ -1,7 +1,6 @@
 package Arbol;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import Prinicipal.ListaEnlazada;
 
 /**

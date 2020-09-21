@@ -194,99 +194,131 @@ public final class UserProfile extends TemplateVentana {
         jPanel1.setBackground(new java.awt.Color(118, 41, 186));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Basic Info");
 
         nameE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameE.setForeground(new java.awt.Color(255, 255, 255));
         nameE.setText("Name");
 
         userE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        userE.setForeground(new java.awt.Color(255, 255, 255));
         userE.setText("Username");
 
         emailE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        emailE.setForeground(new java.awt.Color(255, 255, 255));
         emailE.setText("Email");
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Adress");
 
         streetE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        streetE.setForeground(new java.awt.Color(255, 255, 255));
         streetE.setText("Street");
 
         suiteE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        suiteE.setForeground(new java.awt.Color(255, 255, 255));
         suiteE.setText("Suite");
 
         cityE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cityE.setForeground(new java.awt.Color(255, 255, 255));
         cityE.setText("City");
 
         zipcodeE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        zipcodeE.setForeground(new java.awt.Color(255, 255, 255));
         zipcodeE.setText("Zipcode");
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Geolocation");
 
         latitudeE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        latitudeE.setForeground(new java.awt.Color(255, 255, 255));
         latitudeE.setText("Latitude");
 
         longitudeE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        longitudeE.setForeground(new java.awt.Color(255, 255, 255));
         longitudeE.setText("Longitude");
 
         phoneE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        phoneE.setForeground(new java.awt.Color(255, 255, 255));
         phoneE.setText("Phone");
 
         websiteE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        websiteE.setForeground(new java.awt.Color(255, 255, 255));
         websiteE.setText("Website");
 
         sloganE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        sloganE.setForeground(new java.awt.Color(255, 255, 255));
         sloganE.setText("Slogan");
 
         nameCompanyE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameCompanyE.setForeground(new java.awt.Color(255, 255, 255));
         nameCompanyE.setText("Name");
 
         bsE.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        bsE.setForeground(new java.awt.Color(255, 255, 255));
         bsE.setText("B.S");
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Company");
 
         longitudeET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        longitudeET.setForeground(new java.awt.Color(255, 255, 255));
         longitudeET.setText("jLabel3");
 
         nameET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameET.setForeground(new java.awt.Color(255, 255, 255));
         nameET.setText("jLabel3");
 
         phoneET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        phoneET.setForeground(new java.awt.Color(255, 255, 255));
         phoneET.setText("jLabel3");
 
         userET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        userET.setForeground(new java.awt.Color(255, 255, 255));
         userET.setText("jLabel3");
 
         websiteET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        websiteET.setForeground(new java.awt.Color(255, 255, 255));
         websiteET.setText("jLabel3");
 
         emailET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        emailET.setForeground(new java.awt.Color(255, 255, 255));
         emailET.setText("jLabel3");
 
         sloganET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        sloganET.setForeground(new java.awt.Color(255, 255, 255));
         sloganET.setText("jLabel3");
 
         nameCompanyET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nameCompanyET.setForeground(new java.awt.Color(255, 255, 255));
         nameCompanyET.setText("jLabel3");
 
         streetET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        streetET.setForeground(new java.awt.Color(255, 255, 255));
         streetET.setText("jLabel3");
 
         bsET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        bsET.setForeground(new java.awt.Color(255, 255, 255));
         bsET.setText("jLabel3");
 
         suiteET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        suiteET.setForeground(new java.awt.Color(255, 255, 255));
         suiteET.setText("jLabel3");
 
         cityET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        cityET.setForeground(new java.awt.Color(255, 255, 255));
         cityET.setText("jLabel3");
 
         zipcodeET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        zipcodeET.setForeground(new java.awt.Color(255, 255, 255));
         zipcodeET.setText("jLabel3");
 
         latitudeET.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        latitudeET.setForeground(new java.awt.Color(255, 255, 255));
         latitudeET.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -11,7 +11,6 @@ import java.util.Iterator;
 public class ListaEnlazada<T> implements Iterable<T> {
 
     private Node PTR;
-    private int posicion;
 
     @Override
     public Iterator<T> iterator() {

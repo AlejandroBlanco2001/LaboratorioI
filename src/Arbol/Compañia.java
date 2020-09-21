@@ -1,24 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Arbol;
 
 import java.io.Serializable;
 
 /**
  * Clase que abstrae la idea de Compañia
+ *
  * @author alexz
  */
-public class Compañia implements Serializable{
-    
+public class Compañia implements Serializable {
+
     private String name;
     private String catchPhrase;
-    private String bs; 
+    private String bs;
 
     /**
-     * Constructor publico de la clase 
+     * Constructor publico de la clase
+     *
      * @param name Nombre de la Compañia
      * @param catchPhrase Slogan de la Compañia
      * @param bs BS de la Compañia
@@ -31,6 +28,7 @@ public class Compañia implements Serializable{
 
     /**
      * Metodo que se encarga de devolver el nombre de la Compañia
+     *
      * @return name Nombre de la Compañia
      */
     public String getName() {
@@ -39,6 +37,7 @@ public class Compañia implements Serializable{
 
     /**
      * Metodo que se encarga de devolver el Slogan de la Compañia
+     *
      * @return catchPhrase Slogan de la Compañia
      */
     public String getCatchPhrase() {
@@ -47,11 +46,22 @@ public class Compañia implements Serializable{
 
     /**
      * Metodo que se encarga de devolver el BS de la Compañia
+     *
      * @return bs BS de la Compañia
      */
     public String getBs() {
         return bs;
     }
-    
-    
+
+    /**
+     * Metodo que se encarga de volver los datos de Compañia en una String separados por coma
+     *
+     * @return String Cadena que contiene todos los datos del Compañia
+     */
+    public String getAllData() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.name).append(",").append(this.catchPhrase).append(",").append(this.catchPhrase).append("\n");
+        return sb.toString();
+    }
+
 }
