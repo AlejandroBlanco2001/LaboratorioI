@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -26,20 +27,24 @@ public class Serializador {
      * @param arbol Arbol a serializar
      * @throws FileNotFoundException Error en caso de que no encuentre el archivo a buscar
      * @throws UnsupportedEncodingException Error en caso de que la codificacion del archivo no sea valida 
+     * @throws IOException Error en el caso de la creacion del archivo a la hora de escribir sobre el
      */
-    public static void serialize(Arbol arbol) throws UnsupportedEncodingException, FileNotFoundException {
+    public static void serialize(Arbol arbol) throws UnsupportedEncodingException, FileNotFoundException, IOException {
         JFileChooser f = new JFileChooser();
         f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         f.showSaveDialog(null);
         File file = new File(f.getSelectedFile(), "arbol.csv");
         StringBuilder sb = new StringBuilder();
-        PrintWriter writer = new PrintWriter(file);
+        FileWriter writer = new FileWriter(file);
         for (Object nodo : arbol.getRaiz().getHijos()) {
             User u = (User) nodo;
             System.out.println("USER " + u.getID());
             sb.append(u.getAllData());
+            writer.write(sb.toString());
+            sb.setLength(0);
         }
-        writer.write(sb.toString());
+        writer.flush();
+        writer.close();
     }
 
     /**
@@ -60,10 +65,10 @@ public class Serializador {
                 if (line.startsWith("U")) {
                     ListaEnlazada<String> info = replaceI(line);
                     User user = User.createUser(Integer.parseInt(info.get(0)), info.get(1), info.get(2));
-                    ListaEnlazada<String> personaData = replaceI(br.readLine());
-                    ListaEnlazada<String> adressData = replaceI(br.readLine());
-                    ListaEnlazada<String> geoData = replaceI(br.readLine());
-                    ListaEnlazada<String> companyData = replaceI(br.readLine());
+                    ListaEnlazada<String> personaData = replaceI(line = br.readLine());
+                    ListaEnlazada<String> adressData = replaceI(line = br.readLine());
+                    ListaEnlazada<String> geoData = replaceI(line = br.readLine());
+                    ListaEnlazada<String> companyData = replaceI(line = br.readLine());
                     user.setAllData(user,personaData,adressData,geoData,companyData);
                     users.add(user);
                 } else if (line.startsWith("P")) {
