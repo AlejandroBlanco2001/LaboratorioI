@@ -6,8 +6,13 @@ import Arbol.Post;
 import Arbol.User;
 import Prinicipal.ListaEnlazada;
 import Prinicipal.Ventana;
+import VisualTemplates.Panel.InfoFigura;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Shape;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,11 +25,14 @@ public class TreeDisplay extends TemplateVentana {
     /**
      * Creates new form TreeDisplay
      */
+    private boolean isOpenFrame = false;
     private Graphics g;
     private Panel dp;
     private Boolean toggle = true;
     private Arbol ab;
     private Ventana ventana;
+    private UserProfile userProfile;
+    private PostProfile postProfile;
 
     /**
      * Constructor
@@ -35,7 +43,7 @@ public class TreeDisplay extends TemplateVentana {
     public TreeDisplay(Arbol ab, Ventana ventana) {
         this.ab = ab;
         this.ventana = ventana;
-        dp = new Panel(ab);
+        dp = new Panel(ab.getRaiz());
         Dimension d = new Dimension(783, 440);
         dp.setMinimumSize(d);
         dp.setMaximumSize(d);
@@ -53,6 +61,11 @@ public class TreeDisplay extends TemplateVentana {
         numberUsers.setText(String.valueOf(ab.cantidadDeUsers()));
         numberPost.setText(String.valueOf(ab.cantidadPosts()));
         numberComments.setText(String.valueOf(ab.cantidadDeComments()));
+        grupoBotones.add(userFilter);
+        grupoBotones.add(commentFilter);
+        grupoBotones.add(postFilter);
+        grupoBotones.add(noFilter);
+        setImages();
     }
 
     /**
@@ -73,6 +86,7 @@ public class TreeDisplay extends TemplateVentana {
         jScrollPane1 = new javax.swing.JScrollPane();
         body = new javax.swing.JTextArea();
         title = new javax.swing.JLabel();
+        grupoBotones = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -84,7 +98,15 @@ public class TreeDisplay extends TemplateVentana {
         jLabel6 = new javax.swing.JLabel();
         numberComments = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        level = new javax.swing.JTextField();
+        filterView = new javax.swing.JLabel();
+        userFilter = new javax.swing.JRadioButton();
+        commentFilter = new javax.swing.JRadioButton();
+        postFilter = new javax.swing.JRadioButton();
+        noFilter = new javax.swing.JRadioButton();
+        idField = new javax.swing.JTextField();
+        leftArrow = new javax.swing.JLabel();
+        rightArrow = new javax.swing.JLabel();
         TreeScroll = new javax.swing.JScrollPane(this.dp);
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -100,22 +122,26 @@ public class TreeDisplay extends TemplateVentana {
         close = new javax.swing.JLabel();
         minimize = new javax.swing.JLabel();
 
-        jPanel3.setBackground(new java.awt.Color(46, 182, 125));
+        jPanel3.setBackground(new java.awt.Color(85, 57, 110));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Post:");
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Title");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Body");
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("By");
 
         postCreator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
@@ -132,6 +158,7 @@ public class TreeDisplay extends TemplateVentana {
         jScrollPane1.setBorder(null);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        body.setEditable(false);
         body.setColumns(20);
         body.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         body.setLineWrap(true);
@@ -147,27 +174,17 @@ public class TreeDisplay extends TemplateVentana {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1166, Short.MAX_VALUE)
             .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(186, 186, 186)
-                            .addComponent(jLabel10)
-                            .addGap(8, 8, 8))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                            .addGap(186, 186, 186)
-                            .addComponent(jLabel8)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(214, 214, 214))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,40 +274,146 @@ public class TreeDisplay extends TemplateVentana {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Tree Levels");
 
-        jTextField6.setEditable(false);
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("3");
+        level.setEditable(false);
+        level.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        level.setText("3");
+        level.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                levelFocusGained(evt);
+            }
+        });
+
+        filterView.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        filterView.setForeground(new java.awt.Color(255, 255, 255));
+        filterView.setText("Filter");
+        filterView.setToolTipText("Switch between scroll view/compact view");
+        filterView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                filterViewMouseClicked(evt);
+            }
+        });
+
+        userFilter.setBackground(new java.awt.Color(85, 57, 110));
+        userFilter.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        userFilter.setForeground(new java.awt.Color(255, 255, 255));
+        userFilter.setText("User");
+        userFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userFilterActionPerformed(evt);
+            }
+        });
+
+        commentFilter.setBackground(new java.awt.Color(85, 57, 110));
+        commentFilter.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        commentFilter.setForeground(new java.awt.Color(255, 255, 255));
+        commentFilter.setText("Comment");
+        commentFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commentFilterActionPerformed(evt);
+            }
+        });
+
+        postFilter.setBackground(new java.awt.Color(85, 57, 110));
+        postFilter.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        postFilter.setForeground(new java.awt.Color(255, 255, 255));
+        postFilter.setText("Post");
+        postFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postFilterActionPerformed(evt);
+            }
+        });
+
+        noFilter.setBackground(new java.awt.Color(85, 57, 110));
+        noFilter.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        noFilter.setForeground(new java.awt.Color(255, 255, 255));
+        noFilter.setText("All");
+        noFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noFilterActionPerformed(evt);
+            }
+        });
+
+        idField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                idFieldMouseClicked(evt);
+            }
+        });
+
+        leftArrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                leftArrowMouseClicked(evt);
+            }
+        });
+
+        rightArrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rightArrowMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(numberUsers)
+                                    .addComponent(numberPost)
+                                    .addComponent(numberNodes)
+                                    .addComponent(numberComments)
+                                    .addComponent(level, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(46, 46, 46)))))
+                .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filterView)
+                .addGap(116, 116, 116))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 60, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(userFilter)
+                        .addGap(29, 29, 29))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(numberUsers)
-                            .addComponent(numberPost)
-                            .addComponent(numberNodes)
-                            .addComponent(numberComments)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46))))
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(leftArrow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(noFilter)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(idField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(commentFilter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(postFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(19, 19, 19))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(rightArrow)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(numberNodes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,9 +432,29 @@ public class TreeDisplay extends TemplateVentana {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(filterView)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(leftArrow)
+                    .addComponent(rightArrow))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userFilter)
+                    .addComponent(commentFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postFilter))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, Short.MAX_VALUE)
+                .addComponent(noFilter)
+                .addContainerGap())
         );
+
+        TreeScroll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TreeScrollMouseClicked(evt);
+            }
+        });
 
         TreeScroll.setVisible(true);
 
@@ -479,15 +622,14 @@ public class TreeDisplay extends TemplateVentana {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TreeScroll))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(close)
-                            .addComponent(minimize))))
+                            .addComponent(minimize)))
+                    .addComponent(TreeScroll))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -582,7 +724,41 @@ public class TreeDisplay extends TemplateVentana {
 
     @Override
     public void setImages() {
+        ImageIcon icon = new ImageIcon("Resources/icons/leftArrow.png");
+        ImageIcon icon2 = new ImageIcon("Resources/icons/rightArrow.png");
+        Image img = icon.getImage();
+        Image img2 = icon2.getImage();
+        Image newimg = img.getScaledInstance(15, 24, java.awt.Image.SCALE_SMOOTH);
+        Image newimg2 = img2.getScaledInstance(15, 24, java.awt.Image.SCALE_SMOOTH);
+        leftArrow.setIcon(new ImageIcon(newimg));
+        rightArrow.setIcon(new ImageIcon(newimg2));
     }
+
+    private void searchNodo(InfoFigura info) {
+        if (info.getType().equals("User") && info.getId() != 0) {
+            User u = ab.busquedaUser(info.getId());
+            userProfile = new UserProfile();
+            userProfile.setUsuario(u);
+            userProfile.setVisible(true);
+        } else if (info.getType().equals("Post")) {
+            Post p = ab.getPost(info.getId());
+            postProfile = new PostProfile();
+            User u = ab.getUserByPost(info.getId());
+            postProfile.setPost(p, u);
+            postProfile.setVisible(true);
+        } else {
+            Comment c = ab.getComment(info.getId());
+            Post post = ab.getPost(c.getPostId());
+            CommentsView.setTitle("SMALL SOLUTIONS");
+            creator.setText(c.getEmail());
+            title.setText(c.getName());
+            body.setText(c.getBody());
+            postCreator.setText(post.getTitle());
+            CommentsView.setSize(new Dimension(1166, 446));
+            CommentsView.setVisible(true);
+        }
+    }
+
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
@@ -682,7 +858,7 @@ public class TreeDisplay extends TemplateVentana {
         title.setText(c.getName());
         body.setText(c.getBody());
         postCreator.setText(post.getTitle());
-        CommentsView.setSize(new Dimension(450, 400));
+        CommentsView.setSize(new Dimension(1166, 446));
         CommentsView.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -706,6 +882,102 @@ public class TreeDisplay extends TemplateVentana {
             postProfile.setVisible(true);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void filterViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filterViewMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filterViewMouseClicked
+
+    private void userFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userFilterActionPerformed
+        // TODO add your handling code here:
+        dp.setRaiz(ab.getRaiz().getHijos().get(0));
+        idField.setText("1");
+    }//GEN-LAST:event_userFilterActionPerformed
+
+    private void noFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noFilterActionPerformed
+        // TODO add your handling code here:
+        dp.setRaiz(ab.getRaiz());
+    }//GEN-LAST:event_noFilterActionPerformed
+
+    private void levelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_levelFocusGained
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_levelFocusGained
+
+    private void idFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idFieldMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idFieldMouseClicked
+
+    private void leftArrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_leftArrowMouseClicked
+        // TODO add your handling code here:
+        int currentPosition = Integer.parseInt(idField.getText()) - 1;
+        if (currentPosition == 0) {
+            return;
+        }
+        if (userFilter.isSelected()) {
+            dp.setRaiz(ab.busquedaUser(currentPosition));
+        } else if (commentFilter.isSelected()) {
+            dp.setRaiz(ab.getComment(currentPosition));
+        } else if (postFilter.isSelected()) {
+            dp.setRaiz(ab.getPost(currentPosition));
+        } else {
+            System.out.println("ACA NO SIRVE");
+        }
+        idField.setText(String.valueOf(currentPosition));
+
+    }//GEN-LAST:event_leftArrowMouseClicked
+
+    private void rightArrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rightArrowMouseClicked
+        // TODO add your handling code here:
+        int currentPosition = Integer.parseInt(idField.getText()) + 1;
+        if (userFilter.isSelected()) {
+            if (currentPosition > ab.cantidadDeUsers()) {
+                return;
+            }
+            dp.setRaiz(ab.busquedaUser(currentPosition));
+        } else if (commentFilter.isSelected()) {
+            if (currentPosition > ab.cantidadDeComments()) {
+                return;
+            }
+            dp.setRaiz(ab.getComment(currentPosition));
+        } else if (postFilter.isSelected()) {
+            if (currentPosition > ab.cantidadPosts()) {
+                return;
+            }
+            dp.setRaiz(ab.getPost(currentPosition));
+        }
+
+        idField.setText(String.valueOf(currentPosition));
+    }//GEN-LAST:event_rightArrowMouseClicked
+
+    private void commentFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commentFilterActionPerformed
+        // TODO add your handling code here:
+        dp.setRaiz(ab.getRaiz().getHijos().get(0).getHijos().get(0).getHijos().get(0));
+        idField.setText("1");
+    }//GEN-LAST:event_commentFilterActionPerformed
+
+    private void postFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postFilterActionPerformed
+        // TODO add your handling code here:
+        dp.setRaiz(ab.getRaiz().getHijos().get(0).getHijos().get(0));
+        idField.setText("1");
+    }//GEN-LAST:event_postFilterActionPerformed
+
+    private void TreeScrollMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreeScrollMouseClicked
+        // TODO add your handling code here:
+        Point p = evt.getPoint();
+        int index = 0;
+        isOpenFrame = checkInstanceOfFrames();
+        if (!isOpenFrame) {
+            for (Shape shape : dp.getNodos()) {
+                if (shape.contains(p)) {
+                    InfoFigura info = dp.getNodosID().get(index);
+                    System.out.println(info.getId() + " y es de tipo" + info.getType());
+                    searchNodo(info);
+                    isOpenFrame = true;
+                }
+                index++;
+            }
+        }
+    }//GEN-LAST:event_TreeScrollMouseClicked
 
     /**
      * @param args the command line arguments
@@ -749,7 +1021,11 @@ public class TreeDisplay extends TemplateVentana {
     private javax.swing.JScrollPane TreeScroll;
     private javax.swing.JTextArea body;
     private javax.swing.JLabel close;
+    private javax.swing.JRadioButton commentFilter;
     private javax.swing.JLabel creator;
+    private javax.swing.JLabel filterView;
+    private javax.swing.ButtonGroup grupoBotones;
+    private javax.swing.JTextField idField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
@@ -774,14 +1050,40 @@ public class TreeDisplay extends TemplateVentana {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel leftArrow;
+    private javax.swing.JTextField level;
     private javax.swing.JLabel minimize;
+    private javax.swing.JRadioButton noFilter;
     private javax.swing.JTextField numberComments;
     private javax.swing.JTextField numberNodes;
     private javax.swing.JTextField numberPost;
     private javax.swing.JTextField numberUsers;
     private javax.swing.JLabel postCreator;
+    private javax.swing.JRadioButton postFilter;
+    private javax.swing.JLabel rightArrow;
     private javax.swing.JLabel title;
+    private javax.swing.JRadioButton userFilter;
     // End of variables declaration//GEN-END:variables
 
+    private boolean checkInstanceOfFrames() {
+        if (userProfile == null && postProfile == null && CommentsView == null) {
+            return false;
+        }
+        if (userProfile != null) {
+            if(userProfile.isVisible()){
+                return true;
+            }
+        }
+        if (postProfile != null) {
+            if (postProfile.isVisible()) {
+                return true;
+            }
+        }
+        if (CommentsView != null) {
+            if (CommentsView.isVisible()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
