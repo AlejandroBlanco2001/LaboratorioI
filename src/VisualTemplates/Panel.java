@@ -37,20 +37,36 @@ public class Panel extends JPanel {
         setPreferredSize(d);
     }
 
+    /**
+     * Clase temporal que se encarga de guardar la informacion y el tipo de Objeto para ser pasado a la clase {@link TreeDisplay}
+     */
     public class InfoFigura {
 
         private int id;
         private String type;
 
+        /**
+         * Constructor que se encarga de crear la informacion temporalmente
+         * @param id ID del Objeto
+         * @param type String que representa el tipo de Objeto
+         */
         public InfoFigura(int id, String type) {
             this.id = id;
             this.type = type;
         }
 
+        /**
+         * Metodo que retorna el ID del objeto
+         * @return id ID del objeto 
+         */
         public int getId() {
             return id;
         }
 
+        /**
+         * Metodo que retorna en String el tipo de Objeto almacenado
+         * @return type Tipo de objeto almacenado
+         */
         public String getType() {
             return type;
         }

@@ -333,6 +333,11 @@ public class TreeDisplay extends TemplateVentana {
             }
         });
 
+        idField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                idFieldFocusLost(evt);
+            }
+        });
         idField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 idFieldMouseClicked(evt);
@@ -734,6 +739,11 @@ public class TreeDisplay extends TemplateVentana {
         rightArrow.setIcon(new ImageIcon(newimg2));
     }
 
+    /**
+     * Metodo que se encarga de emparejar la entrada recibida por Mouse, para realizar una busqueda
+     *
+     * @param info Objeto transitorio {@link InfoFigura} para detectar el tipo de {@link Nodo} y su id.
+     */
     private void searchNodo(InfoFigura info) {
         if (info.getType().equals("User") && info.getId() != 0) {
             User u = ab.busquedaUser(info.getId());
@@ -757,6 +767,33 @@ public class TreeDisplay extends TemplateVentana {
             CommentsView.setSize(new Dimension(1166, 446));
             CommentsView.setVisible(true);
         }
+    }
+
+    /**
+     * Metodo que se encarga de verificar que las ventanas no se encuentran más de una abierta al mismo tiempo
+     *
+     * @return open {@code true} si alguno se encuentra activo, {@code false} si todos estan cerrados
+     */
+    private boolean checkInstanceOfFrames() {
+        if (userProfile == null && postProfile == null && CommentsView == null) {
+            return false;
+        }
+        if (userProfile != null) {
+            if (userProfile.isVisible()) {
+                return true;
+            }
+        }
+        if (postProfile != null) {
+            if (postProfile.isVisible()) {
+                return true;
+            }
+        }
+        if (CommentsView != null) {
+            if (CommentsView.isVisible()) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -931,21 +968,23 @@ public class TreeDisplay extends TemplateVentana {
         int currentPosition = Integer.parseInt(idField.getText()) + 1;
         if (userFilter.isSelected()) {
             if (currentPosition > ab.cantidadDeUsers()) {
+                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Users", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             dp.setRaiz(ab.busquedaUser(currentPosition));
         } else if (commentFilter.isSelected()) {
             if (currentPosition > ab.cantidadDeComments()) {
+                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             dp.setRaiz(ab.getComment(currentPosition));
         } else if (postFilter.isSelected()) {
             if (currentPosition > ab.cantidadPosts()) {
+                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             dp.setRaiz(ab.getPost(currentPosition));
         }
-
         idField.setText(String.valueOf(currentPosition));
     }//GEN-LAST:event_rightArrowMouseClicked
 
@@ -978,6 +1017,35 @@ public class TreeDisplay extends TemplateVentana {
             }
         }
     }//GEN-LAST:event_TreeScrollMouseClicked
+
+    private void idFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFieldFocusLost
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int currentPosition = Integer.parseInt(idField.getText());
+        if (currentPosition == 0) {
+            return;
+        }
+        if (userFilter.isSelected()) {
+            if (currentPosition > ab.cantidadDeUsers()) {
+                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            dp.setRaiz(ab.busquedaUser(currentPosition));
+        } else if (commentFilter.isSelected()) {
+            if (currentPosition > ab.cantidadDeComments()) {
+                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            dp.setRaiz(ab.getComment(currentPosition));
+        } else if (postFilter.isSelected()) {
+            if (currentPosition > ab.cantidadPosts()) {
+                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            dp.setRaiz(ab.getPost(currentPosition));
+        }
+
+    }//GEN-LAST:event_idFieldFocusLost
 
     /**
      * @param args the command line arguments
@@ -1065,25 +1133,4 @@ public class TreeDisplay extends TemplateVentana {
     private javax.swing.JRadioButton userFilter;
     // End of variables declaration//GEN-END:variables
 
-    private boolean checkInstanceOfFrames() {
-        if (userProfile == null && postProfile == null && CommentsView == null) {
-            return false;
-        }
-        if (userProfile != null) {
-            if(userProfile.isVisible()){
-                return true;
-            }
-        }
-        if (postProfile != null) {
-            if (postProfile.isVisible()) {
-                return true;
-            }
-        }
-        if (CommentsView != null) {
-            if (CommentsView.isVisible()) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
