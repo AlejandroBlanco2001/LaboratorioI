@@ -132,7 +132,7 @@ public class Lab {
      * Metodo que se encarga de verificar que el nombre de los archivos manejen la estructura correcta de nombre
      *
      * @param files Arreglo de {@link File} que contiene los archivos a examinar
-     * @return checked {@link True} si los archivos cumplen la estructura, {@link False} en el caso contrario
+     * @return checked {@code true} si los archivos cumplen la estructura, {@code false} en el caso contrario
      */
     private static boolean checkFiles(File[] files) {
         boolean flag1 = false;

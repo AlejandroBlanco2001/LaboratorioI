@@ -47,6 +47,7 @@ public class Panel extends JPanel {
 
         /**
          * Constructor que se encarga de crear la informacion temporalmente
+         *
          * @param id ID del Objeto
          * @param type String que representa el tipo de Objeto
          */
@@ -57,7 +58,8 @@ public class Panel extends JPanel {
 
         /**
          * Metodo que retorna el ID del objeto
-         * @return id ID del objeto 
+         *
+         * @return id ID del objeto
          */
         public int getId() {
             return id;
@@ -65,6 +67,7 @@ public class Panel extends JPanel {
 
         /**
          * Metodo que retorna en String el tipo de Objeto almacenado
+         *
          * @return type Tipo de objeto almacenado
          */
         public String getType() {
@@ -125,7 +128,7 @@ public class Panel extends JPanel {
         g.fillOval(x - radio, y - radio, 2 * radio, 2 * radio);
         g.setColor(Color.BLACK);
         nodos.add(new Ellipse2D.Double(x - radio, y - radio, 2 * radio, 2 * radio));
-        nodosID.add(new InfoFigura(id,type));
+        nodosID.add(new InfoFigura(id, type));
         g.drawOval(x - radio, y - radio, 2 * radio, 2 * radio);
         g.setColor(Color.white);
         g.drawString(String.valueOf(id), x - 5, y + 5);
@@ -150,6 +153,8 @@ public class Panel extends JPanel {
      * @param y1 Posicion en el eje Y del Nodo Hijo
      * @param x2 Posicion en el eje X del Nodo Padre
      * @param y2 Posicion en el eje Y del Nodo Padre
+     * @author rotkcraft Basado en el algoritmo de : https://github.com/rotkcraft/arbolgeneral/commits?author=rotkcraft
+     *
      */
     private void dibujarLinea(Graphics g, int x1, int y1, int x2, int y2) {
         double d = Math.sqrt(espacioVertical * espacioVertical + (x2 - x1) * (x2 - x1));
@@ -177,7 +182,5 @@ public class Panel extends JPanel {
     public ListaEnlazada<InfoFigura> getNodosID() {
         return nodosID;
     }
-    
-    
 
 }

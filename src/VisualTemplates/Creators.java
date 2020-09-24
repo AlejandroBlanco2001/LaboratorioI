@@ -2,10 +2,15 @@ package VisualTemplates;
 
 import Prinicipal.Ventana;
 import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
  * Clase encarga de mostrar los creadores del software
+ *
  * @author alexz
  */
 public class Creators extends TemplateVentana {
@@ -13,7 +18,6 @@ public class Creators extends TemplateVentana {
     /**
      * Creates new form Creators
      */
-
     public Creators() {
         super();
         initComponents();
@@ -31,7 +35,6 @@ public class Creators extends TemplateVentana {
 
     @Override
     public void setGUI() {
-
     }
 
     @Override

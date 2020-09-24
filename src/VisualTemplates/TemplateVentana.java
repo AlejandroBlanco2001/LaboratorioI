@@ -1,16 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package VisualTemplates;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
- * Clase abstracta que abstrae los comportamientos que todo JFrame debe tener 
+ * Clase abstracta que abstrae los comportamientos que todo JFrame debe tener
+ *
  * @author alexz
  */
 public abstract class TemplateVentana extends JFrame {
@@ -18,15 +18,20 @@ public abstract class TemplateVentana extends JFrame {
     /**
      * Constructor que se encarga de agregar el control por Mouse
      */
-    public TemplateVentana(){
-        addMouseListener(); 
+    public TemplateVentana() {
+        addMouseListener();
         addMouseMotionListener();
+        try {
+            setIconImage(ImageIO.read(TemplateVentana.class.getResource("/icons/logoSS.png")));
+        } catch (IOException ex) {
+            Logger.getLogger(Creators.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     private int posX, posY;
 
     /**
-     * Metodo abstracto que se encarga de configurar toda la parte de GUI de cada JFrame 
+     * Metodo abstracto que se encarga de configurar toda la parte de GUI de cada JFrame
      */
     public abstract void setGUI();
 
@@ -63,5 +68,4 @@ public abstract class TemplateVentana extends JFrame {
             }
         });
     }
-
 }

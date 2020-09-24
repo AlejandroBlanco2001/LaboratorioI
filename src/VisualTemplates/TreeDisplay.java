@@ -744,7 +744,7 @@ public class TreeDisplay extends TemplateVentana {
     /**
      * Metodo que se encarga de emparejar la entrada recibida por Mouse, para realizar una busqueda
      *
-     * @param info Objeto transitorio {@link InfoFigura} para detectar el tipo de {@link Nodo} y su id.
+     * @param info Objeto transitorio {@link InfoFigura} para detectar el tipo de Nodo y su id.
      */
     private void searchNodo(InfoFigura info) {
         if (info.getType().equals("User") && info.getId() != 0) {
