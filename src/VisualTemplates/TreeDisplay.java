@@ -30,12 +30,12 @@ public class TreeDisplay extends TemplateVentana {
     private Panel dp;
     private Boolean toggle = true;
     private Arbol ab;
-    private Ventana ventana;
+    private final Ventana ventana;
     private UserProfile userProfile;
     private PostProfile postProfile;
 
     /**
-     * Constructor
+     * Constructor para la visualizacion del manejador del Arbol
      *
      * @param ab Arbol a graficar
      * @param ventana Ventana que maneja la GUI General
@@ -174,7 +174,7 @@ public class TreeDisplay extends TemplateVentana {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1166, Short.MAX_VALUE)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -182,7 +182,7 @@ public class TreeDisplay extends TemplateVentana {
             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(259, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(214, 214, 214))
         );
@@ -276,7 +276,7 @@ public class TreeDisplay extends TemplateVentana {
 
         level.setEditable(false);
         level.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        level.setText("3");
+        level.setText("4");
         level.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 levelFocusGained(evt);
@@ -333,6 +333,8 @@ public class TreeDisplay extends TemplateVentana {
             }
         });
 
+        idField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        idField.setText("1");
         idField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 idFieldFocusLost(evt);
@@ -764,7 +766,7 @@ public class TreeDisplay extends TemplateVentana {
             title.setText(c.getName());
             body.setText(c.getBody());
             postCreator.setText(post.getTitle());
-            CommentsView.setSize(new Dimension(1166, 446));
+            CommentsView.setSize(new Dimension(1166, 400));
             CommentsView.setVisible(true);
         }
     }
@@ -796,7 +798,6 @@ public class TreeDisplay extends TemplateVentana {
         return false;
     }
 
-
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
         dispose();
@@ -811,20 +812,24 @@ public class TreeDisplay extends TemplateVentana {
         // TODO add your handling code here:
         User user = searchUser();
         if (user != null) {
-            UserProfile userProfile = new UserProfile();
+            userProfile = new UserProfile();
             userProfile.setUsuario(user);
             userProfile.setVisible(true);
+            return;
         }
+        JOptionPane.showMessageDialog(null, "User no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
         User user = searchUser();
         if (user != null) {
-            UserProfile userProfile = new UserProfile();
+            userProfile = new UserProfile();
             userProfile.setUsuario(user);
             userProfile.setVisible(true);
+            return;
         }
+        JOptionPane.showMessageDialog(null, "User no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -832,10 +837,12 @@ public class TreeDisplay extends TemplateVentana {
         Post post = searchPost();
         User user = ab.getUserByPost(post.getTitle());
         if (post != null) {
-            PostProfile postProfile = new PostProfile();
+            postProfile = new PostProfile();
             postProfile.setPost(post, user);
             postProfile.setVisible(true);
+            return;
         }
+        JOptionPane.showMessageDialog(null, "Post no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -878,25 +885,30 @@ public class TreeDisplay extends TemplateVentana {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Post post = searchPost();
-        User user = ab.getUserByPost(post.getTitle());
         if (post != null) {
+            User user = ab.getUserByPost(post.getTitle());
             PostProfile postProfile = new PostProfile();
             postProfile.setPost(post, user);
             postProfile.setVisible(true);
+            return;
         }
+        JOptionPane.showMessageDialog(null, "Post no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         Comment c = searchComment();
-        Post post = ab.getPost(c.getPostId());
-        CommentsView.setTitle("SMALL SOLUTIONS");
-        creator.setText(c.getEmail());
-        title.setText(c.getName());
-        body.setText(c.getBody());
-        postCreator.setText(post.getTitle());
-        CommentsView.setSize(new Dimension(1166, 446));
-        CommentsView.setVisible(true);
+        if (c != null) {
+            Post post = ab.getPost(c.getPostId());
+            CommentsView.setTitle("SMALL SOLUTIONS");
+            creator.setText(c.getEmail());
+            title.setText(c.getName());
+            body.setText(c.getBody());
+            postCreator.setText(post.getTitle());
+            CommentsView.setSize(new Dimension(1166, 400));
+            CommentsView.setVisible(true);
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -907,17 +919,20 @@ public class TreeDisplay extends TemplateVentana {
             userProfile.setUsuario(user);
             userProfile.setVisible(true);
         }
+        JOptionPane.showMessageDialog(null, "User no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         Post post = searchPost();
-        User user = ab.getUserByPost(post.getTitle());
         if (post != null) {
-            PostProfile postProfile = new PostProfile();
+            User user = ab.getUserByPost(post.getTitle());
+            postProfile = new PostProfile();
             postProfile.setPost(post, user);
             postProfile.setVisible(true);
+            return;
         }
+        JOptionPane.showMessageDialog(null, "Post no encontrado", "ERROR", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void filterViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filterViewMouseClicked
@@ -948,6 +963,7 @@ public class TreeDisplay extends TemplateVentana {
         // TODO add your handling code here:
         int currentPosition = Integer.parseInt(idField.getText()) - 1;
         if (currentPosition == 0) {
+            JOptionPane.showMessageDialog(null, "ID no existente, esta por debajo del minimo", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (userFilter.isSelected()) {
@@ -968,19 +984,25 @@ public class TreeDisplay extends TemplateVentana {
         int currentPosition = Integer.parseInt(idField.getText()) + 1;
         if (userFilter.isSelected()) {
             if (currentPosition > ab.cantidadDeUsers()) {
-                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Users", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ID no existente, esta por encima del maximo de Users", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                idField.setText("1");
+                dp.setRaiz(ab.getRaiz().getHijos().get(0));
                 return;
             }
             dp.setRaiz(ab.busquedaUser(currentPosition));
         } else if (commentFilter.isSelected()) {
             if (currentPosition > ab.cantidadDeComments()) {
-                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ID no existente, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                idField.setText("1");
+                dp.setRaiz(ab.getRaiz().getHijos().get(0).getHijos().get(0));
                 return;
             }
             dp.setRaiz(ab.getComment(currentPosition));
         } else if (postFilter.isSelected()) {
             if (currentPosition > ab.cantidadPosts()) {
-                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ID no existente, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                idField.setText("1");
+                dp.setRaiz(ab.getRaiz().getHijos().get(0).getHijos().get(0).getHijos().get(0));
                 return;
             }
             dp.setRaiz(ab.getPost(currentPosition));
@@ -1020,31 +1042,47 @@ public class TreeDisplay extends TemplateVentana {
 
     private void idFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_idFieldFocusLost
         // TODO add your handling code here:
-        // TODO add your handling code here:
-        int currentPosition = Integer.parseInt(idField.getText());
+        int currentPosition = 1;
+        try {
+            currentPosition = Integer.parseInt(idField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Los ID debe ser valores numericos, por favor ingrese un valor numerico", "ERROR DE INGRESO", JOptionPane.ERROR_MESSAGE);
+            currentPosition = -1;
+        }
         if (currentPosition == 0) {
             return;
         }
         if (userFilter.isSelected()) {
-            if (currentPosition > ab.cantidadDeUsers()) {
-                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+            if (currentPosition > ab.cantidadDeUsers() || currentPosition == -1) {
+                if (currentPosition > ab.cantidadDeUsers()) {
+                    JOptionPane.showMessageDialog(null, "ID no existente, esta por encima del maximo de Users", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                }
+                idField.setText("1");
+                dp.setRaiz(ab.getRaiz().getHijos().get(0));
                 return;
             }
             dp.setRaiz(ab.busquedaUser(currentPosition));
         } else if (commentFilter.isSelected()) {
-            if (currentPosition > ab.cantidadDeComments()) {
-                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+            if (currentPosition > ab.cantidadDeComments() || currentPosition == -1) {
+                if (currentPosition > ab.cantidadDeComments()) {
+                    JOptionPane.showMessageDialog(null, "ID no existente, esta por encima del maximo de Comment", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                }
+                idField.setText("1");
+                dp.setRaiz(ab.getRaiz().getHijos().get(0).getHijos().get(0).getHijos().get(0));
                 return;
             }
             dp.setRaiz(ab.getComment(currentPosition));
         } else if (postFilter.isSelected()) {
-            if (currentPosition > ab.cantidadPosts()) {
-                JOptionPane.showMessageDialog(null, "ID no existinte, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+            if (currentPosition > ab.cantidadPosts() || currentPosition == -1) {
+                if (currentPosition > ab.cantidadPosts()) {
+                    JOptionPane.showMessageDialog(null, "ID no existente, esta por encima del maximo de Post", "ERROR DE BUSQUEDA", JOptionPane.ERROR_MESSAGE);
+                }
+                idField.setText("1");
+                dp.setRaiz(ab.getRaiz().getHijos().get(0).getHijos().get(0));
                 return;
             }
             dp.setRaiz(ab.getPost(currentPosition));
         }
-
     }//GEN-LAST:event_idFieldFocusLost
 
     /**

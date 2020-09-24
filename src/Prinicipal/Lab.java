@@ -6,11 +6,10 @@ import Arbol.Comment;
 import Arbol.Nodo;
 import Arbol.User;
 import Parser.Parser;
-import Prinicipal.ListaEnlazada.Node;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -29,20 +28,19 @@ public class Lab {
         ventana.dispose();
         ventana.setUndecorated(true);
         arbol = new Arbol();
-        File[] files = null;
-        JFileChooser chooser = new JFileChooser();
-        chooser.setMultiSelectionEnabled(true);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "*.txt,*.csv", "txt", "csv");
-        chooser.setFileFilter(filter);
-        int returnValue = chooser.showOpenDialog(null);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-            files = chooser.getSelectedFiles();
+        File[] files = getFiles();
+        while (!files[0].getName().contains(".csv") && Lab.createTree(files) == null) {
+            if (!files[0].getName().contains(".csv") && files.length == 1) {
+                JOptionPane.showMessageDialog(null, "El archivo que contiene el arbol serializado debe ser .csv", "Archivo con extension invalida", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Archivos con nombre incorrecto, por favor maneje los nombres Comment,Users,Posts en formato .txt", "Error de ingreso de archivo", JOptionPane.ERROR_MESSAGE);
+            }
+            files = getFiles();
         }
-        if (files.length == 1) {
-            arbol = Serializador.recover(files[0].getCanonicalPath());
-        } else {
-            Lab.createTree(files);
+        if(files.length == 1){
+            arbol = Serializador.recover(files[0].getAbsolutePath());
+        }else{
+            arbol = Lab.createTree(files);
         }
         ventana.setVisible(true);
         ventana.setArbol(arbol);
@@ -58,6 +56,9 @@ public class Lab {
     public static Arbol createTree(File[] files) throws IOException {
         arbol = new Arbol();
         files = organizeFiles(files);
+        if (files == null) {
+            return null;
+        }
         Parser p = Parser.getParser();
         ListaEnlazada<String> tempo = p.getObjects(files[0].getName(), files[0].getCanonicalPath());
         ListaEnlazada<Nodo> lista = new ListaEnlazada();
@@ -89,6 +90,9 @@ public class Lab {
     public static File[] organizeFiles(File[] files) {
         int cont = 0;
         File aux;
+        if (!checkFiles(files)) {
+            return null;
+        }
         for (File file : files) {
             if (file.getName().equals("Comments.txt")) {
                 aux = files[2];
@@ -124,8 +128,60 @@ public class Lab {
         return lista;
     }
 
+    /**
+     * Metodo que se encarga de verificar que el nombre de los archivos manejen la estructura correcta de nombre
+     *
+     * @param files Arreglo de {@link File} que contiene los archivos a examinar
+     * @return checked {@link True} si los archivos cumplen la estructura, {@link False} en el caso contrario
+     */
+    private static boolean checkFiles(File[] files) {
+        boolean flag1 = false;
+        boolean flag2 = false;
+        boolean flag3 = false;
+        for (File f : files) {
+            if (f.getName().equals("Comments.txt")) {
+                flag1 = true;
+            }
+            if (f.getName().equals("Posts.txt")) {
+                flag2 = true;
+            }
+            if (f.getName().equals("Users.txt")) {
+                flag3 = true;
+            }
+        }
+        if (flag1 && flag2 && flag3) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Metodo que se encarga de retornar el Arbol
+     *
+     * @return arbol Arbol creado
+     */
     public Arbol getArbol() {
         return arbol;
+    }
+
+    /**
+     * Metodo que se encarga de la obtencion de los archivos por medio del JFileChooser
+     *
+     * @return files Arreglo de {@code File} seleccionados
+     */
+    public static File[] getFiles() {
+        File[] files = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "*.txt,*.csv", "txt", "csv");
+        chooser.setFileFilter(filter);
+        int returnValue = chooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            files = chooser.getSelectedFiles();
+            return files;
+        }
+        return null;
     }
 
 }

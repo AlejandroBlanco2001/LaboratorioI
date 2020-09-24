@@ -1,6 +1,7 @@
 package Prinicipal;
 
 import Arbol.*;
+import static Prinicipal.Lab.getFiles;
 import VisualTemplates.Creators;
 import VisualTemplates.PostProfile;
 import VisualTemplates.TemplateVentana;
@@ -27,7 +28,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * Clase que actua como la ventana principal del programa
  *
- * @author alexz
+ * @author Isaac Blanco
+ * 
+ * 
  */
 public class Ventana extends TemplateVentana {
 
@@ -990,7 +993,7 @@ public class Ventana extends TemplateVentana {
         int ID = 0;
         try {
             Integer.parseInt(BusquedaUser.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             ID = -1;
         }
         if (user == null || ID == -1) {
@@ -1095,7 +1098,7 @@ public class Ventana extends TemplateVentana {
             title.setText(c.getName());
             body.setText(c.getBody());
             postCreator.setText(p.getTitle());
-            CommentsView.setSize(new Dimension(1166, 446));
+            CommentsView.setSize(new Dimension(1168, 400));
             CommentsView.setVisible(true);
             CommentsView.setResizable(true);
             lookUser.setText("Look Comment");
@@ -1129,13 +1132,25 @@ public class Ventana extends TemplateVentana {
             files = chooser.getSelectedFiles();
         }
         try {
-            if (files.length == 1) {
-                this.arbol = Serializador.recover(files[0].getCanonicalPath());
-            } else {
-                this.arbol = Lab.createTree(files);
+            while (!files[0].getName().contains(".csv") && Lab.createTree(files) == null) {
+                if (!files[0].getName().contains(".csv") && files.length == 1) {
+                    JOptionPane.showMessageDialog(null, "El archivo que contiene el arbol serializado debe ser .csv", "Archivo con extension invalida", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Archivos con nombre incorrecto, por favor maneje los nombres Comment,Users,Posts en formato .txt", "Error de ingreso de archivo", JOptionPane.ERROR_MESSAGE);
+                }
+                files = getFiles();
             }
         } catch (IOException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(files.length == 1){
+            arbol = Serializador.recover(files[0].getAbsolutePath());
+        }else{
+            try {
+                arbol = Lab.createTree(files);
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_uploadFilesMouseClicked
 
@@ -1173,13 +1188,16 @@ public class Ventana extends TemplateVentana {
         // TODO add your handling code here:
         currentAllSearch = "Comment";
         Comment c = searchComment();
+        if(c == null){
+            return;
+        }
         Post post = arbol.getPost(c.getPostId());
         CommentsView.setTitle("SMALL SOLUTIONS");
         creator.setText(c.getEmail());
         title.setText(c.getName());
         body.setText(c.getBody());
         postCreator.setText(post.getTitle());
-        CommentsView.setSize(new Dimension(1166, 446));
+        CommentsView.setSize(new Dimension(1168, 400));
         CommentsView.setVisible(true);
         CommentsView.setResizable(false);
         lookUser.setText("Look the Comment");
@@ -1262,6 +1280,7 @@ public class Ventana extends TemplateVentana {
         }
         if (comment == null) {
             JOptionPane.showMessageDialog(null, "ERROR", "Comentario no encontrado", JOptionPane.ERROR_MESSAGE);
+            return null;
         }
         return comment;
     }
