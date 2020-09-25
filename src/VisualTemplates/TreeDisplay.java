@@ -148,6 +148,11 @@ public class TreeDisplay extends TemplateVentana {
         postCreator.setForeground(new java.awt.Color(255, 255, 255));
         postCreator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         postCreator.setText("jLabel11");
+        postCreator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postCreatorMouseClicked(evt);
+            }
+        });
 
         creator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         creator.setForeground(new java.awt.Color(255, 255, 255));
@@ -724,7 +729,7 @@ public class TreeDisplay extends TemplateVentana {
         }
         return post;
     }
-
+    
     @Override
     public void setFonts() {
     }
@@ -1084,6 +1089,11 @@ public class TreeDisplay extends TemplateVentana {
             dp.setRaiz(ab.getPost(currentPosition));
         }
     }//GEN-LAST:event_idFieldFocusLost
+
+    private void postCreatorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postCreatorMouseClicked
+        // TODO add your handling code here:
+        ventana.searchPost(postCreator.getText());
+    }//GEN-LAST:event_postCreatorMouseClicked
 
     /**
      * @param args the command line arguments

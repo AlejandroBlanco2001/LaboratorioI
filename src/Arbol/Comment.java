@@ -110,7 +110,7 @@ public class Comment extends Nodo {
     @Override
     public String getAllData(){
         StringBuilder sb = new StringBuilder();
-        sb.append("C").append(",").append(this.postId).append(",").append(this.id).append(",").append(this.name).append(",").append(this.body).append(",").append(this.email).append("\n");
+        sb.append("C").append(",").append(this.postId).append(",").append(this.id).append(",").append(this.name).append(",").append(this.email).append(",").append(this.body).append("\n");
         return sb.toString();
     }
 }

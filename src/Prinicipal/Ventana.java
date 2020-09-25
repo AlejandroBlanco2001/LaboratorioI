@@ -291,11 +291,23 @@ public class Ventana extends TemplateVentana {
         postCreator.setForeground(new java.awt.Color(255, 255, 255));
         postCreator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         postCreator.setText("jLabel11");
+        postCreator.setToolTipText("Watch the post");
+        postCreator.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        postCreator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postCreatorMouseClicked(evt);
+            }
+        });
 
         creator.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         creator.setForeground(new java.awt.Color(255, 255, 255));
         creator.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         creator.setText("jLabel12");
+        creator.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                creatorMouseClicked(evt);
+            }
+        });
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setBorder(null);
@@ -317,7 +329,7 @@ public class Ventana extends TemplateVentana {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(postCreator, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1168, Short.MAX_VALUE)
             .addComponent(creator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -325,9 +337,9 @@ public class Ventana extends TemplateVentana {
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(272, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(229, 229, 229))
+                .addGap(249, 249, 249))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -996,7 +1008,7 @@ public class Ventana extends TemplateVentana {
         } catch (NumberFormatException e) {
             ID = -1;
         }
-        if (user == null || ID == -1) {
+        if (user == null && ID == -1) {
             ListaEnlazada<User> matches = arbol.matchPosibbleUsers(text.toLowerCase());
             if (matches.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ERROR", "Usuario no encontrado", JOptionPane.ERROR_MESSAGE);
@@ -1224,6 +1236,15 @@ public class Ventana extends TemplateVentana {
         setAllComments(comment);
     }//GEN-LAST:event_watchAllCommentsMouseClicked
 
+    private void postCreatorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postCreatorMouseClicked
+        // TODO add your handling code here:
+        searchPost(postCreator.getText());
+    }//GEN-LAST:event_postCreatorMouseClicked
+
+    private void creatorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creatorMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_creatorMouseClicked
+
     public void setArbol(Arbol arbol) {
         Ventana.arbol = arbol;
         getPostForShowing();
@@ -1439,8 +1460,6 @@ public class Ventana extends TemplateVentana {
     public void setCurrentAllSearch(String currentAllSearch) {
         this.currentAllSearch = currentAllSearch;
     }
-
-  
 
     /**
      * @param args the command line arguments

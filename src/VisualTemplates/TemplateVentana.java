@@ -1,11 +1,9 @@
 package VisualTemplates;
 
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -21,11 +19,9 @@ public abstract class TemplateVentana extends JFrame {
     public TemplateVentana() {
         addMouseListener();
         addMouseMotionListener();
-        try {
-            setIconImage(ImageIO.read(TemplateVentana.class.getResource("/icons/logoSS.png")));
-        } catch (IOException ex) {
-            Logger.getLogger(Creators.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ImageIcon icon = new ImageIcon("Resources/icons/logoSS.png");
+        Image iconI = icon.getImage();
+        setIconImage(iconI);
     }
 
     private int posX, posY;
