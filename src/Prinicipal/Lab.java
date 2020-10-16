@@ -37,10 +37,10 @@ public class Lab {
             }
             files = getFiles();
         }
-        if(files.length == 1){
+        if (files.length == 1) {
             arbol = Serializador.recover(files[0].getAbsolutePath());
-        }else{
-            arbol = Lab.createTree(files);
+        } else {
+            Lab.createTree(files);
         }
         ventana.setVisible(true);
         ventana.setArbol(arbol);

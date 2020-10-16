@@ -10,6 +10,7 @@ import Arbol.Nodo;
 import Arbol.Post;
 import Arbol.User;
 import Prinicipal.ListaEnlazada;
+import javax.swing.JOptionPane;
 
 /**
  * Clase que se encarga de abstraer la idea de un Parse de JSON, se encarga de la manipulacion y extraccion de datos de los JSON con la estrucutara dada por los presentes en JSONPLACEHOLDER
@@ -95,15 +96,21 @@ public class Parser {
         pattern = Pattern.compile(RegexPattern.INSIDE_DATA.getPattern());
         matcher = pattern.matcher(dirtyJSON);
         ListaEnlazada<String> info = getKeyInfo(matcher, dirtyJSON);
-        if (identifier.equals("userId") || identifier.equals("postId")) {
-            if (identifier.equals("userId")) {
-                return Post.cleanInfo(info);
+        try {
+            if (identifier.equals("userId") || identifier.equals("postId")) {
+                if (identifier.equals("userId")) {
+                    return Post.cleanInfo(info);
+                } else {
+                    return Comment.cleanInfo(info);
+                }
             } else {
-                return Comment.cleanInfo(info);
+                return cleanDataInsideData(info);
             }
-        } else {
-            return cleanDataInsideData(info);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Archivos con formato invalido, el programa debe ser reiniciado", "ERROR CRITICO", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
+        return null;
     }
 
     /**
@@ -164,9 +171,10 @@ public class Parser {
 
     /**
      * Metodo que se encarga de extraer los pares ordenados "Key,Data" del JSON (Excluyendo a los nombres de Objetos Complejos)
+     *
      * @param radar Matcher que se encarga de buscar las coincidencias de la Expresion Regular
      * @param JSON Cadena que representa un objeto individual de tipo JSON
-     * @return info {@code LinkedList<String>} que contiene los pares "Key,Data" de cada objeto individual 
+     * @return info {@code LinkedList<String>} que contiene los pares "Key,Data" de cada objeto individual
      */
     public ListaEnlazada<String> getKeyInfo(Matcher radar, String JSON) {
         ListaEnlazada<String> info = new ListaEnlazada();
@@ -187,6 +195,7 @@ public class Parser {
 
     /**
      * Metodo que se encarga de crear una cadena a partir de un archivo de texto plano con formato JSON
+     *
      * @param fileName Nombre del archivo
      * @return sb Cadena que representa al JSON
      */
@@ -208,11 +217,12 @@ public class Parser {
 
     /**
      * Metodo que se encarga a partir de toda su informacion, crear un objeto de tipo {@link User} y su composicion
+     *
      * @param info Pares "Key,Data" que conforman al Objeto Complejo
      * @return user Usuario que tiene sus componentes conectados
      */
     public Nodo cleanDataInsideData(ListaEnlazada<String> info) {
-        User user = User.createUser(Integer.parseInt(info.get(0)),info.get(2),info.get(3));
+        User user = User.createUser(Integer.parseInt(info.get(0)), info.get(2), info.get(3));
         user.addPersona(info);
         return user;
     }

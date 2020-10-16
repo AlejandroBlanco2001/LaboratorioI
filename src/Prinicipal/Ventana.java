@@ -1042,7 +1042,7 @@ public class Ventana extends TemplateVentana {
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
